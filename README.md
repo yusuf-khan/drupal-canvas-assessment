@@ -15,15 +15,43 @@
 
 The DDEV configuration serves Drupal from `web/`. Composer locks the project dependencies.
 
-## Run locally
+## Install from scratch
 
-1. From the repository root run `ddev start` and `ddev composer install`.
-2. On a new site, open `ddev launch`, select the Drupal CMS Starter setup, and create a local administrator.
-3. Run `ddev drush pm:enable sfa_components -y`, `ddev drush theme:enable sfa_theme -y`, `ddev drush config:set system.theme default sfa_theme -y`, and `ddev drush cache:rebuild`.
-4. Import the demo page and its media with `ddev exec --dir /var/www/html/web php core/scripts/dr recipe /var/www/html/demo/sfa-homepage`. The recipe makes Winter FancyFaire the site front page. It is also available at `/winter-fancyfaire`.
-5. Run `ddev drush user:login`, open **Content → Pages**, and edit **Winter FancyFaire** to inspect it in Canvas. The demo recipe grants the Drupal CMS **Content editor** role the Canvas publish permission, supplementing its existing page creation and editing permissions.
+You’ll need Git, Docker, and DDEV. Start Docker before running the setup commands.
 
-If a Drush command fails while traversing the repository, run it from the Drupal docroot with `ddev exec --dir /var/www/html/web /var/www/html/vendor/bin/drush <command>`.
+### 1. Install Drupal CMS
+
+```bash
+git clone --branch main https://github.com/yusuf-khan/drupal-canvas-assessment.git
+cd drupal-canvas-assessment
+ddev start
+ddev composer install
+ddev launch
+```
+
+In the browser, select the Drupal CMS **Starter** site template and create a local administrator. Wait for the installer to finish before continuing.
+
+### 2. Enable the components and import the demo
+
+Run these commands from the repository root.
+
+```bash
+ddev drush pm:enable sfa_components -y
+ddev drush theme:enable sfa_theme -y
+ddev drush config:set system.theme default sfa_theme -y
+ddev drush cache:rebuild
+ddev exec --dir /var/www/html/web php core/scripts/dr recipe /var/www/html/demo/sfa-homepage
+```
+
+The recipe imports the Canvas page and its media, sets **Winter FancyFaire** as the front page, and grants the **Content editor** role permission to publish Canvas changes. Run `ddev launch` to open the site. In a signed-out browser, confirm the home page and `/winter-fancyfaire` show the hero and four audience cards.
+
+If Drush fails while traversing the repository, run the same command from the Drupal docroot using `ddev exec --dir /var/www/html/web /var/www/html/vendor/bin/drush <command>`.
+
+### 3. Open Canvas
+
+Run `ddev drush user:login`, open the generated link, and go to **Content → Pages → Winter FancyFaire → Edit**. In **Layers**, expand **Audience grid → Cards** and select a card to inspect its text, media, and link settings.
+
+To test authoring from a blank page, follow [Set up a test editor](#set-up-a-test-editor) and [Compose the design in Canvas](#compose-the-design-in-canvas).
 
 ## Module evaluation
 
