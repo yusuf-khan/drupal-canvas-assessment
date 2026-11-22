@@ -1,0 +1,17 @@
+<article {{ attributes.addClass('sfa-audience-card') }}>
+  {% if photo.src %}
+    <div class="sfa-audience-card__photo">
+      {% include 'canvas:image' with photo only %}
+    </div>
+  {% endif %}
+  <div class="sfa-audience-card__body">
+    {% if icon.src %}
+      <span class="sfa-audience-card__badge" aria-hidden="true">
+        {% include 'canvas:image' with icon|merge({alt: '', attributes: create_attribute({alt: ''})}) only %}
+      </span>
+    {% endif %}
+    <h2>{{ heading }}</h2>
+    {% if summary %}<p>{{ summary|nl2br }}</p>{% endif %}
+    {% if link_label and link_url %}<a href="{{ link_url }}">{{ link_label }}</a>{% endif %}
+  </div>
+</article>

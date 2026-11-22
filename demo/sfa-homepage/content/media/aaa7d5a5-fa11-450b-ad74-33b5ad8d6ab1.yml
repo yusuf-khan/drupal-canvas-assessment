@@ -1,0 +1,32 @@
+_meta:
+  version: '1.0'
+  entity_type: media
+  uuid: aaa7d5a5-fa11-450b-ad74-33b5ad8d6ab1
+  bundle: image
+  default_langcode: en
+  depends:
+    3192a6fd-4dcd-418c-a9b9-34956ff1c74e: file
+default:
+  status:
+    -
+      value: true
+  uid:
+    -
+      target_id: 1
+  name:
+    -
+      value: 'SFA Buyer icon'
+  revision_translation_affected:
+    -
+      value: true
+  path:
+    -
+      langcode: en
+      alias: null
+  field_media_image:
+    -
+      alt: 'Shopping bag'
+      title: ''
+      width: 1254
+      height: 1254
+      entity: 3192a6fd-4dcd-418c-a9b9-34956ff1c74e

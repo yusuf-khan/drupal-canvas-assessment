@@ -1,0 +1,32 @@
+_meta:
+  version: '1.0'
+  entity_type: media
+  uuid: 281608e6-a90d-43f3-9016-c37ee79069fe
+  bundle: image
+  default_langcode: en
+  depends:
+    71ffbdc6-cbf8-4bc3-8171-9bc6bb046dcd: file
+default:
+  status:
+    -
+      value: true
+  uid:
+    -
+      target_id: 1
+  name:
+    -
+      value: 'SFA Service Provider icon'
+  revision_translation_affected:
+    -
+      value: true
+  path:
+    -
+      langcode: en
+      alias: null
+  field_media_image:
+    -
+      alt: 'Delivery truck'
+      title: ''
+      width: 1254
+      height: 1254
+      entity: 71ffbdc6-cbf8-4bc3-8171-9bc6bb046dcd

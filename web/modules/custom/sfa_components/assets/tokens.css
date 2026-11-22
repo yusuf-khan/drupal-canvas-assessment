@@ -1,0 +1,23 @@
+:root {
+  --sfa-font-display: ivypresto-display, serif;
+  --sfa-font-heading: poppins, sans-serif;
+  --sfa-font-body: poppins, sans-serif;
+
+  --sfa-color-text: #000000;
+  --sfa-color-surface: #FFFFFF;
+  --sfa-color-text-muted: #545456;
+  --sfa-color-border: #A7A9AC;
+  --sfa-core-color-honey: #FFAD00;
+  --sfa-core-color-pencil: #FEC661;
+  --sfa-core-color-banana: #FFE7BF;
+  --sfa-core-color-cream: #FFF3E1;
+  --sfa-core-color-black: #000000;
+  --sfa-accent-color-parsley: #008A3F;
+  --sfa-accent-color-grape: #7C51A1;
+
+  --sfa-radius: 0.5rem;
+  --sfa-radius-card: 0.75rem;
+  --sfa-radius-pill: 9999px;
+
+  --sfa-content-max-width: 90rem;
+}

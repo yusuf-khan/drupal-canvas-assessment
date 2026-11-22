@@ -1,0 +1,32 @@
+_meta:
+  version: '1.0'
+  entity_type: media
+  uuid: 0e53fdd1-7cb7-42a4-bc2d-e44358704984
+  bundle: image
+  default_langcode: en
+  depends:
+    b950aed7-e1af-41ae-9c29-bfe8843b4604: file
+default:
+  status:
+    -
+      value: true
+  uid:
+    -
+      target_id: 1
+  name:
+    -
+      value: 'SFA Service Provider photo'
+  revision_translation_affected:
+    -
+      value: true
+  path:
+    -
+      langcode: en
+      alias: null
+  field_media_image:
+    -
+      alt: 'Two people discuss business at the event'
+      title: ''
+      width: 1672
+      height: 940
+      entity: b950aed7-e1af-41ae-9c29-bfe8843b4604

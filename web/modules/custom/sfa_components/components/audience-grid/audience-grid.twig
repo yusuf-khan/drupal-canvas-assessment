@@ -1,0 +1,7 @@
+<div {% if anchor %}id="{{ anchor|clean_id }}"{% endif %} {{ attributes.addClass('sfa-audience-grid') }}>
+  <div class="sfa-container">
+    <div class="sfa-audience-grid__items sfa-audience-grid__items--{{ columns|default('four') }}">
+      {% block cards %}{% endblock %}
+    </div>
+  </div>
+</div>

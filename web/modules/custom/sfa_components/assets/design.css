@@ -1,0 +1,25 @@
+.sfa-container {
+  box-sizing: border-box;
+  width: 100%;
+  max-width: min(calc(100% - 80px), 1344px, var(--sfa-content-max-width));
+  margin-inline: auto;
+}
+
+@media (max-width: 640px) {
+  .sfa-container {
+    max-width: calc(100% - 32px);
+  }
+}
+
+.sfa-event-hero,
+.sfa-audience-grid,
+.sfa-audience-card {
+  color: var(--sfa-color-text);
+  font: 400 1rem/1.4 var(--sfa-font-body);
+}
+
+.sfa-event-hero :focus-visible,
+.sfa-audience-card :focus-visible {
+  outline: 2px solid var(--sfa-accent-color-grape);
+  outline-offset: 3px;
+}

@@ -1,0 +1,218 @@
+_meta:
+  version: '1.0'
+  entity_type: canvas_page
+  uuid: f539a9ff-4499-4601-8fc9-447cca17ef14
+  default_langcode: en
+  depends:
+    3192a6fd-4dcd-418c-a9b9-34956ff1c74e: file
+    7c819b56-f93c-4b67-a1b6-9551603b2205: file
+    819648bb-c1d3-42d5-86cb-f0c67d4b5ce8: media
+    aaa7d5a5-fa11-450b-ad74-33b5ad8d6ab1: media
+    b7f598db-ec91-49ad-a0c1-c5b1a8f1fa9a: file
+    e807a7f4-44e6-41a7-a03a-ee24eac10627: file
+    0eee873c-df6f-4dde-986a-4e86535a2f33: media
+    c4f935c5-250f-48e9-bc24-c157cf99b0a4: media
+    71ffbdc6-cbf8-4bc3-8171-9bc6bb046dcd: file
+    b950aed7-e1af-41ae-9c29-bfe8843b4604: file
+    0e53fdd1-7cb7-42a4-bc2d-e44358704984: media
+    281608e6-a90d-43f3-9016-c37ee79069fe: media
+default:
+  revision_user:
+    -
+      target_id: 1
+  status:
+    -
+      value: false
+  owner:
+    -
+      target_id: 1
+  title:
+    -
+      value: 'Winter FancyFaire'
+  components:
+    -
+      uuid: 233e13ab-daa2-4a70-ac8a-257e5d127b6c
+      component_id: sdc.sfa_components.event-hero
+      inputs:
+        eyebrow: 'People. Products. A brighter food future.'
+        heading: Winter
+        heading_second_line: 'FancyFaire* 2028'
+        heading_level: h1
+        summary: "Join the specialty food community to kick off 2027 in one of the world's great food cities: San Francisco. Elevate your trade show experience with offsite sampling, unstructured networking, and local immersion."
+        photo:
+          sourceType: default-relative-url
+          value:
+            src: assets/home-hero-food.png
+            alt: 'Assorted cheeses, fruit, olives and bread'
+            width: 1672
+            height: 941
+          jsonSchema:
+            type: object
+            properties:
+              src:
+                type: string
+                contentMediaType: 'image/*'
+                format: uri-reference
+                x-allowed-schemes:
+                  - http
+                  - https
+              alt:
+                type: string
+              width:
+                type: integer
+              height:
+                type: integer
+            required:
+              - src
+          componentId: sdc.sfa_components.event-hero
+        event_date: 'January 17–19, 2027'
+        venue: 'Moscone Center'
+        city: 'San Francisco, CA'
+        secondary_label: 'Register to Attend'
+        secondary_url:
+          uri: '#registration'
+          options: {  }
+        primary_label: 'Explore the Event'
+        primary_url:
+          uri: '#resources'
+          options: {  }
+    -
+      uuid: 12814b41-6199-4b34-a5b1-1cb31886dca1
+      component_id: sdc.sfa_components.audience-grid
+      inputs:
+        columns: four
+        anchor: resources
+    -
+      parent_uuid: 12814b41-6199-4b34-a5b1-1cb31886dca1
+      slot: cards
+      uuid: e19084b9-f442-4bae-9ba3-5a9aefa4953e
+      component_id: sdc.sfa_components.audience-card
+      inputs:
+        photo:
+          sourceType: default-relative-url
+          value:
+            src: assets/maker.png
+            alt: 'Hands preparing a spread with crackers and vegetables'
+            width: 1672
+            height: 941
+          jsonSchema:
+            type: object
+            properties:
+              src:
+                type: string
+                contentMediaType: 'image/*'
+                format: uri-reference
+                x-allowed-schemes:
+                  - http
+                  - https
+              alt:
+                type: string
+              width:
+                type: integer
+              height:
+                type: integer
+            required:
+              - src
+          componentId: sdc.sfa_components.audience-card
+        icon:
+          sourceType: default-relative-url
+          value:
+            src: assets/icon-maker.png
+            alt: 'Sprouting leaves'
+            width: 1254
+            height: 1254
+          jsonSchema:
+            type: object
+            properties:
+              src:
+                type: string
+                contentMediaType: 'image/*'
+                format: uri-reference
+                x-allowed-schemes:
+                  - http
+                  - https
+              alt:
+                type: string
+              width:
+                type: integer
+              height:
+                type: integer
+            required:
+              - src
+          componentId: sdc.sfa_components.audience-card
+        heading: "I'm a Maker"
+        summary: 'Grow your brand and reach new markets.'
+        link_label: 'See resources for makers'
+        link_url:
+          uri: '#makers'
+          options: {  }
+    -
+      parent_uuid: 12814b41-6199-4b34-a5b1-1cb31886dca1
+      slot: cards
+      uuid: f87e8b0d-1fa8-41ec-8197-a058f5627e33
+      component_id: sdc.sfa_components.audience-card
+      inputs:
+        photo:
+          CANVAS_ENTITY_REFERENCE:
+            target_uuid: 819648bb-c1d3-42d5-86cb-f0c67d4b5ce8
+            target_type: media
+        icon:
+          CANVAS_ENTITY_REFERENCE:
+            target_uuid: aaa7d5a5-fa11-450b-ad74-33b5ad8d6ab1
+            target_type: media
+        heading: "I'm a Buyer"
+        summary: 'Discover new products and suppliers.'
+        link_label: 'See resources for buyers'
+        link_url:
+          uri: '#buyers'
+          options: {  }
+    -
+      parent_uuid: 12814b41-6199-4b34-a5b1-1cb31886dca1
+      slot: cards
+      uuid: 9b20f2ee-a865-4ea7-9834-32cd4de416f8
+      component_id: sdc.sfa_components.audience-card
+      inputs:
+        photo:
+          CANVAS_ENTITY_REFERENCE:
+            target_uuid: 0eee873c-df6f-4dde-986a-4e86535a2f33
+            target_type: media
+        icon:
+          CANVAS_ENTITY_REFERENCE:
+            target_uuid: c4f935c5-250f-48e9-bc24-c157cf99b0a4
+            target_type: media
+        heading: "I'm a Distributor"
+        summary: 'Find tools to grow your business.'
+        link_label: 'See resources for distributors'
+        link_url:
+          uri: '#distributors'
+          options: {  }
+    -
+      parent_uuid: 12814b41-6199-4b34-a5b1-1cb31886dca1
+      slot: cards
+      uuid: 8607a6f1-5583-4875-93cf-fb300de96bc9
+      component_id: sdc.sfa_components.audience-card
+      inputs:
+        photo:
+          CANVAS_ENTITY_REFERENCE:
+            target_uuid: 0e53fdd1-7cb7-42a4-bc2d-e44358704984
+            target_type: media
+        icon:
+          CANVAS_ENTITY_REFERENCE:
+            target_uuid: 281608e6-a90d-43f3-9016-c37ee79069fe
+            target_type: media
+        heading: "I'm a Service Provider"
+        summary: 'Connect with the specialty food community.'
+        link_label: 'See resources for providers'
+        link_url:
+          uri: '#providers'
+          options: {  }
+  path:
+    -
+      alias: /winter-fancyfaire
+      langcode: en
+  revision_translation_affected:
+    -
+      value: true
+  metatags:
+    -
+      value: '{"image_src":"[canvas_page:image:entity:field_media_image:entity:url]"}'

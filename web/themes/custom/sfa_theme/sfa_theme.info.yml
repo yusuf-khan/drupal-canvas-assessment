@@ -1,0 +1,8 @@
+name: Specialty Food
+type: theme
+base theme: false
+core_version_requirement: ^11
+libraries:
+  - sfa_theme/page
+regions:
+  content: Content

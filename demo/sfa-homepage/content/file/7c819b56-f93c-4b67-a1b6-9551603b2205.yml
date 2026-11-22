@@ -1,0 +1,24 @@
+_meta:
+  version: '1.0'
+  entity_type: file
+  uuid: 7c819b56-f93c-4b67-a1b6-9551603b2205
+  default_langcode: en
+default:
+  uid:
+    -
+      target_id: 0
+  filename:
+    -
+      value: buyer.png
+  uri:
+    -
+      value: 'public://sfa/buyer.png'
+  filemime:
+    -
+      value: image/png
+  filesize:
+    -
+      value: 2109283
+  status:
+    -
+      value: true

@@ -1,0 +1,28 @@
+$schema: https://git.drupalcode.org/project/drupal/-/raw/HEAD/core/assets/schemas/v1/metadata.schema.json
+name: Audience grid
+status: stable
+group: Specialty Food
+description: Arrange cards in a responsive grid with an editable desktop column count.
+libraryOverrides:
+  dependencies:
+    - sfa_components/design
+props:
+  type: object
+  properties:
+    columns:
+      type: string
+      title: Desktop columns
+      enum: [two, three, four]
+      meta:enum:
+        two: Two
+        three: Three
+        four: Four
+      examples: [four]
+    anchor:
+      type: string
+      title: Section anchor without #
+      examples: ["resources"]
+slots:
+  cards:
+    title: Cards
+    description: Add, duplicate and reorder Audience cards here.

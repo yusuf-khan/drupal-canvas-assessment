@@ -1,0 +1,7 @@
+name: Specialty Food components
+type: module
+description: Reusable Canvas components for event promotion and audience resources.
+package: Custom
+core_version_requirement: ^11
+dependencies:
+  - canvas:canvas

@@ -1,0 +1,47 @@
+$schema: https://git.drupalcode.org/project/drupal/-/raw/HEAD/core/assets/schemas/v1/metadata.schema.json
+name: Audience card
+status: stable
+group: Specialty Food
+description: Show a photo, audience description and resource link, with an optional icon.
+libraryOverrides:
+  dependencies:
+    - sfa_components/design
+props:
+  type: object
+  required: [heading]
+  properties:
+    photo:
+      type: object
+      title: Card photo
+      $ref: json-schema-definitions://canvas.module/image
+      examples:
+        - src: assets/maker.png
+          alt: "Hands preparing a spread with crackers and vegetables"
+          width: 1672
+          height: 941
+    icon:
+      type: object
+      title: Decorative badge icon
+      $ref: json-schema-definitions://canvas.module/image
+      examples:
+        - src: assets/icon-maker.png
+          alt: "Sprouting leaves"
+          width: 1254
+          height: 1254
+    heading:
+      type: string
+      title: Heading
+      examples: ["I'm a Maker"]
+    summary:
+      type: string
+      title: Summary
+      examples: ["Grow your brand and reach new markets."]
+    link_label:
+      type: string
+      title: Link label
+      examples: ["See resources for makers"]
+    link_url:
+      type: string
+      title: Link URL
+      format: uri-reference
+      examples: ["#makers"]

@@ -1,0 +1,32 @@
+_meta:
+  version: '1.0'
+  entity_type: media
+  uuid: 0eee873c-df6f-4dde-986a-4e86535a2f33
+  bundle: image
+  default_langcode: en
+  depends:
+    e807a7f4-44e6-41a7-a03a-ee24eac10627: file
+default:
+  status:
+    -
+      value: true
+  uid:
+    -
+      target_id: 1
+  name:
+    -
+      value: 'SFA Distributor photo'
+  revision_translation_affected:
+    -
+      value: true
+  path:
+    -
+      langcode: en
+      alias: null
+  field_media_image:
+    -
+      alt: 'A food distributor scans a jar in a box of products'
+      title: ''
+      width: 1672
+      height: 941
+      entity: e807a7f4-44e6-41a7-a03a-ee24eac10627

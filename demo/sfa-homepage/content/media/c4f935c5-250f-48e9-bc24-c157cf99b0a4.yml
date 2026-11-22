@@ -1,0 +1,32 @@
+_meta:
+  version: '1.0'
+  entity_type: media
+  uuid: c4f935c5-250f-48e9-bc24-c157cf99b0a4
+  bundle: image
+  default_langcode: en
+  depends:
+    b7f598db-ec91-49ad-a0c1-c5b1a8f1fa9a: file
+default:
+  status:
+    -
+      value: true
+  uid:
+    -
+      target_id: 1
+  name:
+    -
+      value: 'SFA Distributor icon'
+  revision_translation_affected:
+    -
+      value: true
+  path:
+    -
+      langcode: en
+      alias: null
+  field_media_image:
+    -
+      alt: 'Group of people'
+      title: ''
+      width: 1254
+      height: 1254
+      entity: b7f598db-ec91-49ad-a0c1-c5b1a8f1fa9a

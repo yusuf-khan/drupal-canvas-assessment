@@ -1,0 +1,30 @@
+<section {{ attributes.addClass('sfa-event-hero') }}>
+  {% if photo.src %}
+    <div class="sfa-event-hero__media" aria-hidden="true">
+      {% include 'canvas:image' with photo|merge({alt: '', loading: 'eager', attributes: create_attribute({alt: ''})}) only %}
+    </div>
+  {% endif %}
+  <div class="sfa-container">
+    <div class="sfa-event-hero__copy">
+      {% if eyebrow %}<p class="sfa-event-hero__eyebrow">{{ eyebrow }}</p>{% endif %}
+      <{{ heading_level|default('h1') }} class="sfa-event-hero__title">{{ heading }}{% if heading_second_line %}<br>{{ heading_second_line }}{% endif %}</{{ heading_level|default('h1') }}>
+      {% if summary %}<p class="sfa-event-hero__summary">{{ summary|nl2br }}</p>{% endif %}
+      {% if event_date or venue %}
+        <div class="sfa-event-hero__details">
+          {% if event_date %}
+            <div><span class="fa-solid fa-calendar-days" aria-hidden="true"></span><span>{{ event_date }}</span></div>
+          {% endif %}
+          {% if venue %}
+            <div><span class="fa-solid fa-location-dot" aria-hidden="true"></span><span>{{ venue }}{% if city %}<br>{{ city }}{% endif %}</span></div>
+          {% endif %}
+        </div>
+      {% endif %}
+      {% if secondary_label and secondary_url or primary_label and primary_url %}
+        <div class="sfa-event-hero__actions">
+          {% if secondary_label and secondary_url %}<a href="{{ secondary_url }}">{{ secondary_label }}</a>{% endif %}
+          {% if primary_label and primary_url %}<a class="sfa-event-hero__primary" href="{{ primary_url }}">{{ primary_label }}</a>{% endif %}
+        </div>
+      {% endif %}
+    </div>
+  </div>
+</section>

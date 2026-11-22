@@ -1,0 +1,13 @@
+name: Specialty Food demo page
+description: Imports the published Winter FancyFaire Canvas page and its media.
+type: Content
+install:
+  - sfa_components
+config:
+  actions:
+    system.site:
+      simpleConfigUpdate:
+        page.front: /winter-fancyfaire
+    user.role.content_editor:
+      grantPermissions:
+        - 'publish auto-saves'

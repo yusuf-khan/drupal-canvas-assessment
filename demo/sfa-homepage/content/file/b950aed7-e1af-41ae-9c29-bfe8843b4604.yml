@@ -1,0 +1,24 @@
+_meta:
+  version: '1.0'
+  entity_type: file
+  uuid: b950aed7-e1af-41ae-9c29-bfe8843b4604
+  default_langcode: en
+default:
+  uid:
+    -
+      target_id: 0
+  filename:
+    -
+      value: provider.png
+  uri:
+    -
+      value: 'public://sfa/provider.png'
+  filemime:
+    -
+      value: image/png
+  filesize:
+    -
+      value: 2163509
+  status:
+    -
+      value: true

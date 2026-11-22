@@ -1,0 +1,24 @@
+_meta:
+  version: '1.0'
+  entity_type: file
+  uuid: 3192a6fd-4dcd-418c-a9b9-34956ff1c74e
+  default_langcode: en
+default:
+  uid:
+    -
+      target_id: 0
+  filename:
+    -
+      value: icon-buyer.png
+  uri:
+    -
+      value: 'public://sfa/icon-buyer.png'
+  filemime:
+    -
+      value: image/png
+  filesize:
+    -
+      value: 216462
+  status:
+    -
+      value: true

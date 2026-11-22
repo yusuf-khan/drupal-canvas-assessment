@@ -1,0 +1,24 @@
+_meta:
+  version: '1.0'
+  entity_type: file
+  uuid: b7f598db-ec91-49ad-a0c1-c5b1a8f1fa9a
+  default_langcode: en
+default:
+  uid:
+    -
+      target_id: 0
+  filename:
+    -
+      value: icon-distributor.png
+  uri:
+    -
+      value: 'public://sfa/icon-distributor.png'
+  filemime:
+    -
+      value: image/png
+  filesize:
+    -
+      value: 282337
+  status:
+    -
+      value: true
