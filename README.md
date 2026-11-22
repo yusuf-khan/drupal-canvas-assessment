@@ -1,6 +1,19 @@
 # Specialty Food Drupal Canvas assessment
 
-Drupal CMS 2.2.10 project with Drupal core 11.4.13, Canvas 1.13.0, PHP 8.4, MariaDB 11.8, and Drush 13.8.1. DDEV 1.25.5 was used locally. Composer locks the PHP dependencies.
+## Environment and dependencies
+
+| Dependency | Version used |
+| --- | --- |
+| Drupal CMS | 2.2.10 |
+| Drupal core | 11.4.13 |
+| Drupal Canvas | 1.13.0 |
+| PHP | 8.4.27 |
+| MariaDB | 11.8 |
+| Drush | 13.8.1 |
+| DDEV | 1.25.5 |
+| Font Awesome Free | 6.7.2 |
+
+The DDEV configuration serves Drupal from `web/`. Composer locks the project dependencies.
 
 ## Run locally
 
@@ -12,12 +25,40 @@ Drupal CMS 2.2.10 project with Drupal core 11.4.13, Canvas 1.13.0, PHP 8.4, Mari
 
 If a Drush command fails while traversing the repository, run it from the Drupal docroot with `ddev exec --dir /var/www/html/web /var/www/html/vendor/bin/drush <command>`.
 
+## Module evaluation
+
+| Module or feature | Decision |
+| --- | --- |
+| Drupal Canvas | Owns page composition, autosaves, previews, and publishing. Its component library lets editors assemble the layout from a blank page. |
+| Core Single Directory Components | Defines the hero, grid, and card using Twig, CSS, and property schemas. The grid exposes a slot so editors can add or reorder cards. |
+| Core Media and Media Library | Provide the image fields for selecting reusable media and managing photo alternative text. |
+| Custom `sfa_components` module | Packages the three components, design tokens, and example assets. The `sfa_theme` theme provides the Drupal page shell. |
+
+## Authentication and role mapping
+
+Drupal authenticates local users and assigns access through Drupal roles. Assign a test author the **Content editor** role (`content_editor`). Drupal CMS Starter provides `create canvas_page`, `edit canvas_page`, and `create image media`. The demo recipe adds `publish auto-saves`, which lets editors publish Canvas drafts they have permission to edit. Setup uses an administrator account. Visitors can view the published page anonymously. This prototype uses local Drupal accounts and manual role assignment.
+
+### Set up a test editor
+
+1. Sign in as the local administrator and open **People → Add user**.
+2. Create an active account such as `canvas-reviewer` with a test email address and a password generated locally. Assign **Content editor** as the account's only additional role. Keep the password outside the repository.
+3. Sign in as the test editor in a private browser window. Under **Content → Pages**, create a disposable page with an unused alias. Insert the hero and a grid with one card, change the card text, select an image, and publish.
+4. Open the disposable page in a signed-out window to confirm the published content is visible. Remove the test page through Drupal when finished.
+
 ## Screenshots
 
 - [Published desktop page](screenshots/published-desktop.png)
 - [Canvas editor, desktop preview with the nested card layers](screenshots/canvas-editor.png)
 
-The published page was checked at 1920, 1366, 1024, 768, and 390 pixels. The 1920px build matches the reference's hero height, content start, card width, and gutters. Typography and image details can vary slightly across browsers.
+## Validation results
+
+| Check | Result |
+| --- | --- |
+| Canvas authoring | Created the page from scratch, nested four cards in the grid slot, selected assets through the Media Library, and published using the local administrator account. |
+| Content editor permissions | Verified the installed role contains page creation, page editing, image creation, and Canvas publishing permissions. The test-editor steps above provide a separate end-to-end check for reviewers. |
+| Anonymous rendering | Confirmed the front page and `/winter-fancyfaire` render the published hero and four cards. |
+| Responsive rendering | Checked 1920, 1366, 1024, 768, and 390px in Chromium. Each width rendered without horizontal overflow. At 1920px, the hero was 584px tall and the four cards measured 318px each with 24px gutters. |
+| Demo export and import | Exported the page and its media and applied the demo recipe on the existing Drupal CMS Starter installation. |
 
 ## Compose the design in Canvas
 
@@ -38,4 +79,8 @@ The hero examples supply the reference copy, including the 2028 heading and the 
 
 See [component-specs.md](component-specs.md) for the component contracts and responsive behavior and [agent-logs.md](agent-logs.md) for the implementation and validation milestones.
 
-During rapid edits, Chromium intermittently logged a Drupal core `once` JavaScript error. The authored content persisted and Canvas published it successfully. The demo recipe was applied on the existing Drupal CMS Starter installation.
+## Challenges and blockers
+
+- The installed Canvas schema registry rejected the textarea reference shown in the bundled documentation. The component schemas use plain text inputs and separate fields for intentional line breaks.
+- During rapid edits, Chromium intermittently logged a Drupal core `once` JavaScript error. The authored content persisted and Canvas published it successfully.
+- The HTTPS push from the development session requires GitHub write authentication. The local submission branch contains the prototype commit.
