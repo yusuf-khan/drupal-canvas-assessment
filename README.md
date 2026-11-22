@@ -55,7 +55,7 @@ Drupal authenticates local users and assigns access through Drupal roles. Assign
 | Check | Result |
 | --- | --- |
 | Canvas authoring | Created the page from scratch, nested four cards in the grid slot, selected assets through the Media Library, and published using the local administrator account. |
-| Content editor permissions | Verified the installed role contains page creation, page editing, image creation, and Canvas publishing permissions. The test-editor steps above provide a separate end-to-end check for reviewers. |
+| Content editor workflow | A test account with only the Content editor role created a blank page, configured the hero, grid, and a nested card, selected a Media Library image, and published. Anonymous access was denied for the draft and allowed after publication. |
 | Anonymous rendering | Confirmed the front page and `/winter-fancyfaire` render the published hero and four cards. |
 | Responsive rendering | Checked 1920, 1366, 1024, 768, and 390px in Chromium. Each width rendered without horizontal overflow. At 1920px, the hero was 584px tall and the four cards measured 318px each with 24px gutters. |
 | Demo export and import | Exported the page and its media and applied the demo recipe on the existing Drupal CMS Starter installation. |
@@ -66,7 +66,7 @@ Drupal authenticates local users and assigns access through Drupal roles. Assign
 2. In **Library → Components → Specialty Food**, place **Event hero** and then **Audience grid** into the content region.
 3. Drag **Audience card** into the grid's **Cards** slot. Add three more cards to the same slot and use **Layers** to verify their nesting and order.
 4. Edit the four cards using the copy below. Use the component image fields to upload or select the supplied images and icons from the Media Library. The source PNGs are under `web/modules/custom/sfa_components/assets` and the component `assets` folders. Add descriptive alternative text for card photos.
-5. Choose the desktop preview and review and publish the changes. Visit the page in a logged-out browser to inspect the layout without the admin UI.
+5. Choose the desktop preview. In **Review changes**, select the page you are editing and publish it. Visit the page in a logged-out browser to inspect the layout without the admin UI.
 
 | Heading | Summary | Link label | Photo and badge |
 | --- | --- | --- | --- |
@@ -83,4 +83,4 @@ See [component-specs.md](component-specs.md) for the component contracts and res
 
 - The installed Canvas schema registry rejected the textarea reference shown in the bundled documentation. The component schemas use plain text inputs and separate fields for intentional line breaks.
 - During rapid edits, Chromium intermittently logged a Drupal core `once` JavaScript error. The authored content persisted and Canvas published it successfully.
-- The HTTPS push from the development session requires GitHub write authentication. The local submission branch contains the prototype commit.
+- The verification pass found that the demo export marked Winter FancyFaire as unpublished. The exported page now preserves the published status so the demo can serve as the front page after import.

@@ -22,7 +22,7 @@ default:
       target_id: 1
   status:
     -
-      value: false
+      value: true
   owner:
     -
       target_id: 1
