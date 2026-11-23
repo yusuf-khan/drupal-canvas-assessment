@@ -1,0 +1,14 @@
+uuid: 5d148f5b-6235-44e2-9320-5628a92f66b5
+langcode: en
+status: true
+dependencies:
+  enforced:
+    module:
+      - sso_dashboards
+_core:
+  default_config_hash: _ebOvUFLsLyhpDPPnUfC2jGQpWRPXGPXRwT86gFHSLs
+id: member
+label: Member
+weight: 5
+is_admin: false
+permissions: {  }

@@ -1,0 +1,15 @@
+sso_dashboards.member:
+  path: '/dashboard/member'
+  defaults:
+    _controller: '\Drupal\sso_dashboards\Controller\DashboardController::member'
+    _title: 'Member dashboard'
+  requirements:
+    _role: 'member'
+
+sso_dashboards.exhibitor:
+  path: '/dashboard/exhibitor'
+  defaults:
+    _controller: '\Drupal\sso_dashboards\Controller\DashboardController::exhibitor'
+    _title: 'Exhibitor dashboard'
+  requirements:
+    _role: 'exhibitor'

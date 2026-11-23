@@ -1,4 +1,16 @@
-# Specialty Food Drupal Canvas assessment
+# Drupal practical assessments
+
+Both prototypes are available in this repository. Each has its own Drupal
+installation, dependencies, and DDEV configuration.
+
+| Assessment | Project directory | Reviewer guide |
+| --- | --- | --- |
+| Drupal CMS, SDC, and Canvas | Repository root | [Canvas setup](#install-from-scratch) |
+| Drupal 11 and Auth0 SSO | `auth0-assessment/` | [Auth0 setup and validation](auth0-assessment/README.md) |
+
+Run DDEV commands from the directory for the assessment you are testing.
+
+## Specialty Food Drupal Canvas assessment
 
 ## Environment and dependencies
 
@@ -23,7 +35,7 @@ You’ll need Git, Docker, and DDEV. Start Docker before running the setup comma
 ### 1. Install Drupal CMS
 
 ```bash
-git clone --branch main https://github.com/yusuf-khan/drupal-canvas-assessment.git
+git clone --branch submission/canvas-and-auth0 https://github.com/yusuf-khan/drupal-canvas-assessment.git
 cd drupal-canvas-assessment
 ddev start
 ddev composer install

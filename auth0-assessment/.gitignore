@@ -1,0 +1,39 @@
+# Composer-installed dependencies and Drupal core/contrib packages.
+/vendor/
+/web/core/
+/web/modules/contrib/
+/web/profiles/contrib/
+/web/themes/contrib/
+/web/libraries/
+/drush/Commands/contrib/
+
+# Local Drupal settings may contain database credentials and hash salts.
+/.auth0-client-secret
+/web/sites/*/settings.local.php
+# /web/sites/*/settings.php
+# /web/sites/*/settings.*.php
+/web/sites/*/services.local.yml
+/web/sites/*/services.*.local.yml
+
+# Uploaded files, generated assets, and compiled Twig templates.
+/web/sites/*/files/*
+!/web/sites/*/files/.htaccess
+!/web/sites/*/files/sync/
+/web/sites/*/files/sync/*
+!/web/sites/*/files/sync/.htaccess
+/web/sites/*/private/
+
+# Local DDEV certificates, routing configuration, and database snapshots.
+/.ddev/traefik/certs/
+/.ddev/traefik/config/
+/.ddev/db_snapshots/
+
+# Environment files and local tooling artifacts.
+/.env
+/.env.*
+!/.env.example
+/web/sites/simpletest/
+/.phpunit.cache/
+/.phpunit.result.cache
+/.DS_Store
+**/Thumbs.db

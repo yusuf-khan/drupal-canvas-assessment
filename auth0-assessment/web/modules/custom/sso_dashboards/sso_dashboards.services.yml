@@ -1,0 +1,15 @@
+services:
+  sso_dashboards.role_mapper:
+    class: Drupal\sso_dashboards\Service\RoleMapper
+  # Wire the service ID referenced by the local login form's submit callback.
+  Drupal\sso_dashboards\Hook\LoginHooks:
+    arguments: ['@sso_dashboards.role_mapper', '@openid_connect.session', '@config.factory', '@request_stack', '@current_user', '@messenger', '@string_translation']
+  sso_dashboards.rest_client:
+    class: Drupal\sso_dashboards\Service\JsonPlaceholderClient
+    arguments: ['@http_client', '@config.factory']
+  sso_dashboards.soap_client:
+    class: Drupal\sso_dashboards\Service\CountryInfoSoapClient
+    arguments: ['@http_client', '@config.factory']
+  sso_dashboards.data:
+    class: Drupal\sso_dashboards\Service\DashboardData
+    arguments: ['@sso_dashboards.rest_client', '@sso_dashboards.soap_client', '@cache.default', '@datetime.time', '@config.factory']

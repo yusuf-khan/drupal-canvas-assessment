@@ -1,0 +1,42 @@
+<?php
+
+/**
+ * @file
+ * Installation and updates for SSO Dashboards.
+ */
+
+use Drupal\sso_dashboards\Service\RoleMapper;
+
+/**
+ * Implements hook_install().
+ */
+function sso_dashboards_install(): void {
+  $settings = \Drupal::configFactory()->getEditable('openid_connect.settings');
+  if ($settings->get('user_login_display') === 'hidden') {
+    $settings->set('user_login_display', 'below');
+  }
+  if ($settings->get('redirect_logout') === '') {
+    $settings->set('redirect_logout', '/user/login');
+  }
+  $settings->set('override_registration_settings', TRUE)->save();
+}
+
+/**
+ * Switch the original default SOAP URL to the Beeceptor assignment endpoint.
+ */
+function sso_dashboards_update_11001(): void {
+  $config = \Drupal::configFactory()->getEditable('sso_dashboards.settings');
+  if ($config->get('soap_endpoint') === 'https://webservices.oorsprong.org/websamples.countryinfo/CountryInfoService.wso') {
+    $config->set('soap_endpoint', 'https://soap-service-free.mock.beeceptor.com/CountryInfoService.wso')->save();
+  }
+}
+
+/**
+ * Initialize configurable Auth0 mappings on existing installations.
+ */
+function sso_dashboards_update_11002(): void {
+  $config = \Drupal::configFactory()->getEditable('sso_dashboards.settings');
+  if ($config->get('role_mapping') === NULL) {
+    $config->set('role_mapping', RoleMapper::DEFAULT_MAPPING)->save();
+  }
+}
