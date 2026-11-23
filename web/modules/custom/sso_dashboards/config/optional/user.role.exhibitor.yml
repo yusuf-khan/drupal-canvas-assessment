@@ -1,0 +1,10 @@
+langcode: en
+status: true
+dependencies:
+  enforced:
+    module:
+      - sso_dashboards
+id: exhibitor
+label: Exhibitor
+is_admin: false
+permissions: []

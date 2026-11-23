@@ -47,3 +47,4 @@ $RECYCLE.BIN/
 # Drupal Composer scaffold templates.
 /web/sites/default/default.settings.php
 /web/sites/default/default.services.yml
+/.auth0-client-secret

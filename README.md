@@ -89,7 +89,7 @@ To test authoring from a blank page, follow [Set up a test editor](#set-up-a-tes
 
 ## Authentication and role mapping
 
-Drupal authenticates local users and assigns access through Drupal roles. Assign a test author the **Content editor** role (`content_editor`). Drupal CMS Starter provides `create canvas_page`, `edit canvas_page`, and `create image media`. The demo recipe grants `publish auto-saves` for publishing Canvas drafts and `use text format canvas_full_html` for CKEditor fields. Setup uses an administrator account. Visitors can view the published page anonymously. This prototype uses local Drupal accounts and manual role assignment.
+Drupal authenticates local users and assigns access through Drupal roles. Assign a test author the **Content editor** role (`content_editor`). Drupal CMS Starter provides `create canvas_page`, `edit canvas_page`, and `create image media`. The demo recipe grants `publish auto-saves` for publishing Canvas drafts and `use text format canvas_full_html` for CKEditor fields. Setup uses an administrator account. Visitors can view the published page anonymously. Reviewers can use local Drupal accounts for the Canvas authoring demo.
 
 ### Set up a test editor
 
@@ -97,6 +97,39 @@ Drupal authenticates local users and assigns access through Drupal roles. Assign
 2. Create an active account such as `canvas-reviewer` with a test email address and a password generated locally. Assign **Content editor** as the account's only additional role. Keep the password outside the repository.
 3. Sign in as the test editor in a private browser window. Under **Content → Pages**, create a disposable page with an unused alias. Insert the hero and a grid with one card, change the card text, select an image, and publish.
 4. Open the disposable page in a signed-out window to confirm the published content is visible. Remove the test page through Drupal when finished.
+
+### Optional Auth0 sign-in on the Canvas site
+
+The Canvas project can also run the Auth0 dashboard module. After installing
+Drupal CMS, run `ddev drush en sso_dashboards -y` from the repository root.
+The module enables OpenID Connect, creates the two dashboard roles, and
+installs the Generic client in strict ID-token validation mode. Canvas
+editor access continues to use the Drupal **Content editor** role.
+
+For the bundled Auth0 application, add these URLs in Auth0:
+
+- **Allowed Callback URLs** `https://drupal-canvas-assessment.ddev.site/openid-connect/auth0`
+- **Allowed Logout URLs** `https://drupal-canvas-assessment.ddev.site/user/login`
+
+Add the rotated client secret to a one-line `.auth0-client-secret` file in
+the Canvas project root. Git ignores this file. In a fresh setup, add the
+following to the end of the ignored `web/sites/default/settings.php` file
+while it is within PHP:
+
+```php
+$auth0_secret_file = dirname($app_root) . '/.auth0-client-secret';
+if (is_readable($auth0_secret_file)) {
+  $auth0_secret = trim((string) file_get_contents($auth0_secret_file));
+  if ($auth0_secret !== '') {
+    $config['openid_connect.client.auth0']['settings']['client_secret'] = $auth0_secret;
+  }
+}
+```
+
+Run `ddev drush cr`, then choose **Auth0** at `/user/login`. Configure a
+different application at `/admin/config/people/openid-connect`. See the
+[Auth0 role mapping guide](auth0-assessment/README.md#auth0-and-test-users)
+for the Post Login Action and test accounts.
 
 ## Reusable Canvas controls
 

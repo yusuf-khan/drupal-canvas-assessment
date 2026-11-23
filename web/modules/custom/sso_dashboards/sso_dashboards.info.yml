@@ -1,0 +1,7 @@
+name: SSO Dashboards
+type: module
+description: Synchronizes Auth0 roles and provides role-specific dashboards.
+package: Custom
+core_version_requirement: ^11.1
+dependencies:
+  - openid_connect:openid_connect

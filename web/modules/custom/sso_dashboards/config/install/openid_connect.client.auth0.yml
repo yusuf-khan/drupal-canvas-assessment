@@ -1,0 +1,30 @@
+langcode: en
+status: true
+dependencies:
+  enforced:
+    module:
+      - sso_dashboards
+id: auth0
+label: Auth0
+plugin: generic
+settings:
+  client_id: 'ypwN2FeofI4fsGpa8PZTcUKP0hEgEtbd'
+  client_secret: ''
+  provider_slug: ''
+  iss_allowed_domains: ''
+  prompt:
+    - login
+  verify_id_token: strict
+  issuer: 'https://dev-jpbw46achmzwergl.us.auth0.com/'
+  jwks_uri: 'https://dev-jpbw46achmzwergl.us.auth0.com/.well-known/jwks.json'
+  id_token_signing_algorithms:
+    - RS256
+  issuer_url: 'https://dev-jpbw46achmzwergl.us.auth0.com/'
+  authorization_endpoint: 'https://dev-jpbw46achmzwergl.us.auth0.com/authorize'
+  token_endpoint: 'https://dev-jpbw46achmzwergl.us.auth0.com/oauth/token'
+  userinfo_endpoint: 'https://dev-jpbw46achmzwergl.us.auth0.com/userinfo'
+  end_session_endpoint: 'https://dev-jpbw46achmzwergl.us.auth0.com/oidc/logout'
+  scopes:
+    - openid
+    - profile
+    - email

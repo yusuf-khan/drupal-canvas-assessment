@@ -1,0 +1,5 @@
+name: 'SSO Dashboards test fixtures'
+type: module
+package: Testing
+core_version_requirement: ^11
+hidden: true

@@ -1,0 +1,10 @@
+langcode: en
+status: true
+dependencies:
+  enforced:
+    module:
+      - sso_dashboards
+id: member
+label: Member
+is_admin: false
+permissions: []
