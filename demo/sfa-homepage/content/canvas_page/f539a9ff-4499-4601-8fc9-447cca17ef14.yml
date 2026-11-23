@@ -32,13 +32,15 @@ default:
   components:
     -
       uuid: 233e13ab-daa2-4a70-ac8a-257e5d127b6c
-      component_id: sdc.sfa_components.event-hero
+      component_id: sdc.sfa_theme.event-hero
       inputs:
         eyebrow: 'People. Products. A brighter food future.'
-        heading: Winter
-        heading_second_line: 'FancyFaire* 2028'
-        heading_level: h1
-        summary: "Join the specialty food community to kick off 2027 in one of the world's great food cities: San Francisco. Elevate your trade show experience with offsite sampling, unstructured networking, and local immersion."
+        formatted_heading:
+          value: '<p>Winter<br>FancyFaire* 2028</p>'
+          format: canvas_full_html
+        formatted_summary:
+          value: "<p>Join the specialty food community to kick off 2027 in one of the world's great food cities: San Francisco. Elevate your trade show experience with offsite sampling, unstructured networking, and local immersion.</p>"
+          format: canvas_full_html
         photo:
           sourceType: default-relative-url
           value:
@@ -64,21 +66,35 @@ default:
                 type: integer
             required:
               - src
-          componentId: sdc.sfa_components.event-hero
+          componentId: sdc.sfa_theme.event-hero
         event_date: 'January 17–19, 2027'
         venue: 'Moscone Center'
         city: 'San Francisco, CA'
-        secondary_label: 'Register to Attend'
-        secondary_url:
+    -
+      parent_uuid: 233e13ab-daa2-4a70-ac8a-257e5d127b6c
+      slot: desktop_actions
+      uuid: 187abc59-2d87-443a-8d3d-187f9b65ecd1
+      component_id: sdc.sfa_theme.action-link
+      inputs:
+        label: 'Register to Attend'
+        url:
           uri: '#registration'
           options: {  }
-        primary_label: 'Explore the Event'
-        primary_url:
+        variant: outline
+    -
+      parent_uuid: 233e13ab-daa2-4a70-ac8a-257e5d127b6c
+      slot: desktop_actions
+      uuid: cceb4a28-b1f3-40eb-8191-a1c12bce2af9
+      component_id: sdc.sfa_theme.action-link
+      inputs:
+        label: 'Explore the Event'
+        url:
           uri: '#resources'
           options: {  }
+        variant: filled
     -
       uuid: 12814b41-6199-4b34-a5b1-1cb31886dca1
-      component_id: sdc.sfa_components.audience-grid
+      component_id: sdc.sfa_theme.audience-grid
       inputs:
         columns: four
         anchor: resources
@@ -86,7 +102,7 @@ default:
       parent_uuid: 12814b41-6199-4b34-a5b1-1cb31886dca1
       slot: cards
       uuid: e19084b9-f442-4bae-9ba3-5a9aefa4953e
-      component_id: sdc.sfa_components.audience-card
+      component_id: sdc.sfa_theme.audience-card
       inputs:
         photo:
           sourceType: default-relative-url
@@ -113,7 +129,7 @@ default:
                 type: integer
             required:
               - src
-          componentId: sdc.sfa_components.audience-card
+          componentId: sdc.sfa_theme.audience-card
         icon:
           sourceType: default-relative-url
           value:
@@ -139,7 +155,7 @@ default:
                 type: integer
             required:
               - src
-          componentId: sdc.sfa_components.audience-card
+          componentId: sdc.sfa_theme.audience-card
         heading: "I'm a Maker"
         summary: 'Grow your brand and reach new markets.'
         link_label: 'See resources for makers'
@@ -150,7 +166,7 @@ default:
       parent_uuid: 12814b41-6199-4b34-a5b1-1cb31886dca1
       slot: cards
       uuid: f87e8b0d-1fa8-41ec-8197-a058f5627e33
-      component_id: sdc.sfa_components.audience-card
+      component_id: sdc.sfa_theme.audience-card
       inputs:
         photo:
           CANVAS_ENTITY_REFERENCE:
@@ -170,7 +186,7 @@ default:
       parent_uuid: 12814b41-6199-4b34-a5b1-1cb31886dca1
       slot: cards
       uuid: 9b20f2ee-a865-4ea7-9834-32cd4de416f8
-      component_id: sdc.sfa_components.audience-card
+      component_id: sdc.sfa_theme.audience-card
       inputs:
         photo:
           CANVAS_ENTITY_REFERENCE:
@@ -190,7 +206,7 @@ default:
       parent_uuid: 12814b41-6199-4b34-a5b1-1cb31886dca1
       slot: cards
       uuid: 8607a6f1-5583-4875-93cf-fb300de96bc9
-      component_id: sdc.sfa_components.audience-card
+      component_id: sdc.sfa_theme.audience-card
       inputs:
         photo:
           CANVAS_ENTITY_REFERENCE:

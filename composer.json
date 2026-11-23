@@ -23,6 +23,7 @@
         "drupal/automatic_updates": "^4.1",
         "drupal/autosave_form": "^1.10",
         "drupal/canvas": "^1.11",
+        "drupal/canvas_full_html": "^1.0",
         "drupal/canvas_translate": "@alpha",
         "drupal/coffee": "^2",
         "drupal/core": "^11.4",

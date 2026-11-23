@@ -1,0 +1,6 @@
+.sfa-eyebrow {
+  margin: 0;
+  font: 600 .75rem/1.4 var(--sfa-font-heading);
+  letter-spacing: .145em;
+  text-transform: uppercase;
+}

@@ -5,11 +5,20 @@ group: Specialty Food
 description: Show a photo, audience description and resource link, with an optional icon.
 libraryOverrides:
   dependencies:
-    - sfa_components/design
+    - sfa_theme/design
 props:
   type: object
   required: [heading]
   properties:
+    background:
+      type: string
+      title: Background color
+      enum: [white, cream, banana]
+      meta:enum:
+        white: White
+        cream: Cream
+        banana: Banana
+      examples: [white]
     photo:
       type: object
       title: Card photo
@@ -32,6 +41,21 @@ props:
       type: string
       title: Heading
       examples: ["I'm a Maker"]
+    heading_level:
+      type: string
+      title: Heading level
+      enum: [h2, h3]
+      examples: [h2]
+    formatted_heading:
+      type: string
+      title: Formatted heading
+      contentMediaType: text/html
+      x-formatting-context: block
+    formatted_summary:
+      type: string
+      title: Formatted description
+      contentMediaType: text/html
+      x-formatting-context: block
     summary:
       type: string
       title: Summary

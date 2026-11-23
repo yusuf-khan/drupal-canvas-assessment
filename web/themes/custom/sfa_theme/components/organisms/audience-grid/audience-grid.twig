@@ -1,0 +1,15 @@
+{% set item_alignment = alignment|default('stretch') %}
+{% if anchor %}{% set attributes = attributes.setAttribute('id', anchor|clean_id) %}{% endif %}
+<div {{ attributes.addClass('sfa-audience-grid', 'sfa-surface--' ~ background|default('white')) }} style="{% if padding_top is defined and padding_top is not null %}--sfa-padding-top: {{ padding_top }}px;{% endif %}{% if padding_bottom is defined and padding_bottom is not null %}--sfa-padding-bottom: {{ padding_bottom }}px;{% endif %}">
+  <div class="sfa-container">
+    {% if summary or formatted_heading or formatted_summary %}
+      <div class="sfa-audience-grid__intro">
+        {% include 'sfa_theme:title' with {formatted: formatted_heading|default('')} only %}
+        {% include 'sfa_theme:prose' with {text: summary|default(''), formatted: formatted_summary|default('')} only %}
+      </div>
+    {% endif %}
+    <div class="sfa-audience-grid__items sfa-audience-grid__items--{{ columns|default('four') }} sfa-audience-grid__items--{{ direction|default('row') }}" style="--sfa-gap: {{ gap ?? 24 }}px; --sfa-alignment: {{ item_alignment }}; --sfa-card-content-alignment: {{ item_alignment == 'stretch' ? 'start' : item_alignment }}; --sfa-row-alignment: {{ row_alignment|default('start') }}">
+      {% block cards %}{% endblock %}
+    </div>
+  </div>
+</div>

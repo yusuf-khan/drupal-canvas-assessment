@@ -1,0 +1,87 @@
+$schema: https://git.drupalcode.org/project/drupal/-/raw/HEAD/core/assets/schemas/v1/metadata.schema.json
+name: Event hero
+status: stable
+group: Specialty Food
+description: Promote an event with full-width photography and separate desktop and mobile button slots.
+libraryOverrides:
+  dependencies:
+    - sfa_theme/design
+props:
+  type: object
+  required: [formatted_heading]
+  properties:
+    background:
+      type: string
+      title: Background color
+      enum: [white, cream, banana]
+      meta:enum:
+        white: White
+        cream: Cream
+        banana: Banana
+      examples: [cream]
+    eyebrow:
+      type: string
+      title: Eyebrow
+      examples: ["People. Products. A brighter food future."]
+    formatted_heading:
+      type: string
+      title: Heading
+      contentMediaType: text/html
+      x-formatting-context: block
+      examples: ['<p>Winter<br>FancyFaire* 2028</p>']
+    formatted_summary:
+      type: string
+      title: Description
+      contentMediaType: text/html
+      x-formatting-context: block
+      examples: ["<p>Join the specialty food community to kick off 2027 in one of the world's great food cities: San Francisco. Elevate your trade show experience with offsite sampling, unstructured networking, and local immersion.</p>"]
+    photo:
+      type: object
+      title: Decorative hero photo
+      $ref: json-schema-definitions://canvas.module/image
+      examples:
+        - src: assets/home-hero-food.png
+          alt: "Assorted cheeses, fruit, olives and bread"
+          width: 1672
+          height: 941
+    date_icon:
+      type: string
+      title: Date icon
+      enum: [calendar-days, location-dot, clock, building, none]
+      meta:enum:
+        calendar-days: Calendar
+        location-dot: Location pin
+        clock: Clock
+        building: Building
+        none: No icon
+      examples: [calendar-days]
+    event_date:
+      type: string
+      title: Event date
+      examples: ["January 17–19, 2027"]
+    location_icon:
+      type: string
+      title: Location icon
+      enum: [calendar-days, location-dot, clock, building, none]
+      meta:enum:
+        calendar-days: Calendar
+        location-dot: Location pin
+        clock: Clock
+        building: Building
+        none: No icon
+      examples: [location-dot]
+    venue:
+      type: string
+      title: Venue
+      examples: ["Moscone Center"]
+    city:
+      type: string
+      title: City
+      examples: ["San Francisco, CA"]
+slots:
+  desktop_actions:
+    title: Desktop buttons
+    description: Add as many Button link components as needed. Also appears on mobile when Mobile buttons is empty.
+  mobile_actions:
+    title: Mobile buttons
+    description: Add Button link components to replace the desktop buttons on mobile.

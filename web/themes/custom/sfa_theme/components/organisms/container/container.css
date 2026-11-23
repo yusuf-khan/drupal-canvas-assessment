@@ -1,0 +1,10 @@
+.sfa-layout-container {
+  padding-block: var(--sfa-padding-top) var(--sfa-padding-bottom);
+  background: var(--sfa-section-surface);
+}
+
+.sfa-layout-container--boxed {
+  box-sizing: border-box;
+  max-width: min(calc(100% - 32px), var(--sfa-content-max-width));
+  margin-inline: auto;
+}

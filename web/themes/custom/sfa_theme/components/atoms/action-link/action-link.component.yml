@@ -1,0 +1,24 @@
+$schema: https://git.drupalcode.org/project/drupal/-/raw/HEAD/core/assets/schemas/v1/metadata.schema.json
+name: Button link
+status: stable
+group: Specialty Food
+libraryOverrides:
+  dependencies:
+    - sfa_theme/design
+props:
+  type: object
+  properties:
+    label:
+      type: string
+      title: Link label
+      examples: [Explore the Event]
+    url:
+      type: string
+      title: Link URL
+      format: uri-reference
+      examples: ["#resources"]
+    variant:
+      type: string
+      title: Style
+      enum: [text, outline, filled]
+      examples: [filled]

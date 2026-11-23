@@ -3,7 +3,7 @@
   display: grid;
   align-items: center;
   min-height: 584px;
-  background: var(--sfa-core-color-cream);
+  background: var(--sfa-section-surface);
 }
 
 .sfa-event-hero__media {
@@ -22,7 +22,7 @@
 .sfa-event-hero__media::after {
   position: absolute;
   inset: 0;
-  background: linear-gradient(90deg, var(--sfa-core-color-cream), transparent 25%);
+  background: linear-gradient(90deg, var(--sfa-section-surface), transparent 25%);
   content: "";
 }
 
@@ -35,22 +35,17 @@
   padding-block: 64px;
 }
 
-.sfa-event-hero__eyebrow {
+.sfa-event-hero .sfa-event-hero__eyebrow,
+.sfa-event-hero .sfa-event-hero__title {
   margin: 0 0 16px;
-  font-size: .75rem;
-  font-weight: 600;
-  letter-spacing: .145em;
-  text-transform: uppercase;
 }
 
-.sfa-event-hero__title {
-  margin: 0 0 16px;
+.sfa-event-hero .sfa-event-hero__title {
   font: 700 clamp(2.75rem, 4vw, 3.75rem)/1.02 var(--sfa-font-display);
 }
 
 .sfa-event-hero__summary {
   max-width: 494px;
-  margin: 0;
 }
 
 .sfa-event-hero__details,
@@ -64,39 +59,6 @@
 .sfa-event-hero__details {
   column-gap: 54px;
   font-weight: 500;
-}
-
-.sfa-event-hero__details > div {
-  display: flex;
-  align-items: center;
-  gap: 16px;
-}
-
-.sfa-event-hero__details .fa-solid {
-  width: 28px;
-  color: var(--sfa-core-color-honey);
-  font-size: 1.75rem;
-  text-align: center;
-}
-
-.sfa-event-hero__actions a {
-  padding: 12px 15px;
-  border: 1px solid currentColor;
-  border-radius: var(--sfa-radius-pill);
-  color: inherit;
-  font-size: .875rem;
-  font-weight: 600;
-  letter-spacing: -.02em;
-  text-decoration: none;
-}
-
-.sfa-event-hero__actions .sfa-event-hero__primary {
-  border-color: var(--sfa-core-color-honey);
-  background: var(--sfa-core-color-honey);
-}
-
-.sfa-event-hero__actions a:hover {
-  text-decoration: underline;
 }
 
 @media (min-width: 901px) and (max-width: 1250px) {
@@ -113,11 +75,30 @@
   }
 
   .sfa-event-hero__media::after {
-    background: linear-gradient(0deg, var(--sfa-core-color-cream), transparent 25%);
+    background: linear-gradient(0deg, var(--sfa-section-surface), transparent 25%);
   }
 
   .sfa-event-hero__copy {
     max-width: 100%;
     padding-block: 32px 48px;
+  }
+}
+
+
+.sfa-event-hero .sfa-event-hero__actions--empty {
+  margin-top: 0;
+}
+
+.sfa-event-hero .sfa-event-hero__actions--mobile {
+  display: none;
+}
+
+@media (max-width: 640px) {
+  .sfa-event-hero .sfa-event-hero__actions--desktop {
+    display: none;
+  }
+
+  .sfa-event-hero .sfa-event-hero__actions--mobile {
+    display: flex;
   }
 }

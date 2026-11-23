@@ -1,0 +1,17 @@
+$schema: https://git.drupalcode.org/project/drupal/-/raw/HEAD/core/assets/schemas/v1/metadata.schema.json
+name: Event detail
+status: stable
+noUi: true
+props:
+  type: object
+  properties:
+    glyph:
+      type: string
+      title: Icon
+      enum: [calendar-days, location-dot, clock, building, none]
+    text:
+      type: string
+      title: Detail
+    second_line:
+      type: string
+      title: Second line

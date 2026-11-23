@@ -1,0 +1,10 @@
+{% set tag = level|default('h2') %}
+{% if formatted %}
+  <div {{ attributes.addClass('sfa-title').setAttribute('role', 'heading').setAttribute('aria-level', tag|slice(1)) }}>
+    {{ formatted }}{% if second_line %}<br>{{ second_line }}{% endif %}
+  </div>
+{% elseif text %}
+  <{{ tag }} {{ attributes.addClass('sfa-title') }}>
+    {{ text }}{% if second_line %}<br>{{ second_line }}{% endif %}
+  </{{ tag }}>
+{% endif %}

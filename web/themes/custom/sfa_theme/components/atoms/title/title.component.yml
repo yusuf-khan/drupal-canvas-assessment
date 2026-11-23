@@ -1,0 +1,27 @@
+$schema: https://git.drupalcode.org/project/drupal/-/raw/HEAD/core/assets/schemas/v1/metadata.schema.json
+name: Title
+status: stable
+group: Specialty Food
+libraryOverrides:
+  dependencies:
+    - sfa_theme/design
+props:
+  type: object
+  properties:
+    text:
+      type: string
+      title: Title
+      examples: [Section title]
+    second_line:
+      type: string
+      title: Second line
+    formatted:
+      type: string
+      title: Formatted title
+      contentMediaType: text/html
+      x-formatting-context: block
+    level:
+      type: string
+      title: Heading level
+      enum: [h1, h2, h3, h4, h5, h6]
+      examples: [h2]

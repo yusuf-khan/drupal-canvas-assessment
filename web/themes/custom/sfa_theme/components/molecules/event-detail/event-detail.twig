@@ -1,0 +1,6 @@
+{% if text or second_line %}
+  <div class="sfa-event-detail">
+    {% include 'sfa_theme:icon' with {glyph: glyph} only %}
+    <span>{{ text }}{% if text and second_line %}<br>{% endif %}{{ second_line }}</span>
+  </div>
+{% endif %}

@@ -1,0 +1,6 @@
+{% set width = width|default('boxed') %}
+<div {{ attributes.addClass('sfa-layout-container', 'sfa-layout-container--' ~ width, 'sfa-surface--' ~ background|default('white')) }} style="--sfa-padding-top: {{ padding_top ?? 32 }}px; --sfa-padding-bottom: {{ padding_bottom ?? 32 }}px">
+  <div class="sfa-layout-container__content{% if width == 'full-boxed' %} sfa-container{% endif %}">
+    {% block content %}{% endblock %}
+  </div>
+</div>

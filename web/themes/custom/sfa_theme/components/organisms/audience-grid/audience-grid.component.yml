@@ -1,0 +1,82 @@
+$schema: https://git.drupalcode.org/project/drupal/-/raw/HEAD/core/assets/schemas/v1/metadata.schema.json
+name: Card group
+status: stable
+group: Specialty Food
+description: Arrange cards in a responsive grid with an editable desktop column count.
+libraryOverrides:
+  dependencies:
+    - sfa_theme/design
+props:
+  type: object
+  properties:
+    alignment:
+      type: string
+      title: Item alignment
+      description: Align individual cards and their contents. Stretch keeps cards the same height in a row and aligns contents to the start.
+      enum: [stretch, start, center, end]
+      examples: [stretch]
+    direction:
+      type: string
+      title: Direction
+      enum: [row, column]
+      examples: [row]
+    columns:
+      type: string
+      title: Items across on desktop
+      enum: [two, three, four]
+      meta:enum:
+        two: Two
+        three: Three
+        four: Four
+      examples: [four]
+    gap:
+      type: integer
+      title: Space between items in pixels
+      minimum: 0
+      maximum: 80
+      examples: [24]
+    row_alignment:
+      type: string
+      title: Row alignment
+      enum: [start, center, end]
+      examples: [start]
+    padding_top:
+      type: integer
+      title: Top padding in pixels
+      minimum: 0
+      maximum: 160
+    padding_bottom:
+      type: integer
+      title: Bottom padding in pixels
+      minimum: 0
+      maximum: 160
+    background:
+      type: string
+      title: Background color
+      enum: [white, cream, banana]
+      meta:enum:
+        white: White
+        cream: Cream
+        banana: Banana
+      examples: [white]
+    formatted_heading:
+      type: string
+      title: Section heading (rich text)
+      contentMediaType: text/html
+      x-formatting-context: block
+    formatted_summary:
+      type: string
+      title: Formatted description
+      contentMediaType: text/html
+      x-formatting-context: block
+    summary:
+      type: string
+      title: Optional section description
+    anchor:
+      type: string
+      title: Section anchor without #
+      examples: ["resources"]
+slots:
+  cards:
+    title: Cards
+    description: Add, duplicate and reorder Audience cards here.

@@ -1,0 +1,40 @@
+$schema: https://git.drupalcode.org/project/drupal/-/raw/HEAD/core/assets/schemas/v1/metadata.schema.json
+name: Container
+status: stable
+group: Specialty Food
+libraryOverrides:
+  dependencies:
+    - sfa_theme/design
+props:
+  type: object
+  properties:
+    width:
+      type: string
+      title: Width
+      enum: [boxed, full, full-boxed]
+      meta:enum:
+        boxed: Boxed
+        full: Full width
+        full-boxed: Full width with boxed content
+      examples: [boxed]
+    background:
+      type: string
+      title: Background color
+      enum: [white, cream, banana]
+      examples: [white]
+    padding_top:
+      type: integer
+      title: Top padding in pixels
+      minimum: 0
+      maximum: 160
+      examples: [32]
+    padding_bottom:
+      type: integer
+      title: Bottom padding in pixels
+      minimum: 0
+      maximum: 160
+      examples: [32]
+slots:
+  content:
+    title: Content
+    description: Add any Canvas component to this container.

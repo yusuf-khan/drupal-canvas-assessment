@@ -23,3 +23,15 @@
   outline: 2px solid var(--sfa-accent-color-grape);
   outline-offset: 3px;
 }
+
+.sfa-surface--white {
+  --sfa-section-surface: var(--sfa-color-surface);
+}
+
+.sfa-surface--cream {
+  --sfa-section-surface: var(--sfa-core-color-cream);
+}
+
+.sfa-surface--banana {
+  --sfa-section-surface: var(--sfa-core-color-banana);
+}

@@ -1,0 +1,12 @@
+.sfa-prose {
+  margin: 0;
+  font-family: var(--sfa-font-body);
+}
+
+.sfa-prose > :first-child {
+  margin-block-start: 0;
+}
+
+.sfa-prose > :last-child {
+  margin-block-end: 0;
+}

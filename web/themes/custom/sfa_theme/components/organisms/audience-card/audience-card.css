@@ -5,7 +5,7 @@
   overflow: hidden;
   border: 1px solid var(--sfa-color-border);
   border-radius: var(--sfa-radius-card);
-  background: var(--sfa-color-surface);
+  background: var(--sfa-section-surface);
 }
 
 .sfa-audience-card__photo {
@@ -24,52 +24,30 @@
   display: flex;
   flex: 1;
   flex-direction: column;
-  align-items: start;
+  align-items: var(--sfa-card-content-alignment, start);
+  text-align: var(--sfa-card-content-alignment, start);
   padding: 20px 20px 21px;
 }
 
-.sfa-audience-card__photo + .sfa-audience-card__body:has(.sfa-audience-card__badge) {
+.sfa-audience-card__photo + .sfa-audience-card__body:has(.sfa-card-badge) {
   padding-top: 39px;
 }
 
-.sfa-audience-card__badge {
-  display: grid;
-  width: 64px;
-  height: 64px;
-  place-items: center;
-  border-radius: 50%;
-  background: var(--sfa-color-surface);
-}
-
-.sfa-audience-card__photo + .sfa-audience-card__body .sfa-audience-card__badge {
+.sfa-audience-card__photo + .sfa-audience-card__body .sfa-card-badge {
   position: absolute;
   top: -31px;
 }
 
-.sfa-audience-card__badge img {
-  display: block;
-  width: 44px;
-  height: 44px;
-  object-fit: contain;
-}
-
-.sfa-audience-card h2 {
+.sfa-audience-card .sfa-audience-card__heading {
   margin: 0 0 4px;
   font: 600 1.375rem/1.4 var(--sfa-font-heading);
 }
 
-.sfa-audience-card p {
+.sfa-audience-card .sfa-audience-card__description {
   margin: 0 0 14px;
   color: var(--sfa-color-text-muted);
 }
 
-.sfa-audience-card a {
+.sfa-audience-card .sfa-action-link {
   margin-top: auto;
-  color: inherit;
-  font-weight: 500;
-  text-decoration: none;
-}
-
-.sfa-audience-card a:hover {
-  text-decoration: underline;
 }

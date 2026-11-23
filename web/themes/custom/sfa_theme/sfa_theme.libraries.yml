@@ -2,3 +2,11 @@ page:
   css:
     base:
       page.css: {}
+design:
+  css:
+    base:
+      https://use.typekit.net/fdh3suu.css: { type: external }
+      https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@6.7.2/css/fontawesome.min.css: { type: external, minified: true }
+      https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@6.7.2/css/solid.min.css: { type: external, minified: true }
+      assets/tokens.css: {}
+      assets/design.css: {}

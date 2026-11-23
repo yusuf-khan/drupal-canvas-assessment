@@ -1,0 +1,15 @@
+<article {{ attributes.addClass('sfa-audience-card', 'sfa-surface--' ~ background|default('white')) }}>
+  {% if photo.src %}
+    <div class="sfa-audience-card__photo">
+      {% include 'canvas:image' with photo only %}
+    </div>
+  {% endif %}
+  <div class="sfa-audience-card__body">
+    {% if icon.src %}
+      {% include 'sfa_theme:card-badge' with {image: icon} only %}
+    {% endif %}
+    {% include 'sfa_theme:title' with {text: heading, formatted: formatted_heading|default(''), level: heading_level|default('h2'), attributes: create_attribute({class: ['sfa-audience-card__heading']})} only %}
+    {% include 'sfa_theme:prose' with {text: summary|default(''), formatted: formatted_summary|default(''), attributes: create_attribute({class: ['sfa-audience-card__description']})} only %}
+    {% include 'sfa_theme:action-link' with {label: link_label|default(''), url: link_url|default('')} only %}
+  </div>
+</article>

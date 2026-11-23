@@ -1,0 +1,12 @@
+.sfa-event-detail {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+}
+
+.sfa-event-detail .fa-solid {
+  width: 28px;
+  color: var(--sfa-core-color-honey);
+  font-size: 1.75rem;
+  text-align: center;
+}

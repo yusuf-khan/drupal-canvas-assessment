@@ -1,0 +1,3 @@
+{% if label and url %}
+  <a {{ attributes.addClass('sfa-action-link', 'sfa-action-link--' ~ variant|default('text')) }} href="{{ url }}">{{ label }}</a>
+{% endif %}

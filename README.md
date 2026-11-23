@@ -6,6 +6,7 @@
 | --- | --- |
 | Drupal CMS | 2.2.10 |
 | Drupal core | 11.4.13 |
+| Canvas Full HTML | 1.0.6 |
 | Drupal Canvas | 1.13.0 |
 | PHP | 8.4.27 |
 | MariaDB | 11.8 |
@@ -36,20 +37,31 @@ In the browser, select the Drupal CMS **Starter** site template and create a loc
 Run these commands from the repository root.
 
 ```bash
-ddev drush pm:enable sfa_components -y
 ddev drush theme:enable sfa_theme -y
 ddev drush config:set system.theme default sfa_theme -y
 ddev drush cache:rebuild
 ddev exec --dir /var/www/html/web php core/scripts/dr recipe /var/www/html/demo/sfa-homepage
 ```
 
-The recipe imports the Canvas page and its media, sets **Winter FancyFaire** as the front page, and grants the **Content editor** role permission to publish Canvas changes. Run `ddev launch` to open the site. In a signed-out browser, confirm the home page and `/winter-fancyfaire` show the hero and four audience cards.
+The recipe imports the Canvas page and media, sets **Winter FancyFaire** as the front page, and gives the **Content editor** role Canvas publishing and Canvas Full HTML permissions. Run `ddev launch` to open the site. In a signed-out browser, confirm the home page and `/winter-fancyfaire` show the hero and four audience cards.
 
 If Drush fails while traversing the repository, run the same command from the Drupal docroot using `ddev exec --dir /var/www/html/web /var/www/html/vendor/bin/drush <command>`.
 
+### Update an existing Canvas demo
+
+For an existing installation that already uses the `sfa_theme` components, rebuild caches and run the migration to update its saved layouts and drafts.
+
+```bash
+ddev drush cache:rebuild
+ddev exec --dir /var/www/html/web /var/www/html/vendor/bin/drush php:script /var/www/html/scripts/migrate-canvas-layout-fields.php
+ddev drush cache:rebuild
+```
+
+The script converts older headings and descriptions to rich text, moves earlier hero buttons into an empty Desktop buttons slot, and removes the retired heading level setting.
+
 ### 3. Open Canvas
 
-Run `ddev drush user:login`, open the generated link, and go to **Content → Pages → Winter FancyFaire → Edit**. In **Layers**, expand **Audience grid → Cards** and select a card to inspect its text, media, and link settings.
+Run `ddev drush user:login`, open the generated link, and go to **Content → Pages → Winter FancyFaire → Edit**. In **Layers**, expand **Card group → Cards** and select a card to inspect its text, media, and link settings.
 
 To test authoring from a blank page, follow [Set up a test editor](#set-up-a-test-editor) and [Compose the design in Canvas](#compose-the-design-in-canvas).
 
@@ -58,13 +70,14 @@ To test authoring from a blank page, follow [Set up a test editor](#set-up-a-tes
 | Module or feature | Decision |
 | --- | --- |
 | Drupal Canvas | Owns page composition, autosaves, previews, and publishing. Its component library lets editors assemble the layout from a blank page. |
-| Core Single Directory Components | Defines the hero, grid, and card using Twig, CSS, and property schemas. The grid exposes a slot so editors can add or reorder cards. |
+| Core Single Directory Components | Defines reusable typography and button atoms, the Event hero, Container, Card group, and Audience card. Canvas slots let editors compose and reorder them. |
+| Canvas Full HTML | Provides the CKEditor 5 text format used by rich-text headings and descriptions. |
 | Core Media and Media Library | Provide the image fields for selecting reusable media and managing photo alternative text. |
-| Custom `sfa_components` module | Packages the three components, design tokens, and example assets. The `sfa_theme` theme provides the Drupal page shell. |
+| Custom `sfa_theme` theme | Packages the Atomic Design components, design tokens, and example assets. It also provides the Drupal page shell. |
 
 ## Authentication and role mapping
 
-Drupal authenticates local users and assigns access through Drupal roles. Assign a test author the **Content editor** role (`content_editor`). Drupal CMS Starter provides `create canvas_page`, `edit canvas_page`, and `create image media`. The demo recipe adds `publish auto-saves`, which lets editors publish Canvas drafts they have permission to edit. Setup uses an administrator account. Visitors can view the published page anonymously. This prototype uses local Drupal accounts and manual role assignment.
+Drupal authenticates local users and assigns access through Drupal roles. Assign a test author the **Content editor** role (`content_editor`). Drupal CMS Starter provides `create canvas_page`, `edit canvas_page`, and `create image media`. The demo recipe grants `publish auto-saves` for publishing Canvas drafts and `use text format canvas_full_html` for CKEditor fields. Setup uses an administrator account. Visitors can view the published page anonymously. This prototype uses local Drupal accounts and manual role assignment.
 
 ### Set up a test editor
 
@@ -72,6 +85,28 @@ Drupal authenticates local users and assigns access through Drupal roles. Assign
 2. Create an active account such as `canvas-reviewer` with a test email address and a password generated locally. Assign **Content editor** as the account's only additional role. Keep the password outside the repository.
 3. Sign in as the test editor in a private browser window. Under **Content → Pages**, create a disposable page with an unused alias. Insert the hero and a grid with one card, change the card text, select an image, and publish.
 4. Open the disposable page in a signed-out window to confirm the published content is visible. Remove the test page through Drupal when finished.
+
+## Reusable Canvas controls
+
+Find the theme components under **Library → Components → Specialty Food**. The source is in [theme components](web/themes/custom/sfa_theme/components).
+
+| Component | Controls and composition |
+| --- | --- |
+| Event hero | Edit **Heading** and **Description** in CKEditor. The heading uses H1 semantics. Use **Shift+Enter** for a line break inside the heading. Configure the background, photo, and event details in the same form. |
+| Button link | Add individual buttons to the hero’s **Desktop buttons** and **Mobile buttons** slots. Edit each button’s label, URL, and style on the button itself. When the mobile slot is empty, mobile visitors see the desktop buttons. |
+| Container | Defaults to **Boxed**. The other choices are **Full width** and **Full width with boxed content**. Top and bottom padding are independent. Add components to its **Content** slot. |
+| Card group | **Item alignment** is the first control and aligns cards and their contents. **Row alignment** positions the row as a group. Editors can also set direction, items across, spacing, and padding, then add or reorder cards in the **Cards** slot. |
+| Eyebrow, Title, and Description | Add these reusable atoms directly to any slot. Title and Description offer CKEditor fields. |
+
+## Local Canvas examples
+
+| Page | Path | What it demonstrates |
+| --- | --- | --- |
+| Winter FancyFaire | `/winter-fancyfaire` | Imported by the demo recipe and set as the front page. |
+| Winter FancyFaire Canvas Showcase | `/winter-fancyfaire-canvas` | Authored on the local DDEV site with separate desktop and mobile buttons and a Container wrapping four cards. |
+| Audience Resources | `/audience-resources` | Authored on the local DDEV site with standalone typography atoms and a two-card group. |
+
+A fresh install imports Winter FancyFaire. Use the steps below to compose more pages in Canvas.
 
 ## Screenshots
 
@@ -91,9 +126,9 @@ Drupal authenticates local users and assigns access through Drupal roles. Assign
 ## Compose the design in Canvas
 
 1. Choose **Add Page**. Set the title and URL alias in **Page data**. Use an unused alias when the demo page is already installed.
-2. In **Library → Components → Specialty Food**, place **Event hero** and then **Audience grid** into the content region.
+2. In **Library → Components → Specialty Food**, add **Event hero**. Add **Button link** instances to **Desktop buttons** and optionally to **Mobile buttons**. Then add **Card group** below the hero.
 3. Drag **Audience card** into the grid's **Cards** slot. Add three more cards to the same slot and use **Layers** to verify their nesting and order.
-4. Edit the four cards using the copy below. Use the component image fields to upload or select the supplied images and icons from the Media Library. The source PNGs are under `web/modules/custom/sfa_components/assets` and the component `assets` folders. Add descriptive alternative text for card photos.
+4. Edit the four cards using the copy below. Use the component image fields to upload or select the supplied images and icons from the Media Library. The source PNGs are under `web/themes/custom/sfa_theme/assets` and the component `assets` folders. Add descriptive alternative text for card photos.
 5. Choose the desktop preview. In **Review changes**, select the page you are editing and publish it. Visit the page in a logged-out browser to inspect the layout without the admin UI.
 
 | Heading | Summary | Link label | Photo and badge |
@@ -109,6 +144,6 @@ See [component-specs.md](component-specs.md) for the component contracts and res
 
 ## Challenges and blockers
 
-- The installed Canvas schema registry rejected the textarea reference shown in the bundled documentation. The component schemas use plain text inputs and separate fields for intentional line breaks.
+- The installed Canvas schema registry rejected the textarea reference shown in the bundled documentation. The final hero uses Canvas Full HTML with textarea-backed rich-text fields. A soft line break in CKEditor preserves the two-line title.
 - During rapid edits, Chromium intermittently logged a Drupal core `once` JavaScript error. The authored content persisted and Canvas published it successfully.
 - The verification pass found that the demo export marked Winter FancyFaire as unpublished. The exported page now preserves the published status so the demo can serve as the front page after import.
