@@ -5,7 +5,7 @@ Both assessments are on branch `main` and can be reviewed on the root DDEV site.
 | Assessment | Project directory | DDEV URL | Reviewer guide |
 | --- | --- | --- | --- |
 | Drupal CMS, SDC, and Canvas | Repository root | `https://drupal-canvas-assessment.ddev.site` | [Install Canvas](#setup-and-run) · [Validation](#canvas-validation-results) |
-| Drupal 11 and Auth0 SSO | Repository root | `https://drupal-canvas-assessment.ddev.site` | [Configure Auth0 sign-in](#optional-auth0-sign-in-on-the-canvas-site) · [Validation](#auth0-validation-results) |
+| Drupal 11 and Auth0 SSO | Repository root | `https://drupal-canvas-assessment.ddev.site/user/login` | [Configure Auth0 sign-in](#optional-auth0-sign-in-on-the-canvas-site) · [Validation](#auth0-validation-results) |
 
 The [standalone Auth0 installation](auth0-assessment/README.md#setup-and-run) is also available in `auth0-assessment/` with its own DDEV configuration.
 
