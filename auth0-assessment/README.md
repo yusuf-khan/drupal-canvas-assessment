@@ -50,7 +50,7 @@ Composer restores the exact dependency versions from `composer.lock`.
 ## Setup and run
 
 ```sh
-git clone --branch submission/canvas-and-auth0 https://github.com/yusuf-khan/drupal-canvas-assessment.git
+git clone --branch main https://github.com/yusuf-khan/drupal-canvas-assessment.git
 cd drupal-canvas-assessment/auth0-assessment
 ddev start
 ddev composer install
@@ -232,7 +232,7 @@ The screenshots use local Drupal demo accounts and live API data.
 
 ## Submission
 
-The submission branch is `submission/canvas-and-auth0`. Run `git rev-parse HEAD` on the final
+The submission branch is `main`. Run `git rev-parse HEAD` on the final
 reviewed commit, then share that SHA and the repository URL privately with
 the interview team. Confirm reviewers can access the repository.
 [Combined assessment overview](../README.md)

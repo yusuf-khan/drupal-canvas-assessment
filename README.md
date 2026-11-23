@@ -35,7 +35,7 @@ You’ll need Git, Docker, and DDEV. Start Docker before running the setup comma
 ### 1. Install Drupal CMS
 
 ```bash
-git clone --branch submission/canvas-and-auth0 https://github.com/yusuf-khan/drupal-canvas-assessment.git
+git clone --branch main https://github.com/yusuf-khan/drupal-canvas-assessment.git
 cd drupal-canvas-assessment
 ddev start
 ddev composer install
