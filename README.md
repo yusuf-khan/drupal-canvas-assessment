@@ -53,19 +53,35 @@ ddev start
 ddev composer install
 ```
 
-In the ignored `web/sites/default/settings.php`, set the configuration path
-inside the existing PHP block.
+Before running `site:install`, edit the root site's ignored
+`web/sites/default/settings.php`. Replace any commented example or existing
+`config_sync_directory` setting with the following line inside the PHP block.
+If `settings.php` is missing, copy `web/sites/default/default.settings.php`
+to `web/sites/default/settings.php` first.
 
 ```php
 $settings['config_sync_directory'] = dirname($app_root) . '/config/sync';
 ```
 
-Install Drupal from the [Canvas configuration export](config/sync), then
-apply the demo recipe to import the published page and its media.
+Check the path before installing:
+
+```bash
+ddev drush status --fields=config-sync
+test -f config/sync/core.extension.yml
+```
+
+The config-sync value should be `/var/www/html/config/sync`. If it still shows
+`sites/default/files/sync`, Drush is using DDEV's fallback. Check that you
+edited the root site's `settings.php` and that your assignment is active PHP.
+
+On a fresh DDEV database, install Drupal from the
+[Canvas configuration export](config/sync), then apply the demo recipe to
+import the published page and its media. `site:install` drops existing
+tables in the selected database.
 
 ```bash
 ddev drush site:install --existing-config --db-url=mysql://db:db@db/db --account-name=admin -y
-ddev drush recipe /var/www/html/demo/sfa-homepage -y
+ddev exec --dir /var/www/html/web php core/scripts/dr recipe /var/www/html/demo/sfa-homepage
 ddev launch
 ```
 
