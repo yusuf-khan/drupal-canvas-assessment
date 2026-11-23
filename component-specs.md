@@ -36,4 +36,4 @@ The theme shares the supplied palette, typography and radius tokens. The theme s
 | Winter FancyFaire Canvas Showcase at `/winter-fancyfaire-canvas` | Local page authored in Canvas. Event hero with a CKEditor description and separate desktop and mobile buttons. A Container wraps the four-card group. |
 | Audience Resources at `/audience-resources` | Local page authored in Canvas. A Container holds standalone Eyebrow, Title, Description, and Button link components, followed by a two-card group. |
 
-The two local examples demonstrate additional compositions. The demo recipe imports Winter FancyFaire. For existing theme-based installations, [the layout migration](scripts/migrate-canvas-layout-fields.php) converts earlier copy and button fields while preserving page and draft publication state. Follow [the upgrade steps](README.md#update-an-existing-canvas-demo).
+The two local examples demonstrate additional compositions. The demo recipe imports Winter FancyFaire. For existing theme-based installations, [the layout migration](scripts/migrate-canvas-layout-fields.php) converts earlier copy and button fields while preserving page and draft publication state.

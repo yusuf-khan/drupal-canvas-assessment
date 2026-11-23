@@ -1,136 +1,50 @@
 # Drupal practical assessments
 
-This repository contains two independently runnable Drupal prototypes. OpenAI
-Codex was the primary coding agent. The projects share this guide and the
-[AI development log](agent-logs.md).
+Both assessments are on branch `main` and can be reviewed on the root DDEV site. OpenAI Codex was the primary coding agent. See the [AI development log](agent-logs.md) for the implementation and review milestones.
 
-| Assessment | DDEV project directory | Local URL | Setup and validation |
+| Assessment | Project directory | DDEV URL | Reviewer guide |
 | --- | --- | --- | --- |
-| Drupal CMS, SDC, and Canvas | Repository root | `https://drupal-canvas-assessment.ddev.site` | [Canvas setup](#install-from-scratch) · [Canvas validation](#canvas-validation-results) |
-| Drupal 11 and Auth0 SSO | `auth0-assessment/` | `https://drupal-assessment.ddev.site` | [Auth0 setup](#install-the-auth0-assessment-from-config) · [Auth0 validation](#auth0-validation-results) |
+| Drupal CMS, SDC, and Canvas | Repository root | `https://drupal-canvas-assessment.ddev.site` | [Install Canvas](#setup-and-run) · [Validation](#canvas-validation-results) |
+| Drupal 11 and Auth0 SSO | Repository root | `https://drupal-canvas-assessment.ddev.site` | [Configure Auth0 sign-in](#optional-auth0-sign-in-on-the-canvas-site) · [Validation](#auth0-validation-results) |
 
-## Get the combined repository
+The [standalone Auth0 installation](auth0-assessment/README.md#setup-and-run) is also available in `auth0-assessment/` with its own DDEV configuration.
 
-Install Git, Docker, and [DDEV](https://ddev.com/get-started/). Start Docker and
-clone the repository once.
+## Drupal CMS, SDC, and Canvas
+
+The Specialty Food prototype uses Drupal CMS 2.2.10, Drupal core 11.4.13, Canvas 1.13.0, Canvas Full HTML 1.0.6, and Drush 13.8.1. The local environment used DDEV 1.25.5, PHP 8.4.27, and MariaDB 11.8. Composer restores the PHP dependencies from the lockfile.
+
+### Setup and run
+
+Install Git, Docker, and DDEV, then start Docker. Run this setup on a fresh DDEV database. The `site:install` command drops existing tables in the selected database.
 
 ```bash
 git clone --branch main https://github.com/yusuf-khan/drupal-canvas-assessment.git
 cd drupal-canvas-assessment
-```
-
-Run DDEV commands from the assessment’s project directory. Both databases can
-run in parallel. Use the install commands below on empty databases.
-
-## Drupal CMS, SDC, and Canvas
-
-The Specialty Food prototype uses reusable Single Directory Components and
-Canvas slots for editor-managed content, layout, and publication. See the
-[component specifications](component-specs.md).
-
-### Environment and dependencies
-
-| Dependency | Version used |
-| --- | --- |
-| Drupal CMS | 2.2.10 |
-| Drupal core | 11.4.13 |
-| Canvas Full HTML | 1.0.6 |
-| Drupal Canvas | 1.13.0 |
-| PHP | 8.4.27 |
-| MariaDB | 11.8 |
-| Drush | 13.8.1 |
-| DDEV | 1.25.5 |
-| Font Awesome Free | 6.7.2 |
-
-The DDEV configuration serves Drupal from `web/`. Composer locks the project dependencies.
-
-### Install from scratch
-
-Run these commands from the repository root.
-
-```bash
 ddev start
 ddev composer install
-```
-
-The tracked `web/sites/default/settings.php` sets the configuration sync path
-before Drupal installs and loads DDEV's generated local settings when available.
-
-```php
-$settings['config_sync_directory'] = dirname($app_root) . '/config/sync';
-```
-
-Check the path before installing:
-
-```bash
-ddev drush status --fields=config-sync
-test -f config/sync/core.extension.yml
-```
-
-The config-sync value should be `/var/www/html/config/sync`. If it still shows
-`sites/default/files/sync`, Drush is using DDEV's fallback. Check that the
-root site's `web/sites/default/settings.php` contains the active assignment
-shown above.
-
-On a fresh DDEV database, install Drupal from the
-[Canvas configuration export](config/sync), then apply the demo recipe to
-import the published page and its media. `site:install` drops existing
-tables in the selected database.
-
-```bash
 ddev drush site:install --existing-config --db-url=mysql://db:db@db/db --account-name=admin -y
 ddev exec --dir /var/www/html/web php core/scripts/dr recipe /var/www/html/demo/sfa-homepage
 ddev launch
 ```
 
-Drush prints the local administrator credentials. The configuration export
-includes the theme and modules, and the recipe provides the Winter FancyFaire
-page and media. If you already installed a site with the Drupal CMS **Starter**
-template, enable `sfa_theme`, make it the default theme, rebuild the cache,
-and apply the demo recipe. Use `ddev drush config:import` only on a site with
-the same UUID as the export.
+The recipe imports the published Winter FancyFaire page and media. Open `/winter-fancyfaire` in a signed-out browser and check for the hero and four cards.
 
-1. Open the front page in a signed-out window. Check the event hero and four
-   cards. The demo is also available at `/winter-fancyfaire`.
-2. Run `ddev drush user:login` and open the generated sign-in link.
-3. Go to **Content → Pages → Winter FancyFaire → Edit**. Expand **Event
-   hero → Desktop buttons** or **Card group → Cards** in **Layers**.
+### Review the page in Canvas
 
-To verify non-admin authoring, [set up a test editor](#set-up-a-test-editor)
-and [compose a page from scratch](#compose-the-design-in-canvas).
-
-### Update an existing Canvas demo
-
-For an existing installation that already uses the `sfa_theme` components, rebuild caches and run the migration to update its saved layouts and drafts.
-
-```bash
-ddev drush cache:rebuild
-ddev exec --dir /var/www/html/web /var/www/html/vendor/bin/drush php:script /var/www/html/scripts/migrate-canvas-layout-fields.php
-ddev drush cache:rebuild
-```
-
-The script converts older headings and descriptions to rich text, moves earlier hero buttons into an empty Desktop buttons slot, and removes the retired heading level setting.
-
-### Canvas module evaluation
-
-| Module or feature | Decision |
-| --- | --- |
-| Drupal Canvas | Owns page composition, autosaves, previews, and publishing. Its component library lets editors assemble the layout from a blank page. |
-| Core Single Directory Components | Defines reusable typography and button atoms, the Event hero, Container, Card group, and Audience card. Canvas slots let editors compose and reorder them. |
-| Canvas Full HTML | Provides the CKEditor 5 text format used by rich-text headings and descriptions. |
-| Core Media and Media Library | Provide the image fields for selecting reusable media and managing photo alternative text. |
-| Custom `sfa_theme` theme | Packages the Atomic Design components, design tokens, and example assets. It also provides the Drupal page shell. |
-
-### Canvas editor access
-
-Drupal authenticates local users and assigns access through Drupal roles. Assign a test author the **Content editor** role (`content_editor`). Drupal CMS Starter provides `create canvas_page`, `edit canvas_page`, and `create image media`. The demo recipe grants `publish auto-saves` for publishing Canvas drafts and `use text format canvas_full_html` for CKEditor fields. Setup uses an administrator account. Visitors can view the published page anonymously. Reviewers can use local Drupal accounts for the Canvas authoring demo.
+1. Run `ddev drush user:login` and open the generated local sign-in link.
+2. Go to **Content → Pages → Winter FancyFaire → Edit**.
+3. In **Layers**, expand **Event hero → Desktop buttons** or **Card group → Cards** and select a child component to inspect its settings.
 
 #### Set up a test editor
 
-1. Sign in as the local administrator and open **People → Add user**.
-2. Create an active account such as `canvas-reviewer` with a test email address and a password generated locally. Assign **Content editor** as the account's only additional role. Keep the password outside the repository.
-3. Sign in as the test editor in a private browser window. Under **Content → Pages**, create a disposable page with an unused alias. Insert the hero and a grid with one card, change the card text, select an image, and publish.
-4. Open the disposable page in a signed-out window to confirm the published content is visible. Remove the test page through Drupal when finished.
+As the local administrator, create a new active user under **People → Add user** and assign **Content editor**. That role has access to create, edit, and publish Canvas pages and use the Canvas Full HTML text format. Sign in as this user in a private window and follow the steps below.
+
+#### Compose the design in Canvas
+
+1. Open **Content → Pages → Add Page** and set the title and an unused alias in **Page data**.
+2. In **Library → Components → Specialty Food**, add **Event hero** and **Card group**. Add **Button link** instances to the hero’s **Desktop buttons** slot. Use **Mobile buttons** when the mobile labels or destinations differ.
+3. Add four **Audience card** instances to the **Cards** slot. Configure the Maker, Buyer, Distributor, and Service Provider cards with photos and icons from the Media Library.
+4. In **Review changes**, select the new page and publish. Open its URL in a signed-out window.
 
 #### Optional Auth0 sign-in on the Canvas site
 
@@ -155,67 +69,21 @@ different application at `/admin/config/people/openid-connect`. See the
 [Auth0 role mapping guide](#auth0-and-test-users)
 for the Post Login Action and test accounts.
 
-### Reusable Canvas controls
+### Component design
 
-Find the theme components under **Library → Components → Specialty Food**. The source is in [theme components](web/themes/custom/sfa_theme/components).
-
-| Component | Controls and composition |
-| --- | --- |
-| Event hero | Edit **Heading** and **Description** in CKEditor. The heading uses H1 semantics. Use **Shift+Enter** for a line break inside the heading. Configure the background, photo, and event details in the same form. |
-| Button link | Add individual buttons to the hero’s **Desktop buttons** and **Mobile buttons** slots. Edit each button’s label, URL, and style on the button itself. When the mobile slot is empty, mobile visitors see the desktop buttons. |
-| Container | Defaults to **Boxed**. The other choices are **Full width** and **Full width with boxed content**. Top and bottom padding are independent. Add components to its **Content** slot. |
-| Card group | **Item alignment** is the first control and aligns cards and their contents. **Row alignment** positions the row as a group. Editors can also set direction, items across, spacing, and padding, then add or reorder cards in the **Cards** slot. |
-| Eyebrow, Title, and Description | Add these reusable atoms directly to any slot. Title and Description offer CKEditor fields. |
-
-### Local Canvas examples
-
-| Page | Path | What it demonstrates |
-| --- | --- | --- |
-| Winter FancyFaire | `/winter-fancyfaire` | Imported by the demo recipe and set as the front page. |
-| Winter FancyFaire Canvas Showcase | `/winter-fancyfaire-canvas` | Authored on the local DDEV site with separate desktop and mobile buttons and a Container wrapping four cards. |
-| Audience Resources | `/audience-resources` | Authored on the local DDEV site with standalone typography atoms and a two-card group. |
-
-A fresh install imports Winter FancyFaire. Use the steps below to compose more pages in Canvas.
-
-### Canvas screenshots
-
-- [Published desktop page](screenshots/published-desktop.png)
-- [Canvas editor, desktop preview with the nested card layers](screenshots/canvas-editor.png)
+The [Specialty Food theme](web/themes/custom/sfa_theme/components) defines the reusable Single Directory Components. Canvas slots let editors compose the hero buttons and audience cards, and Canvas Full HTML and Media Library supply the text and image controls. See the [component specifications](component-specs.md) for props, defaults, and responsive behavior.
 
 ### Canvas validation results
 
 | Check | Result |
 | --- | --- |
-| Canvas authoring | Created the page from scratch, nested four cards in the grid slot, selected assets through the Media Library, and published using the local administrator account. |
-| Content editor workflow | A test account with only the Content editor role created a blank page, configured the hero, grid, and a nested card, selected a Media Library image, and published. Anonymous access was denied for the draft and allowed after publication. |
-| Anonymous rendering | Confirmed the front page and `/winter-fancyfaire` render the published hero and four cards. |
-| Responsive rendering | Checked 1920, 1366, 1024, 768, and 390px in Chromium. Each width rendered without horizontal overflow. At 1920px, the hero was 584px tall and the four cards measured 318px each with 24px gutters. |
-| Fresh install and demo import | Installed Canvas from the tracked configuration in an empty DDEV database. Applied the demo recipe and verified the published Winter FancyFaire front page. |
+| Fresh install | Installed from the tracked config on a fresh DDEV database, applied the demo recipe, and verified the published front page. |
+| Editor workflow | A Content editor created a page, configured components and media, and published it. The draft was private and the published page opened anonymously. |
+| Responsive layout | Checked 1920, 1366, 1024, 768, and 390px in Chromium without horizontal overflow. At 1920px, the hero measured 584px tall and the four cards measured 318px each with 24px gaps. |
 
-### Compose the design in Canvas
+[Published desktop page](screenshots/published-desktop.png) · [Canvas editor](screenshots/canvas-editor.png)
 
-1. Choose **Add Page**. Set the title and URL alias in **Page data**. Use an unused alias when the demo page is already installed.
-2. In **Library → Components → Specialty Food**, add **Event hero**. Add **Button link** instances to **Desktop buttons** and optionally to **Mobile buttons**. Then add **Card group** below the hero.
-3. Drag **Audience card** into the grid's **Cards** slot. Add three more cards to the same slot and use **Layers** to verify their nesting and order.
-4. Edit the four cards using the copy below. Use the component image fields to upload or select the supplied images and icons from the Media Library. The source PNGs are under `web/themes/custom/sfa_theme/assets` and the component `assets` folders. Add descriptive alternative text for card photos.
-5. Choose the desktop preview. In **Review changes**, select the page you are editing and publish it. Visit the page in a logged-out browser to inspect the layout without the admin UI.
-
-| Heading | Summary | Link label | Photo and badge |
-| --- | --- | --- | --- |
-| I'm a Maker | Grow your brand and reach new markets. | See resources for makers | `maker.png`, `icon-maker.png` |
-| I'm a Buyer | Discover new products and suppliers. | See resources for buyers | `buyer.png`, `icon-buyer.png` |
-| I'm a Distributor | Find tools to grow your business. | See resources for distributors | `distributor.png`, `icon-distributor.png` |
-| I'm a Service Provider | Connect with the specialty food community. | See resources for providers | `provider.png`, `icon-provider.png` |
-
-The hero examples supply the reference copy, including the 2028 heading and the January 2027 date. The brief supplied no destination URLs. The sample links use prototype anchors that editors can replace with real destinations. The hero loads the requested Adobe Fonts stylesheet and Font Awesome Free 6.7.2 through external stylesheets. Network access is required for those resources.
-
-See [component-specs.md](component-specs.md) for the component contracts and responsive behavior and [agent-logs.md](agent-logs.md) for the implementation and validation milestones.
-
-### Canvas challenges and blockers
-
-- The installed Canvas schema registry rejected the textarea reference shown in the bundled documentation. The final hero uses Canvas Full HTML with textarea-backed rich-text fields. A soft line break in CKEditor preserves the two-line title.
-- During rapid edits, Chromium intermittently logged a Drupal core `once` JavaScript error. The authored content persisted and Canvas published it successfully.
-- The verification pass found that the demo export marked Winter FancyFaire as unpublished. The exported page now preserves the published status so the demo can serve as the front page after import.
+The reference pairs a 2028 title with a January 2027 date. Both values stay editable. Button and resource destinations use demo anchors. Network access is required for Adobe Fonts and Font Awesome Free 6.7.2.
 
 ## Auth0 SSO assessment
 
@@ -264,35 +132,6 @@ Install Git, Docker, and [DDEV](https://ddev.com/get-started/).
 
 Composer restores the exact dependency versions from `composer.lock`.
 
-### Install the Auth0 assessment from config
-
-```sh
-cd auth0-assessment
-ddev start
-ddev composer install
-ddev drush site:install --existing-config --db-url=mysql://db:db@db/db --account-name=admin -y
-ddev launch
-ddev drush cr
-```
-
-Run the block above from the repository root, so DDEV commands execute inside `auth0-assessment/`. It uses the DDEV project name `drupal-assessment` so the existing Auth0 callback URL still works. If DDEV already knows a different checkout under that name, run `ddev stop --unlist` from the old checkout first.
-
-Run the install command on a new DDEV database. Drupal installs the modules,
-the Auth0 client, and both dashboard roles from `config/sync`. Drush prints the
-local administrator credentials. Use `ddev describe` to confirm the site URL,
-which defaults to `https://drupal-assessment.ddev.site`.
-
-#### Configuration synchronization
-
-Drupal reads the [Auth0 configuration export](auth0-assessment/config/sync) from this project. On a site installed from
-this export, run `ddev drush config:status` to see differences and
-`ddev drush config:import` to review and import changes. The same screen is
-available at **Configuration → Development → Configuration synchronization**
-(`/admin/config/development/configuration`).
-
-Drupal requires a matching site UUID to import the full export. Supply the
-Auth0 client secret through the ignored runtime file so it stays out of
-configuration exports.
 
 ### Auth0 module evaluation
 
@@ -414,13 +253,6 @@ ddev exec env SIMPLETEST_BASE_URL=http://localhost \
 | Live APIs | REST returned Leanne Graham’s sample record. SOAP returned 246 countries. |
 | Direct URL access | Browser tests verified 403 for wrong-role and anonymous requests. |
 
-The screenshots use local Drupal demo accounts and live API data.
-[Member dashboard](auth0-assessment/screenshots/member-dashboard.png) ·
-[Exhibitor dashboard](auth0-assessment/screenshots/exhibitor-dashboard.png) ·
-[Member denied exhibitor](auth0-assessment/screenshots/member-exhibitor-denied.png) ·
-[Exhibitor denied member](auth0-assessment/screenshots/exhibitor-member-denied.png) ·
-[Anonymous denied](auth0-assessment/screenshots/anonymous-member-denied.png)
-
 ### Auth0 challenges and blockers
 
 #### Resolved during development
@@ -434,23 +266,7 @@ The screenshots use local Drupal demo accounts and live API data.
   `authmap` table missing. The local database was repaired, and fresh installs
   create the table automatically.
 
-#### Open before submission
-
-- **Auth0 credential rotation and replay.** During a later fresh setup, Auth0
-  returned HTTP 401 during token exchange because Drupal lacked a valid client
-  secret. A secret was exposed in the earlier standalone repository. Use a rotated
-  secret in `auth0-assessment/.auth0-client-secret`.
-  Replay login, dashboard access, and logout with both accounts. The live
-  results above describe the earlier successful run.
-- **Additional live validation.** Automated tests cover role revocation.
-  Live role revocation and the Free-tier `app_metadata` role source still need
-  separate checks.
 
 ## Submission
 
-Share the [combined repository](https://github.com/yusuf-khan/drupal-canvas-assessment),
-branch `main`, and the output of `git rev-parse HEAD` with the interview
-team. The two setup guides, [Canvas component specifications](component-specs.md),
-[Auth0 module plan](module-plan.md), [AI development log](agent-logs.md), and
-the screenshots for both prototypes are in this checkout. Share reviewer
-passwords and application secrets privately.
+Share the [repository](https://github.com/yusuf-khan/drupal-canvas-assessment), branch `main`, and the output of `git rev-parse HEAD` for the final reviewed commit. Share any reviewer credentials privately.
