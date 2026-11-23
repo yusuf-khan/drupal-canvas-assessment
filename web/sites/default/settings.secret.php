@@ -2,11 +2,14 @@
 
 /**
  * @file
- * Example runtime settings for local Auth0 sign-in.
- *
- * Copy this file to settings.secret.php and add the client secret to
- * .auth0-client-secret in the project root.
+ * Loads local Auth0 credentials from ignored files.
  */
+
+$local_credentials = __DIR__ . '/settings.credentials.php';
+if (is_readable($local_credentials)) {
+  require $local_credentials;
+  return;
+}
 
 $auth0_secret_file = dirname($app_root) . '/.auth0-client-secret';
 if (is_readable($auth0_secret_file)) {

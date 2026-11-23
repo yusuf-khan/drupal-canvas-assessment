@@ -144,17 +144,11 @@ For the bundled Auth0 application, add these URLs in Auth0:
 - **Allowed Callback URLs** `https://drupal-canvas-assessment.ddev.site/openid-connect/auth0`
 - **Allowed Logout URLs** `https://drupal-canvas-assessment.ddev.site/user/login`
 
-Add the Auth0 client secret to a one-line `.auth0-client-secret` file in the
-Canvas project root. Create the local runtime settings file from the tracked
-example if the local file is absent.
-
-```bash
-test -e web/sites/default/settings.secret.php || \
-  cp web/sites/default/settings.secret.example.php web/sites/default/settings.secret.php
-```
-
-The tracked settings load this optional local file. Git ignores both
-`settings.secret.php` and `.auth0-client-secret`.
+The tracked `web/sites/default/settings.secret.php` loads local credentials.
+For a fresh setup, add the Auth0 client secret to a one-line
+`.auth0-client-secret` file in the Canvas project root. If you use local PHP
+overrides, put them in `web/sites/default/settings.credentials.php`. The
+loader uses that file when it exists. Git ignores both credential files.
 
 Run `ddev drush cr`, then choose **Auth0** at `/user/login`. Configure a
 different application at `/admin/config/people/openid-connect`. See the
