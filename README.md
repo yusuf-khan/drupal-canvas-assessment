@@ -30,23 +30,34 @@ The DDEV configuration serves Drupal from `web/`. Composer locks the project dep
 
 ## Install from scratch
 
-You’ll need Git, Docker, and DDEV. Start Docker before running the setup commands.
+This walkthrough installs the Canvas assessment at the repository root. For the second Drupal site, follow the [Auth0 assessment install guide](auth0-assessment/README.md#setup-and-run) from `auth0-assessment/`.
 
-### 1. Install Drupal CMS
+### 1. Clone the project and start DDEV
+
+Install Git, Docker, and DDEV 1.25 or later. Start Docker, then run:
 
 ```bash
 git clone --branch main https://github.com/yusuf-khan/drupal-canvas-assessment.git
 cd drupal-canvas-assessment
 ddev start
 ddev composer install
+ddev drush site:install --existing-config --db-url=mysql://db:db@db/db --account-name=admin -y
 ddev launch
+ddev drush cr
+
 ```
 
-In the browser, select the Drupal CMS **Starter** site template and create a local administrator. Wait for the installer to finish before continuing.
+Run the remaining Canvas commands from this directory. Use `ddev describe` to find the local URL if the browser does not open automatically.
 
-### 2. Enable the components and import the demo
+### 2. Complete the Drupal CMS installer
 
-Run these commands from the repository root.
+At the local URL, choose the Drupal CMS **Starter** site template and create a local administrator. Wait for the installer to finish. Check that Drush can reach the installed site:
+
+```bash
+ddev drush status
+```
+
+### 3. Enable the theme and install the demo
 
 ```bash
 ddev drush theme:enable sfa_theme -y
@@ -55,25 +66,54 @@ ddev drush cache:rebuild
 ddev exec --dir /var/www/html/web php core/scripts/dr recipe /var/www/html/demo/sfa-homepage
 ```
 
-The recipe imports the Canvas page and media, sets **Winter FancyFaire** as the front page, and gives the **Content editor** role Canvas publishing and Canvas Full HTML permissions. Run `ddev launch` to open the site. In a signed-out browser, confirm the home page and `/winter-fancyfaire` show the hero and four audience cards.
+The recipe enables Canvas Full HTML, imports the published Winter FancyFaire page and its media, sets it as the front page, and grants the **Content editor** role access to Canvas publishing and CKEditor.
 
-If Drush fails while traversing the repository, run the same command from the Drupal docroot using `ddev exec --dir /var/www/html/web /var/www/html/vendor/bin/drush <command>`.
+If a Drush command fails while traversing the repository, run it from the Drupal docroot using `ddev exec --dir /var/www/html/web /var/www/html/vendor/bin/drush <command>`.
 
-### Configuration synchronization
+### 4. Set the configuration sync directory
 
-The Canvas site’s reviewed configuration is in [config/sync](config/sync). The Auth0 assessment keeps its own export in [auth0-assessment/config/sync](auth0-assessment/config/sync).
-
-After running the Canvas installer, add this setting to the ignored `web/sites/default/settings.php` file, within PHP.
+In your local `web/sites/default/settings.php`, add or replace this setting within the existing PHP block.
 
 ```php
 $settings['config_sync_directory'] = dirname($app_root) . '/config/sync';
 ```
 
-Run `ddev drush config:status` to review differences. Use `ddev drush config:import` on an installation with the same site UUID as the export. For a new Canvas installation, follow the Starter and demo recipe steps above. Canvas pages and media are content and are provided by the demo recipe.
+```bash
+ddev drush cache:rebuild
+ddev drush status --fields=config-sync
+```
 
-The export leaves the Auth0 client secret and notification address blank. Supply the Auth0 secret through the ignored runtime file described below and set any site-specific notification address locally. Review future configuration exports before committing them.
+DDEV should report `/var/www/html/config/sync`. The settings file is ignored by Git. The tracked [Canvas configuration export](config/sync) supports synchronization between installations with a matching site UUID. The fresh install already has its page and media after the recipe step.
 
-### Update an existing Canvas demo
+### 5. Open the published page and Canvas
+
+1. Run `ddev launch` and open the local site in a signed-out window. The front page and `/winter-fancyfaire` should show the event hero and all four cards.
+2. Run `ddev drush user:login` and open the generated link to sign in as the local administrator.
+3. Go to **Content → Pages → Winter FancyFaire → Edit**. In **Layers**, expand **Event hero → Desktop buttons** or **Card group → Cards** and select a component to inspect its settings.
+
+The Canvas demo uses local Drupal accounts. Follow [Set up a test editor](#set-up-a-test-editor) and [Compose the design in Canvas](#compose-the-design-in-canvas) to verify the authoring workflow with the **Content editor** role.
+
+## Install the Auth0 assessment from config
+
+After cloning the repository, run these commands from the repository root. The install command initializes the Auth0 site from its tracked configuration. Use it on a fresh DDEV database.
+
+```bash
+cd auth0-assessment
+ddev start
+ddev composer install
+ddev drush site:install --existing-config --db-url=mysql://db:db@db/db --account-name=admin -y
+ddev launch
+```
+
+The Auth0 site's settings already point to `auth0-assessment/config/sync`. Follow the [Auth0 setup and test-user guide](auth0-assessment/README.md#auth0-and-test-users) to configure the identity provider and exercise sign-in. For the Canvas site at the repository root, use the [Drupal CMS Starter and demo recipe steps](#install-from-scratch).
+
+## Configuration synchronization
+
+Use `ddev drush config:status` to review differences against the tracked export. Run `ddev drush config:import` on an installation with the same site UUID. A fresh Starter installation has its own UUID. The demo recipe provides the Canvas page and media as content.
+
+The export leaves the Auth0 client secret and notification address blank. If you enable [optional Auth0 sign-in](#optional-auth0-sign-in-on-the-canvas-site), supply the client secret through the ignored runtime file. Set any site-specific notification address locally. The Auth0 assessment uses its own [configuration export](auth0-assessment/config/sync).
+
+## Update an existing Canvas demo
 
 For an existing installation that already uses the `sfa_theme` components, rebuild caches and run the migration to update its saved layouts and drafts.
 
@@ -84,12 +124,6 @@ ddev drush cache:rebuild
 ```
 
 The script converts older headings and descriptions to rich text, moves earlier hero buttons into an empty Desktop buttons slot, and removes the retired heading level setting.
-
-### 3. Open Canvas
-
-Run `ddev drush user:login`, open the generated link, and go to **Content → Pages → Winter FancyFaire → Edit**. In **Layers**, expand **Card group → Cards** and select a card to inspect its text, media, and link settings.
-
-To test authoring from a blank page, follow [Set up a test editor](#set-up-a-test-editor) and [Compose the design in Canvas](#compose-the-design-in-canvas).
 
 ## Module evaluation
 
