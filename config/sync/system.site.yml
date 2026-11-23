@@ -1,0 +1,15 @@
+_core:
+  default_config_hash: HlN7eAN2N4JIHsYv56V4E7sqC9bS609KwvGFjyD_mgk
+langcode: en
+uuid: e2ad00b6-5f7a-44d3-a181-d6e1e94d06cc
+name: 'Drupal Canvas Assessment'
+mail: admin@example.com
+slogan: ''
+page:
+  403: /user/login
+  404: ''
+  front: /winter-fancyfaire
+admin_compact_mode: false
+weight_select_max: 100
+default_langcode: en
+mail_notification: ''

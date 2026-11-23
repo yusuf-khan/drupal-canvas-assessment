@@ -1,0 +1,14 @@
+uuid: e5742717-1882-4506-9731-24ac03d21474
+langcode: en
+status: true
+dependencies:
+  config:
+    - user.role.exhibitor
+  module:
+    - user
+id: user_remove_role_action.exhibitor
+label: 'Remove the Exhibitor role from the selected user(s)'
+type: user
+plugin: user_remove_role_action
+configuration:
+  rid: exhibitor

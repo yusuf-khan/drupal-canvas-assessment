@@ -1,0 +1,25 @@
+uuid: 8226d865-7ac5-429d-9080-7e9d3da1cfc3
+langcode: en
+status: true
+dependencies:
+  config:
+    - canvas.component.sdc.sfa_theme.action-link
+    - canvas.component.sdc.sfa_theme.audience-card
+    - canvas.component.sdc.sfa_theme.audience-grid
+    - canvas.component.sdc.sfa_theme.container
+    - canvas.component.sdc.sfa_theme.event-hero
+    - canvas.component.sdc.sfa_theme.eyebrow
+    - canvas.component.sdc.sfa_theme.prose
+    - canvas.component.sdc.sfa_theme.title
+name: 'Specialty Food'
+configEntityTypeId: component
+weight: 0
+items:
+  - sdc.sfa_theme.action-link
+  - sdc.sfa_theme.audience-card
+  - sdc.sfa_theme.audience-grid
+  - sdc.sfa_theme.container
+  - sdc.sfa_theme.event-hero
+  - sdc.sfa_theme.eyebrow
+  - sdc.sfa_theme.prose
+  - sdc.sfa_theme.title

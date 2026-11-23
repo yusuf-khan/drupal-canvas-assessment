@@ -1,0 +1,15 @@
+_core:
+  default_config_hash: '-IMINx7tUeIlsMsfG4x-7nf4xY-zkfnyXDoTW-ZFRJQ'
+client_id: auth0
+role_claim: 'https://sso-prototype.example/roles'
+role_mapping:
+  member:
+    - member
+  exhibitor:
+    - exhibitor
+redirect_priority:
+  - exhibitor
+  - member
+rest_base_url: 'https://jsonplaceholder.typicode.com'
+soap_endpoint: 'https://soap-service-free.mock.beeceptor.com/CountryInfoService.wso'
+cache_max_age: 60

@@ -1,0 +1,14 @@
+uuid: 4d86c7bf-add1-45cc-9e8a-8eaccb3ddbeb
+langcode: en
+status: true
+dependencies:
+  config:
+    - user.role.exhibitor
+  module:
+    - user
+id: user_add_role_action.exhibitor
+label: 'Add the Exhibitor role to the selected user(s)'
+type: user
+plugin: user_add_role_action
+configuration:
+  rid: exhibitor

@@ -1,0 +1,14 @@
+uuid: 9d73c4bb-63ab-45a7-ab1d-71043538df2f
+langcode: en
+status: true
+dependencies:
+  enforced:
+    module:
+      - sso_dashboards
+_core:
+  default_config_hash: k--yxCfDLdfBb--ST9DMxXaS2gxTQOVCQ9YCYOs_qT0
+id: exhibitor
+label: Exhibitor
+weight: 4
+is_admin: false
+permissions: {  }

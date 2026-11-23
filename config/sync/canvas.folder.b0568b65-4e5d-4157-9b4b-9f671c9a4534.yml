@@ -1,0 +1,11 @@
+uuid: b0568b65-4e5d-4157-9b4b-9f671c9a4534
+langcode: en
+status: true
+dependencies:
+  config:
+    - canvas.component.block.openid_connect_login
+name: 'OpenID Connect'
+configEntityTypeId: component
+weight: 0
+items:
+  - block.openid_connect_login

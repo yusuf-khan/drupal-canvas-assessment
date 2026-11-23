@@ -1,0 +1,1019 @@
+uuid: b0c818d3-9339-4bda-8d75-5242f1119695
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.field.media.image.field_media_image
+    - field.field.media.svg_image.field_media_svg_image
+    - filter.format.canvas_full_html
+    - image.style.canvas_parametrized_width
+    - media.type.image
+    - media.type.svg_image
+  module:
+    - file
+    - link
+    - media
+    - media_library
+    - options
+    - text
+  theme:
+    - sfa_theme
+active_version: 472b081081783643
+versioned_properties:
+  active:
+    settings:
+      prop_field_definitions:
+        background:
+          required: false
+          field_type: list_string
+          field_storage_settings:
+            allowed_values_function: canvas_load_allowed_values_for_component_prop
+          field_instance_settings: {  }
+          field_widget: options_select
+          default_value:
+            -
+              value: cream
+          expression: ℹ︎list_string␟value
+          derived_schema_metadata: {  }
+        eyebrow:
+          required: false
+          field_type: string
+          field_storage_settings: {  }
+          field_instance_settings: {  }
+          field_widget: string_textfield
+          default_value:
+            -
+              value: 'People. Products. A brighter food future.'
+          expression: ℹ︎string␟value
+          derived_schema_metadata:
+            string_shape: {  }
+        formatted_heading:
+          required: true
+          field_type: text_long
+          field_storage_settings: {  }
+          field_instance_settings:
+            allowed_formats:
+              - canvas_full_html
+          field_widget: text_textarea
+          default_value:
+            -
+              value: '<p>Winter<br>FancyFaire* 2028</p>'
+              format: canvas_full_html
+          expression: ℹ︎text_long␟processed
+          derived_schema_metadata:
+            string_shape:
+              contentMediaType: text/html
+              x-formatting-context: block
+        formatted_summary:
+          required: false
+          field_type: text_long
+          field_storage_settings: {  }
+          field_instance_settings:
+            allowed_formats:
+              - canvas_full_html
+          field_widget: text_textarea
+          default_value:
+            -
+              value: "<p>Join the specialty food community to kick off 2027 in one of the world's great food cities: San Francisco. Elevate your trade show experience with offsite sampling, unstructured networking, and local immersion.</p>"
+              format: canvas_full_html
+          expression: ℹ︎text_long␟processed
+          derived_schema_metadata:
+            string_shape:
+              contentMediaType: text/html
+              x-formatting-context: block
+        photo:
+          required: false
+          field_type: entity_reference
+          field_storage_settings:
+            target_type: media
+          field_instance_settings:
+            handler: 'default:media'
+            handler_settings:
+              target_bundles:
+                image: image
+                svg_image: svg_image
+          field_widget: media_library_widget
+          default_value: {  }
+          expression: 'ℹ︎entity_reference␟entity␜[␜entity:media:image␝field_media_image␞␟{src↠src_with_alternate_widths,alt↠alt,width↠width,height↠height}][␜entity:media:svg_image␝field_media_svg_image␞␟{src↠src_with_alternate_widths,alt↠alt,width↠width,height↠height}]'
+          derived_schema_metadata: {  }
+        date_icon:
+          required: false
+          field_type: list_string
+          field_storage_settings:
+            allowed_values_function: canvas_load_allowed_values_for_component_prop
+          field_instance_settings: {  }
+          field_widget: options_select
+          default_value:
+            -
+              value: calendar-days
+          expression: ℹ︎list_string␟value
+          derived_schema_metadata: {  }
+        event_date:
+          required: false
+          field_type: string
+          field_storage_settings: {  }
+          field_instance_settings: {  }
+          field_widget: string_textfield
+          default_value:
+            -
+              value: 'January 17–19, 2027'
+          expression: ℹ︎string␟value
+          derived_schema_metadata:
+            string_shape: {  }
+        location_icon:
+          required: false
+          field_type: list_string
+          field_storage_settings:
+            allowed_values_function: canvas_load_allowed_values_for_component_prop
+          field_instance_settings: {  }
+          field_widget: options_select
+          default_value:
+            -
+              value: location-dot
+          expression: ℹ︎list_string␟value
+          derived_schema_metadata: {  }
+        venue:
+          required: false
+          field_type: string
+          field_storage_settings: {  }
+          field_instance_settings: {  }
+          field_widget: string_textfield
+          default_value:
+            -
+              value: 'Moscone Center'
+          expression: ℹ︎string␟value
+          derived_schema_metadata:
+            string_shape: {  }
+        city:
+          required: false
+          field_type: string
+          field_storage_settings: {  }
+          field_instance_settings: {  }
+          field_widget: string_textfield
+          default_value:
+            -
+              value: 'San Francisco, CA'
+          expression: ℹ︎string␟value
+          derived_schema_metadata:
+            string_shape: {  }
+    fallback_metadata:
+      slot_definitions:
+        desktop_actions:
+          title: 'Desktop buttons'
+          description: 'Add as many Button link components as needed. Also appears on mobile when Mobile buttons is empty.'
+        mobile_actions:
+          title: 'Mobile buttons'
+          description: 'Add Button link components to replace the desktop buttons on mobile.'
+  11bb4b26d6ee8a35:
+    settings:
+      prop_field_definitions:
+        background:
+          required: false
+          field_type: list_string
+          field_storage_settings:
+            allowed_values_function: canvas_load_allowed_values_for_component_prop
+          field_instance_settings: {  }
+          field_widget: options_select
+          default_value:
+            -
+              value: cream
+          expression: ℹ︎list_string␟value
+          derived_schema_metadata: {  }
+        eyebrow:
+          required: false
+          field_type: string
+          field_storage_settings: {  }
+          field_instance_settings: {  }
+          field_widget: string_textfield
+          default_value:
+            -
+              value: 'People. Products. A brighter food future.'
+          expression: ℹ︎string␟value
+          derived_schema_metadata:
+            string_shape: {  }
+        formatted_heading:
+          required: true
+          field_type: text_long
+          field_storage_settings: {  }
+          field_instance_settings:
+            allowed_formats:
+              - canvas_full_html
+          field_widget: text_textarea
+          default_value:
+            -
+              value: '<p>Winter<br>FancyFaire* 2028</p>'
+              format: canvas_full_html
+          expression: ℹ︎text_long␟processed
+          derived_schema_metadata:
+            string_shape:
+              contentMediaType: text/html
+              x-formatting-context: block
+        formatted_summary:
+          required: false
+          field_type: text_long
+          field_storage_settings: {  }
+          field_instance_settings:
+            allowed_formats:
+              - canvas_full_html
+          field_widget: text_textarea
+          default_value:
+            -
+              value: "<p>Join the specialty food community to kick off 2027 in one of the world's great food cities: San Francisco. Elevate your trade show experience with offsite sampling, unstructured networking, and local immersion.</p>"
+              format: canvas_full_html
+          expression: ℹ︎text_long␟processed
+          derived_schema_metadata:
+            string_shape:
+              contentMediaType: text/html
+              x-formatting-context: block
+        heading_level:
+          required: false
+          field_type: list_string
+          field_storage_settings:
+            allowed_values_function: canvas_load_allowed_values_for_component_prop
+          field_instance_settings: {  }
+          field_widget: options_select
+          default_value:
+            -
+              value: h1
+          expression: ℹ︎list_string␟value
+          derived_schema_metadata: {  }
+        photo:
+          required: false
+          field_type: entity_reference
+          field_storage_settings:
+            target_type: media
+          field_instance_settings:
+            handler: 'default:media'
+            handler_settings:
+              target_bundles:
+                image: image
+                svg_image: svg_image
+          field_widget: media_library_widget
+          default_value: {  }
+          expression: 'ℹ︎entity_reference␟entity␜[␜entity:media:image␝field_media_image␞␟{src↠src_with_alternate_widths,alt↠alt,width↠width,height↠height}][␜entity:media:svg_image␝field_media_svg_image␞␟{src↠src_with_alternate_widths,alt↠alt,width↠width,height↠height}]'
+          derived_schema_metadata: {  }
+        date_icon:
+          required: false
+          field_type: list_string
+          field_storage_settings:
+            allowed_values_function: canvas_load_allowed_values_for_component_prop
+          field_instance_settings: {  }
+          field_widget: options_select
+          default_value:
+            -
+              value: calendar-days
+          expression: ℹ︎list_string␟value
+          derived_schema_metadata: {  }
+        event_date:
+          required: false
+          field_type: string
+          field_storage_settings: {  }
+          field_instance_settings: {  }
+          field_widget: string_textfield
+          default_value:
+            -
+              value: 'January 17–19, 2027'
+          expression: ℹ︎string␟value
+          derived_schema_metadata:
+            string_shape: {  }
+        location_icon:
+          required: false
+          field_type: list_string
+          field_storage_settings:
+            allowed_values_function: canvas_load_allowed_values_for_component_prop
+          field_instance_settings: {  }
+          field_widget: options_select
+          default_value:
+            -
+              value: location-dot
+          expression: ℹ︎list_string␟value
+          derived_schema_metadata: {  }
+        venue:
+          required: false
+          field_type: string
+          field_storage_settings: {  }
+          field_instance_settings: {  }
+          field_widget: string_textfield
+          default_value:
+            -
+              value: 'Moscone Center'
+          expression: ℹ︎string␟value
+          derived_schema_metadata:
+            string_shape: {  }
+        city:
+          required: false
+          field_type: string
+          field_storage_settings: {  }
+          field_instance_settings: {  }
+          field_widget: string_textfield
+          default_value:
+            -
+              value: 'San Francisco, CA'
+          expression: ℹ︎string␟value
+          derived_schema_metadata:
+            string_shape: {  }
+    fallback_metadata:
+      slot_definitions:
+        desktop_actions:
+          title: 'Desktop buttons'
+          description: 'Add as many Button link components as needed. Also appears on mobile when Mobile buttons is empty.'
+        mobile_actions:
+          title: 'Mobile buttons'
+          description: 'Add Button link components to replace the desktop buttons on mobile.'
+  ae37eb8810cee61e:
+    settings:
+      prop_field_definitions:
+        background:
+          required: false
+          field_type: list_string
+          field_storage_settings:
+            allowed_values_function: canvas_load_allowed_values_for_component_prop
+          field_instance_settings: {  }
+          field_widget: options_select
+          default_value:
+            -
+              value: cream
+          expression: ℹ︎list_string␟value
+          derived_schema_metadata: {  }
+        eyebrow:
+          required: false
+          field_type: string
+          field_storage_settings: {  }
+          field_instance_settings: {  }
+          field_widget: string_textfield
+          default_value:
+            -
+              value: 'People. Products. A brighter food future.'
+          expression: ℹ︎string␟value
+          derived_schema_metadata:
+            string_shape: {  }
+        heading:
+          required: true
+          field_type: string
+          field_storage_settings: {  }
+          field_instance_settings: {  }
+          field_widget: string_textfield
+          default_value:
+            -
+              value: Winter
+          expression: ℹ︎string␟value
+          derived_schema_metadata:
+            string_shape: {  }
+        heading_second_line:
+          required: false
+          field_type: string
+          field_storage_settings: {  }
+          field_instance_settings: {  }
+          field_widget: string_textfield
+          default_value:
+            -
+              value: 'FancyFaire* 2028'
+          expression: ℹ︎string␟value
+          derived_schema_metadata:
+            string_shape: {  }
+        heading_level:
+          required: false
+          field_type: list_string
+          field_storage_settings:
+            allowed_values_function: canvas_load_allowed_values_for_component_prop
+          field_instance_settings: {  }
+          field_widget: options_select
+          default_value:
+            -
+              value: h1
+          expression: ℹ︎list_string␟value
+          derived_schema_metadata: {  }
+        formatted_heading:
+          required: false
+          field_type: text_long
+          field_storage_settings: {  }
+          field_instance_settings:
+            allowed_formats:
+              - canvas_full_html
+          field_widget: text_textarea
+          default_value: null
+          expression: ℹ︎text_long␟processed
+          derived_schema_metadata:
+            string_shape:
+              contentMediaType: text/html
+              x-formatting-context: block
+        formatted_summary:
+          required: false
+          field_type: text_long
+          field_storage_settings: {  }
+          field_instance_settings:
+            allowed_formats:
+              - canvas_full_html
+          field_widget: text_textarea
+          default_value: null
+          expression: ℹ︎text_long␟processed
+          derived_schema_metadata:
+            string_shape:
+              contentMediaType: text/html
+              x-formatting-context: block
+        summary:
+          required: false
+          field_type: string
+          field_storage_settings: {  }
+          field_instance_settings: {  }
+          field_widget: string_textfield
+          default_value:
+            -
+              value: "Join the specialty food community to kick off 2027 in one of the world's great food cities: San Francisco. Elevate your trade show experience with offsite sampling, unstructured networking, and local immersion."
+          expression: ℹ︎string␟value
+          derived_schema_metadata:
+            string_shape: {  }
+        photo:
+          required: false
+          field_type: entity_reference
+          field_storage_settings:
+            target_type: media
+          field_instance_settings:
+            handler: 'default:media'
+            handler_settings:
+              target_bundles:
+                image: image
+                svg_image: svg_image
+          field_widget: media_library_widget
+          default_value: {  }
+          expression: 'ℹ︎entity_reference␟entity␜[␜entity:media:image␝field_media_image␞␟{src↠src_with_alternate_widths,alt↠alt,width↠width,height↠height}][␜entity:media:svg_image␝field_media_svg_image␞␟{src↠src_with_alternate_widths,alt↠alt,width↠width,height↠height}]'
+          derived_schema_metadata: {  }
+        date_icon:
+          required: false
+          field_type: list_string
+          field_storage_settings:
+            allowed_values_function: canvas_load_allowed_values_for_component_prop
+          field_instance_settings: {  }
+          field_widget: options_select
+          default_value:
+            -
+              value: calendar-days
+          expression: ℹ︎list_string␟value
+          derived_schema_metadata: {  }
+        event_date:
+          required: false
+          field_type: string
+          field_storage_settings: {  }
+          field_instance_settings: {  }
+          field_widget: string_textfield
+          default_value:
+            -
+              value: 'January 17–19, 2027'
+          expression: ℹ︎string␟value
+          derived_schema_metadata:
+            string_shape: {  }
+        location_icon:
+          required: false
+          field_type: list_string
+          field_storage_settings:
+            allowed_values_function: canvas_load_allowed_values_for_component_prop
+          field_instance_settings: {  }
+          field_widget: options_select
+          default_value:
+            -
+              value: location-dot
+          expression: ℹ︎list_string␟value
+          derived_schema_metadata: {  }
+        venue:
+          required: false
+          field_type: string
+          field_storage_settings: {  }
+          field_instance_settings: {  }
+          field_widget: string_textfield
+          default_value:
+            -
+              value: 'Moscone Center'
+          expression: ℹ︎string␟value
+          derived_schema_metadata:
+            string_shape: {  }
+        city:
+          required: false
+          field_type: string
+          field_storage_settings: {  }
+          field_instance_settings: {  }
+          field_widget: string_textfield
+          default_value:
+            -
+              value: 'San Francisco, CA'
+          expression: ℹ︎string␟value
+          derived_schema_metadata:
+            string_shape: {  }
+        secondary_label:
+          required: false
+          field_type: string
+          field_storage_settings: {  }
+          field_instance_settings: {  }
+          field_widget: string_textfield
+          default_value:
+            -
+              value: 'Register to Attend'
+          expression: ℹ︎string␟value
+          derived_schema_metadata:
+            string_shape: {  }
+        secondary_url:
+          required: false
+          field_type: link
+          field_storage_settings: {  }
+          field_instance_settings:
+            title: 0
+            link_type: 17
+          field_widget: link_default
+          default_value:
+            -
+              uri: '#registration'
+              options: {  }
+          expression: ℹ︎link␟url
+          derived_schema_metadata:
+            string_shape:
+              format: uri-reference
+        primary_label:
+          required: false
+          field_type: string
+          field_storage_settings: {  }
+          field_instance_settings: {  }
+          field_widget: string_textfield
+          default_value:
+            -
+              value: 'Explore the Event'
+          expression: ℹ︎string␟value
+          derived_schema_metadata:
+            string_shape: {  }
+        primary_url:
+          required: false
+          field_type: link
+          field_storage_settings: {  }
+          field_instance_settings:
+            title: 0
+            link_type: 17
+          field_widget: link_default
+          default_value:
+            -
+              uri: '#resources'
+              options: {  }
+          expression: ℹ︎link␟url
+          derived_schema_metadata:
+            string_shape:
+              format: uri-reference
+    fallback_metadata:
+      slot_definitions:
+        desktop_actions:
+          title: 'Desktop buttons'
+          description: 'Add as many Button link components as needed. Also appears on mobile when Mobile buttons is empty.'
+        mobile_actions:
+          title: 'Mobile buttons'
+          description: 'Add Button link components to replace the desktop buttons on mobile.'
+  0e6960fcee867ba5:
+    settings:
+      prop_field_definitions:
+        background:
+          required: false
+          field_type: list_string
+          field_storage_settings:
+            allowed_values_function: canvas_load_allowed_values_for_component_prop
+          field_instance_settings: {  }
+          field_widget: options_select
+          default_value:
+            -
+              value: cream
+          expression: ℹ︎list_string␟value
+          derived_schema_metadata: {  }
+        eyebrow:
+          required: false
+          field_type: string
+          field_storage_settings: {  }
+          field_instance_settings: {  }
+          field_widget: string_textfield
+          default_value:
+            -
+              value: 'People. Products. A brighter food future.'
+          expression: ℹ︎string␟value
+          derived_schema_metadata:
+            string_shape: {  }
+        heading:
+          required: true
+          field_type: string
+          field_storage_settings: {  }
+          field_instance_settings: {  }
+          field_widget: string_textfield
+          default_value:
+            -
+              value: Winter
+          expression: ℹ︎string␟value
+          derived_schema_metadata:
+            string_shape: {  }
+        heading_second_line:
+          required: false
+          field_type: string
+          field_storage_settings: {  }
+          field_instance_settings: {  }
+          field_widget: string_textfield
+          default_value:
+            -
+              value: 'FancyFaire* 2028'
+          expression: ℹ︎string␟value
+          derived_schema_metadata:
+            string_shape: {  }
+        heading_level:
+          required: false
+          field_type: list_string
+          field_storage_settings:
+            allowed_values_function: canvas_load_allowed_values_for_component_prop
+          field_instance_settings: {  }
+          field_widget: options_select
+          default_value:
+            -
+              value: h1
+          expression: ℹ︎list_string␟value
+          derived_schema_metadata: {  }
+        formatted_heading:
+          required: false
+          field_type: text
+          field_storage_settings: {  }
+          field_instance_settings:
+            allowed_formats:
+              - canvas_full_html
+          field_widget: text_textfield
+          default_value: null
+          expression: ℹ︎text␟processed
+          derived_schema_metadata:
+            string_shape:
+              contentMediaType: text/html
+              x-formatting-context: inline
+        formatted_summary:
+          required: false
+          field_type: text_long
+          field_storage_settings: {  }
+          field_instance_settings:
+            allowed_formats:
+              - canvas_full_html
+          field_widget: text_textarea
+          default_value: null
+          expression: ℹ︎text_long␟processed
+          derived_schema_metadata:
+            string_shape:
+              contentMediaType: text/html
+              x-formatting-context: block
+        summary:
+          required: false
+          field_type: string
+          field_storage_settings: {  }
+          field_instance_settings: {  }
+          field_widget: string_textfield
+          default_value:
+            -
+              value: "Join the specialty food community to kick off 2027 in one of the world's great food cities: San Francisco. Elevate your trade show experience with offsite sampling, unstructured networking, and local immersion."
+          expression: ℹ︎string␟value
+          derived_schema_metadata:
+            string_shape: {  }
+        photo:
+          required: false
+          field_type: entity_reference
+          field_storage_settings:
+            target_type: media
+          field_instance_settings:
+            handler: 'default:media'
+            handler_settings:
+              target_bundles:
+                image: image
+                svg_image: svg_image
+          field_widget: media_library_widget
+          default_value: {  }
+          expression: 'ℹ︎entity_reference␟entity␜[␜entity:media:image␝field_media_image␞␟{src↠src_with_alternate_widths,alt↠alt,width↠width,height↠height}][␜entity:media:svg_image␝field_media_svg_image␞␟{src↠src_with_alternate_widths,alt↠alt,width↠width,height↠height}]'
+          derived_schema_metadata: {  }
+        date_icon:
+          required: false
+          field_type: list_string
+          field_storage_settings:
+            allowed_values_function: canvas_load_allowed_values_for_component_prop
+          field_instance_settings: {  }
+          field_widget: options_select
+          default_value:
+            -
+              value: calendar-days
+          expression: ℹ︎list_string␟value
+          derived_schema_metadata: {  }
+        event_date:
+          required: false
+          field_type: string
+          field_storage_settings: {  }
+          field_instance_settings: {  }
+          field_widget: string_textfield
+          default_value:
+            -
+              value: 'January 17–19, 2027'
+          expression: ℹ︎string␟value
+          derived_schema_metadata:
+            string_shape: {  }
+        location_icon:
+          required: false
+          field_type: list_string
+          field_storage_settings:
+            allowed_values_function: canvas_load_allowed_values_for_component_prop
+          field_instance_settings: {  }
+          field_widget: options_select
+          default_value:
+            -
+              value: location-dot
+          expression: ℹ︎list_string␟value
+          derived_schema_metadata: {  }
+        venue:
+          required: false
+          field_type: string
+          field_storage_settings: {  }
+          field_instance_settings: {  }
+          field_widget: string_textfield
+          default_value:
+            -
+              value: 'Moscone Center'
+          expression: ℹ︎string␟value
+          derived_schema_metadata:
+            string_shape: {  }
+        city:
+          required: false
+          field_type: string
+          field_storage_settings: {  }
+          field_instance_settings: {  }
+          field_widget: string_textfield
+          default_value:
+            -
+              value: 'San Francisco, CA'
+          expression: ℹ︎string␟value
+          derived_schema_metadata:
+            string_shape: {  }
+        secondary_label:
+          required: false
+          field_type: string
+          field_storage_settings: {  }
+          field_instance_settings: {  }
+          field_widget: string_textfield
+          default_value:
+            -
+              value: 'Register to Attend'
+          expression: ℹ︎string␟value
+          derived_schema_metadata:
+            string_shape: {  }
+        secondary_url:
+          required: false
+          field_type: link
+          field_storage_settings: {  }
+          field_instance_settings:
+            title: 0
+            link_type: 17
+          field_widget: link_default
+          default_value:
+            -
+              uri: '#registration'
+              options: {  }
+          expression: ℹ︎link␟url
+          derived_schema_metadata:
+            string_shape:
+              format: uri-reference
+        primary_label:
+          required: false
+          field_type: string
+          field_storage_settings: {  }
+          field_instance_settings: {  }
+          field_widget: string_textfield
+          default_value:
+            -
+              value: 'Explore the Event'
+          expression: ℹ︎string␟value
+          derived_schema_metadata:
+            string_shape: {  }
+        primary_url:
+          required: false
+          field_type: link
+          field_storage_settings: {  }
+          field_instance_settings:
+            title: 0
+            link_type: 17
+          field_widget: link_default
+          default_value:
+            -
+              uri: '#resources'
+              options: {  }
+          expression: ℹ︎link␟url
+          derived_schema_metadata:
+            string_shape:
+              format: uri-reference
+    fallback_metadata:
+      slot_definitions:
+        desktop_actions:
+          title: 'Desktop buttons'
+          description: 'Add as many Button link components as needed. Also appears on mobile when Mobile buttons is empty.'
+        mobile_actions:
+          title: 'Mobile buttons'
+          description: 'Add Button link components to replace the desktop buttons on mobile.'
+  10c62d33040927d3:
+    settings:
+      prop_field_definitions:
+        background:
+          required: false
+          field_type: list_string
+          field_storage_settings:
+            allowed_values_function: canvas_load_allowed_values_for_component_prop
+          field_instance_settings: {  }
+          field_widget: options_select
+          default_value:
+            -
+              value: cream
+          expression: ℹ︎list_string␟value
+          derived_schema_metadata: {  }
+        eyebrow:
+          required: false
+          field_type: string
+          field_storage_settings: {  }
+          field_instance_settings: {  }
+          field_widget: string_textfield
+          default_value:
+            -
+              value: 'People. Products. A brighter food future.'
+          expression: ℹ︎string␟value
+          derived_schema_metadata:
+            string_shape: {  }
+        heading:
+          required: true
+          field_type: string
+          field_storage_settings: {  }
+          field_instance_settings: {  }
+          field_widget: string_textfield
+          default_value:
+            -
+              value: Winter
+          expression: ℹ︎string␟value
+          derived_schema_metadata:
+            string_shape: {  }
+        heading_second_line:
+          required: false
+          field_type: string
+          field_storage_settings: {  }
+          field_instance_settings: {  }
+          field_widget: string_textfield
+          default_value:
+            -
+              value: 'FancyFaire* 2028'
+          expression: ℹ︎string␟value
+          derived_schema_metadata:
+            string_shape: {  }
+        heading_level:
+          required: false
+          field_type: list_string
+          field_storage_settings:
+            allowed_values_function: canvas_load_allowed_values_for_component_prop
+          field_instance_settings: {  }
+          field_widget: options_select
+          default_value:
+            -
+              value: h1
+          expression: ℹ︎list_string␟value
+          derived_schema_metadata: {  }
+        summary:
+          required: false
+          field_type: string
+          field_storage_settings: {  }
+          field_instance_settings: {  }
+          field_widget: string_textfield
+          default_value:
+            -
+              value: "Join the specialty food community to kick off 2027 in one of the world's great food cities: San Francisco. Elevate your trade show experience with offsite sampling, unstructured networking, and local immersion."
+          expression: ℹ︎string␟value
+          derived_schema_metadata:
+            string_shape: {  }
+        photo:
+          required: false
+          field_type: entity_reference
+          field_storage_settings:
+            target_type: media
+          field_instance_settings:
+            handler: 'default:media'
+            handler_settings:
+              target_bundles:
+                image: image
+                svg_image: svg_image
+          field_widget: media_library_widget
+          default_value: {  }
+          expression: 'ℹ︎entity_reference␟entity␜[␜entity:media:image␝field_media_image␞␟{src↠src_with_alternate_widths,alt↠alt,width↠width,height↠height}][␜entity:media:svg_image␝field_media_svg_image␞␟{src↠src_with_alternate_widths,alt↠alt,width↠width,height↠height}]'
+          derived_schema_metadata: {  }
+        date_icon:
+          required: false
+          field_type: list_string
+          field_storage_settings:
+            allowed_values_function: canvas_load_allowed_values_for_component_prop
+          field_instance_settings: {  }
+          field_widget: options_select
+          default_value:
+            -
+              value: calendar-days
+          expression: ℹ︎list_string␟value
+          derived_schema_metadata: {  }
+        event_date:
+          required: false
+          field_type: string
+          field_storage_settings: {  }
+          field_instance_settings: {  }
+          field_widget: string_textfield
+          default_value:
+            -
+              value: 'January 17–19, 2027'
+          expression: ℹ︎string␟value
+          derived_schema_metadata:
+            string_shape: {  }
+        location_icon:
+          required: false
+          field_type: list_string
+          field_storage_settings:
+            allowed_values_function: canvas_load_allowed_values_for_component_prop
+          field_instance_settings: {  }
+          field_widget: options_select
+          default_value:
+            -
+              value: location-dot
+          expression: ℹ︎list_string␟value
+          derived_schema_metadata: {  }
+        venue:
+          required: false
+          field_type: string
+          field_storage_settings: {  }
+          field_instance_settings: {  }
+          field_widget: string_textfield
+          default_value:
+            -
+              value: 'Moscone Center'
+          expression: ℹ︎string␟value
+          derived_schema_metadata:
+            string_shape: {  }
+        city:
+          required: false
+          field_type: string
+          field_storage_settings: {  }
+          field_instance_settings: {  }
+          field_widget: string_textfield
+          default_value:
+            -
+              value: 'San Francisco, CA'
+          expression: ℹ︎string␟value
+          derived_schema_metadata:
+            string_shape: {  }
+        secondary_label:
+          required: false
+          field_type: string
+          field_storage_settings: {  }
+          field_instance_settings: {  }
+          field_widget: string_textfield
+          default_value:
+            -
+              value: 'Register to Attend'
+          expression: ℹ︎string␟value
+          derived_schema_metadata:
+            string_shape: {  }
+        secondary_url:
+          required: false
+          field_type: link
+          field_storage_settings: {  }
+          field_instance_settings:
+            title: 0
+            link_type: 17
+          field_widget: link_default
+          default_value:
+            -
+              uri: '#registration'
+              options: {  }
+          expression: ℹ︎link␟url
+          derived_schema_metadata:
+            string_shape:
+              format: uri-reference
+        primary_label:
+          required: false
+          field_type: string
+          field_storage_settings: {  }
+          field_instance_settings: {  }
+          field_widget: string_textfield
+          default_value:
+            -
+              value: 'Explore the Event'
+          expression: ℹ︎string␟value
+          derived_schema_metadata:
+            string_shape: {  }
+        primary_url:
+          required: false
+          field_type: link
+          field_storage_settings: {  }
+          field_instance_settings:
+            title: 0
+            link_type: 17
+          field_widget: link_default
+          default_value:
+            -
+              uri: '#resources'
+              options: {  }
+          expression: ℹ︎link␟url
+          derived_schema_metadata:
+            string_shape:
+              format: uri-reference
+    fallback_metadata:
+      slot_definitions: {  }
+label: 'Event hero'
+id: sdc.sfa_theme.event-hero
+provider: sfa_theme
+source: sdc
+source_local_id: 'sfa_theme:event-hero'

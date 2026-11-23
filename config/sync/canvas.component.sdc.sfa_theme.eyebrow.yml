@@ -1,0 +1,30 @@
+uuid: 6aa6c619-aa55-46b3-b6ae-bb2687056663
+langcode: en
+status: true
+dependencies:
+  theme:
+    - sfa_theme
+active_version: 807b6c96dd36d095
+versioned_properties:
+  active:
+    settings:
+      prop_field_definitions:
+        text:
+          required: false
+          field_type: string
+          field_storage_settings: {  }
+          field_instance_settings: {  }
+          field_widget: string_textfield
+          default_value:
+            -
+              value: 'A brighter food future'
+          expression: ℹ︎string␟value
+          derived_schema_metadata:
+            string_shape: {  }
+    fallback_metadata:
+      slot_definitions: {  }
+label: Eyebrow
+id: sdc.sfa_theme.eyebrow
+provider: sfa_theme
+source: sdc
+source_local_id: 'sfa_theme:eyebrow'

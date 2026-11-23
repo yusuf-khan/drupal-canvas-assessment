@@ -1,0 +1,561 @@
+uuid: 246ba213-d329-4092-b043-6ab326bf9412
+langcode: en
+status: true
+dependencies:
+  config:
+    - filter.format.canvas_full_html
+  module:
+    - options
+    - text
+  theme:
+    - sfa_theme
+active_version: f7e962753da21708
+versioned_properties:
+  active:
+    settings:
+      prop_field_definitions:
+        alignment:
+          required: false
+          field_type: list_string
+          field_storage_settings:
+            allowed_values_function: canvas_load_allowed_values_for_component_prop
+          field_instance_settings: {  }
+          field_widget: options_select
+          default_value:
+            -
+              value: stretch
+          expression: ℹ︎list_string␟value
+          derived_schema_metadata: {  }
+        direction:
+          required: false
+          field_type: list_string
+          field_storage_settings:
+            allowed_values_function: canvas_load_allowed_values_for_component_prop
+          field_instance_settings: {  }
+          field_widget: options_select
+          default_value:
+            -
+              value: row
+          expression: ℹ︎list_string␟value
+          derived_schema_metadata: {  }
+        columns:
+          required: false
+          field_type: list_string
+          field_storage_settings:
+            allowed_values_function: canvas_load_allowed_values_for_component_prop
+          field_instance_settings: {  }
+          field_widget: options_select
+          default_value:
+            -
+              value: four
+          expression: ℹ︎list_string␟value
+          derived_schema_metadata: {  }
+        gap:
+          required: false
+          field_type: integer
+          field_storage_settings: {  }
+          field_instance_settings:
+            min: 0
+            max: 80
+          field_widget: number
+          default_value:
+            -
+              value: 24
+          expression: ℹ︎integer␟value
+          derived_schema_metadata: {  }
+        row_alignment:
+          required: false
+          field_type: list_string
+          field_storage_settings:
+            allowed_values_function: canvas_load_allowed_values_for_component_prop
+          field_instance_settings: {  }
+          field_widget: options_select
+          default_value:
+            -
+              value: start
+          expression: ℹ︎list_string␟value
+          derived_schema_metadata: {  }
+        padding_top:
+          required: false
+          field_type: integer
+          field_storage_settings: {  }
+          field_instance_settings:
+            min: 0
+            max: 160
+          field_widget: number
+          default_value: null
+          expression: ℹ︎integer␟value
+          derived_schema_metadata: {  }
+        padding_bottom:
+          required: false
+          field_type: integer
+          field_storage_settings: {  }
+          field_instance_settings:
+            min: 0
+            max: 160
+          field_widget: number
+          default_value: null
+          expression: ℹ︎integer␟value
+          derived_schema_metadata: {  }
+        background:
+          required: false
+          field_type: list_string
+          field_storage_settings:
+            allowed_values_function: canvas_load_allowed_values_for_component_prop
+          field_instance_settings: {  }
+          field_widget: options_select
+          default_value:
+            -
+              value: white
+          expression: ℹ︎list_string␟value
+          derived_schema_metadata: {  }
+        formatted_heading:
+          required: false
+          field_type: text_long
+          field_storage_settings: {  }
+          field_instance_settings:
+            allowed_formats:
+              - canvas_full_html
+          field_widget: text_textarea
+          default_value: null
+          expression: ℹ︎text_long␟processed
+          derived_schema_metadata:
+            string_shape:
+              contentMediaType: text/html
+              x-formatting-context: block
+        formatted_summary:
+          required: false
+          field_type: text_long
+          field_storage_settings: {  }
+          field_instance_settings:
+            allowed_formats:
+              - canvas_full_html
+          field_widget: text_textarea
+          default_value: null
+          expression: ℹ︎text_long␟processed
+          derived_schema_metadata:
+            string_shape:
+              contentMediaType: text/html
+              x-formatting-context: block
+        summary:
+          required: false
+          field_type: string
+          field_storage_settings: {  }
+          field_instance_settings: {  }
+          field_widget: string_textfield
+          default_value: null
+          expression: ℹ︎string␟value
+          derived_schema_metadata:
+            string_shape: {  }
+        anchor:
+          required: false
+          field_type: string
+          field_storage_settings: {  }
+          field_instance_settings: {  }
+          field_widget: string_textfield
+          default_value:
+            -
+              value: resources
+          expression: ℹ︎string␟value
+          derived_schema_metadata:
+            string_shape: {  }
+    fallback_metadata:
+      slot_definitions:
+        cards:
+          title: Cards
+          description: 'Add, duplicate and reorder Audience cards here.'
+  e7b97e2f46122545:
+    settings:
+      prop_field_definitions:
+        background:
+          required: false
+          field_type: list_string
+          field_storage_settings:
+            allowed_values_function: canvas_load_allowed_values_for_component_prop
+          field_instance_settings: {  }
+          field_widget: options_select
+          default_value:
+            -
+              value: white
+          expression: ℹ︎list_string␟value
+          derived_schema_metadata: {  }
+        heading:
+          required: false
+          field_type: string
+          field_storage_settings: {  }
+          field_instance_settings: {  }
+          field_widget: string_textfield
+          default_value: null
+          expression: ℹ︎string␟value
+          derived_schema_metadata:
+            string_shape: {  }
+        formatted_heading:
+          required: false
+          field_type: text_long
+          field_storage_settings: {  }
+          field_instance_settings:
+            allowed_formats:
+              - canvas_full_html
+          field_widget: text_textarea
+          default_value: null
+          expression: ℹ︎text_long␟processed
+          derived_schema_metadata:
+            string_shape:
+              contentMediaType: text/html
+              x-formatting-context: block
+        formatted_summary:
+          required: false
+          field_type: text_long
+          field_storage_settings: {  }
+          field_instance_settings:
+            allowed_formats:
+              - canvas_full_html
+          field_widget: text_textarea
+          default_value: null
+          expression: ℹ︎text_long␟processed
+          derived_schema_metadata:
+            string_shape:
+              contentMediaType: text/html
+              x-formatting-context: block
+        summary:
+          required: false
+          field_type: string
+          field_storage_settings: {  }
+          field_instance_settings: {  }
+          field_widget: string_textfield
+          default_value: null
+          expression: ℹ︎string␟value
+          derived_schema_metadata:
+            string_shape: {  }
+        direction:
+          required: false
+          field_type: list_string
+          field_storage_settings:
+            allowed_values_function: canvas_load_allowed_values_for_component_prop
+          field_instance_settings: {  }
+          field_widget: options_select
+          default_value:
+            -
+              value: row
+          expression: ℹ︎list_string␟value
+          derived_schema_metadata: {  }
+        gap:
+          required: false
+          field_type: integer
+          field_storage_settings: {  }
+          field_instance_settings:
+            min: 0
+            max: 80
+          field_widget: number
+          default_value:
+            -
+              value: 24
+          expression: ℹ︎integer␟value
+          derived_schema_metadata: {  }
+        padding_top:
+          required: false
+          field_type: integer
+          field_storage_settings: {  }
+          field_instance_settings:
+            min: 0
+            max: 160
+          field_widget: number
+          default_value: null
+          expression: ℹ︎integer␟value
+          derived_schema_metadata: {  }
+        padding_bottom:
+          required: false
+          field_type: integer
+          field_storage_settings: {  }
+          field_instance_settings:
+            min: 0
+            max: 160
+          field_widget: number
+          default_value: null
+          expression: ℹ︎integer␟value
+          derived_schema_metadata: {  }
+        alignment:
+          required: false
+          field_type: list_string
+          field_storage_settings:
+            allowed_values_function: canvas_load_allowed_values_for_component_prop
+          field_instance_settings: {  }
+          field_widget: options_select
+          default_value:
+            -
+              value: stretch
+          expression: ℹ︎list_string␟value
+          derived_schema_metadata: {  }
+        row_alignment:
+          required: false
+          field_type: list_string
+          field_storage_settings:
+            allowed_values_function: canvas_load_allowed_values_for_component_prop
+          field_instance_settings: {  }
+          field_widget: options_select
+          default_value:
+            -
+              value: start
+          expression: ℹ︎list_string␟value
+          derived_schema_metadata: {  }
+        columns:
+          required: false
+          field_type: list_string
+          field_storage_settings:
+            allowed_values_function: canvas_load_allowed_values_for_component_prop
+          field_instance_settings: {  }
+          field_widget: options_select
+          default_value:
+            -
+              value: four
+          expression: ℹ︎list_string␟value
+          derived_schema_metadata: {  }
+        anchor:
+          required: false
+          field_type: string
+          field_storage_settings: {  }
+          field_instance_settings: {  }
+          field_widget: string_textfield
+          default_value:
+            -
+              value: resources
+          expression: ℹ︎string␟value
+          derived_schema_metadata:
+            string_shape: {  }
+    fallback_metadata:
+      slot_definitions:
+        cards:
+          title: Cards
+          description: 'Add, duplicate and reorder Audience cards here.'
+  3ec337c342b03573:
+    settings:
+      prop_field_definitions:
+        background:
+          required: false
+          field_type: list_string
+          field_storage_settings:
+            allowed_values_function: canvas_load_allowed_values_for_component_prop
+          field_instance_settings: {  }
+          field_widget: options_select
+          default_value:
+            -
+              value: white
+          expression: ℹ︎list_string␟value
+          derived_schema_metadata: {  }
+        heading:
+          required: false
+          field_type: string
+          field_storage_settings: {  }
+          field_instance_settings: {  }
+          field_widget: string_textfield
+          default_value: null
+          expression: ℹ︎string␟value
+          derived_schema_metadata:
+            string_shape: {  }
+        formatted_heading:
+          required: false
+          field_type: text
+          field_storage_settings: {  }
+          field_instance_settings:
+            allowed_formats:
+              - canvas_full_html
+          field_widget: text_textfield
+          default_value: null
+          expression: ℹ︎text␟processed
+          derived_schema_metadata:
+            string_shape:
+              contentMediaType: text/html
+              x-formatting-context: inline
+        formatted_summary:
+          required: false
+          field_type: text_long
+          field_storage_settings: {  }
+          field_instance_settings:
+            allowed_formats:
+              - canvas_full_html
+          field_widget: text_textarea
+          default_value: null
+          expression: ℹ︎text_long␟processed
+          derived_schema_metadata:
+            string_shape:
+              contentMediaType: text/html
+              x-formatting-context: block
+        summary:
+          required: false
+          field_type: string
+          field_storage_settings: {  }
+          field_instance_settings: {  }
+          field_widget: string_textfield
+          default_value: null
+          expression: ℹ︎string␟value
+          derived_schema_metadata:
+            string_shape: {  }
+        direction:
+          required: false
+          field_type: list_string
+          field_storage_settings:
+            allowed_values_function: canvas_load_allowed_values_for_component_prop
+          field_instance_settings: {  }
+          field_widget: options_select
+          default_value:
+            -
+              value: row
+          expression: ℹ︎list_string␟value
+          derived_schema_metadata: {  }
+        gap:
+          required: false
+          field_type: integer
+          field_storage_settings: {  }
+          field_instance_settings:
+            min: 0
+            max: 80
+          field_widget: number
+          default_value:
+            -
+              value: 24
+          expression: ℹ︎integer␟value
+          derived_schema_metadata: {  }
+        padding_top:
+          required: false
+          field_type: integer
+          field_storage_settings: {  }
+          field_instance_settings:
+            min: 0
+            max: 160
+          field_widget: number
+          default_value: null
+          expression: ℹ︎integer␟value
+          derived_schema_metadata: {  }
+        padding_bottom:
+          required: false
+          field_type: integer
+          field_storage_settings: {  }
+          field_instance_settings:
+            min: 0
+            max: 160
+          field_widget: number
+          default_value: null
+          expression: ℹ︎integer␟value
+          derived_schema_metadata: {  }
+        alignment:
+          required: false
+          field_type: list_string
+          field_storage_settings:
+            allowed_values_function: canvas_load_allowed_values_for_component_prop
+          field_instance_settings: {  }
+          field_widget: options_select
+          default_value:
+            -
+              value: stretch
+          expression: ℹ︎list_string␟value
+          derived_schema_metadata: {  }
+        row_alignment:
+          required: false
+          field_type: list_string
+          field_storage_settings:
+            allowed_values_function: canvas_load_allowed_values_for_component_prop
+          field_instance_settings: {  }
+          field_widget: options_select
+          default_value:
+            -
+              value: start
+          expression: ℹ︎list_string␟value
+          derived_schema_metadata: {  }
+        columns:
+          required: false
+          field_type: list_string
+          field_storage_settings:
+            allowed_values_function: canvas_load_allowed_values_for_component_prop
+          field_instance_settings: {  }
+          field_widget: options_select
+          default_value:
+            -
+              value: four
+          expression: ℹ︎list_string␟value
+          derived_schema_metadata: {  }
+        anchor:
+          required: false
+          field_type: string
+          field_storage_settings: {  }
+          field_instance_settings: {  }
+          field_widget: string_textfield
+          default_value:
+            -
+              value: resources
+          expression: ℹ︎string␟value
+          derived_schema_metadata:
+            string_shape: {  }
+    fallback_metadata:
+      slot_definitions:
+        cards:
+          title: Cards
+          description: 'Add, duplicate and reorder Audience cards here.'
+  51f8aa5a44d38dba:
+    settings:
+      prop_field_definitions:
+        background:
+          required: false
+          field_type: list_string
+          field_storage_settings:
+            allowed_values_function: canvas_load_allowed_values_for_component_prop
+          field_instance_settings: {  }
+          field_widget: options_select
+          default_value:
+            -
+              value: white
+          expression: ℹ︎list_string␟value
+          derived_schema_metadata: {  }
+        heading:
+          required: false
+          field_type: string
+          field_storage_settings: {  }
+          field_instance_settings: {  }
+          field_widget: string_textfield
+          default_value: null
+          expression: ℹ︎string␟value
+          derived_schema_metadata:
+            string_shape: {  }
+        summary:
+          required: false
+          field_type: string
+          field_storage_settings: {  }
+          field_instance_settings: {  }
+          field_widget: string_textfield
+          default_value: null
+          expression: ℹ︎string␟value
+          derived_schema_metadata:
+            string_shape: {  }
+        columns:
+          required: false
+          field_type: list_string
+          field_storage_settings:
+            allowed_values_function: canvas_load_allowed_values_for_component_prop
+          field_instance_settings: {  }
+          field_widget: options_select
+          default_value:
+            -
+              value: four
+          expression: ℹ︎list_string␟value
+          derived_schema_metadata: {  }
+        anchor:
+          required: false
+          field_type: string
+          field_storage_settings: {  }
+          field_instance_settings: {  }
+          field_widget: string_textfield
+          default_value:
+            -
+              value: resources
+          expression: ℹ︎string␟value
+          derived_schema_metadata:
+            string_shape: {  }
+    fallback_metadata:
+      slot_definitions:
+        cards:
+          title: Cards
+          description: 'Add, duplicate and reorder Audience cards here.'
+label: 'Card group'
+id: sdc.sfa_theme.audience-grid
+provider: sfa_theme
+source: sdc
+source_local_id: 'sfa_theme:audience-grid'

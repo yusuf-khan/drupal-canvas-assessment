@@ -1,0 +1,416 @@
+uuid: 723d8f47-94b9-4b3c-83ea-b195c7bfee64
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.field.media.image.field_media_image
+    - field.field.media.svg_image.field_media_svg_image
+    - filter.format.canvas_full_html
+    - image.style.canvas_parametrized_width
+    - media.type.image
+    - media.type.svg_image
+  module:
+    - file
+    - link
+    - media
+    - media_library
+    - options
+    - text
+  theme:
+    - sfa_theme
+active_version: 1007f796f5f8e4c1
+versioned_properties:
+  active:
+    settings:
+      prop_field_definitions:
+        background:
+          required: false
+          field_type: list_string
+          field_storage_settings:
+            allowed_values_function: canvas_load_allowed_values_for_component_prop
+          field_instance_settings: {  }
+          field_widget: options_select
+          default_value:
+            -
+              value: white
+          expression: ℹ︎list_string␟value
+          derived_schema_metadata: {  }
+        photo:
+          required: false
+          field_type: entity_reference
+          field_storage_settings:
+            target_type: media
+          field_instance_settings:
+            handler: 'default:media'
+            handler_settings:
+              target_bundles:
+                image: image
+                svg_image: svg_image
+          field_widget: media_library_widget
+          default_value: {  }
+          expression: 'ℹ︎entity_reference␟entity␜[␜entity:media:image␝field_media_image␞␟{src↠src_with_alternate_widths,alt↠alt,width↠width,height↠height}][␜entity:media:svg_image␝field_media_svg_image␞␟{src↠src_with_alternate_widths,alt↠alt,width↠width,height↠height}]'
+          derived_schema_metadata: {  }
+        icon:
+          required: false
+          field_type: entity_reference
+          field_storage_settings:
+            target_type: media
+          field_instance_settings:
+            handler: 'default:media'
+            handler_settings:
+              target_bundles:
+                image: image
+                svg_image: svg_image
+          field_widget: media_library_widget
+          default_value: {  }
+          expression: 'ℹ︎entity_reference␟entity␜[␜entity:media:image␝field_media_image␞␟{src↠src_with_alternate_widths,alt↠alt,width↠width,height↠height}][␜entity:media:svg_image␝field_media_svg_image␞␟{src↠src_with_alternate_widths,alt↠alt,width↠width,height↠height}]'
+          derived_schema_metadata: {  }
+        heading:
+          required: true
+          field_type: string
+          field_storage_settings: {  }
+          field_instance_settings: {  }
+          field_widget: string_textfield
+          default_value:
+            -
+              value: "I'm a Maker"
+          expression: ℹ︎string␟value
+          derived_schema_metadata:
+            string_shape: {  }
+        heading_level:
+          required: false
+          field_type: list_string
+          field_storage_settings:
+            allowed_values_function: canvas_load_allowed_values_for_component_prop
+          field_instance_settings: {  }
+          field_widget: options_select
+          default_value:
+            -
+              value: h2
+          expression: ℹ︎list_string␟value
+          derived_schema_metadata: {  }
+        formatted_heading:
+          required: false
+          field_type: text_long
+          field_storage_settings: {  }
+          field_instance_settings:
+            allowed_formats:
+              - canvas_full_html
+          field_widget: text_textarea
+          default_value: null
+          expression: ℹ︎text_long␟processed
+          derived_schema_metadata:
+            string_shape:
+              contentMediaType: text/html
+              x-formatting-context: block
+        formatted_summary:
+          required: false
+          field_type: text_long
+          field_storage_settings: {  }
+          field_instance_settings:
+            allowed_formats:
+              - canvas_full_html
+          field_widget: text_textarea
+          default_value: null
+          expression: ℹ︎text_long␟processed
+          derived_schema_metadata:
+            string_shape:
+              contentMediaType: text/html
+              x-formatting-context: block
+        summary:
+          required: false
+          field_type: string
+          field_storage_settings: {  }
+          field_instance_settings: {  }
+          field_widget: string_textfield
+          default_value:
+            -
+              value: 'Grow your brand and reach new markets.'
+          expression: ℹ︎string␟value
+          derived_schema_metadata:
+            string_shape: {  }
+        link_label:
+          required: false
+          field_type: string
+          field_storage_settings: {  }
+          field_instance_settings: {  }
+          field_widget: string_textfield
+          default_value:
+            -
+              value: 'See resources for makers'
+          expression: ℹ︎string␟value
+          derived_schema_metadata:
+            string_shape: {  }
+        link_url:
+          required: false
+          field_type: link
+          field_storage_settings: {  }
+          field_instance_settings:
+            title: 0
+            link_type: 17
+          field_widget: link_default
+          default_value:
+            -
+              uri: '#makers'
+              options: {  }
+          expression: ℹ︎link␟url
+          derived_schema_metadata:
+            string_shape:
+              format: uri-reference
+    fallback_metadata:
+      slot_definitions: {  }
+  0fa744329d5cf403:
+    settings:
+      prop_field_definitions:
+        background:
+          required: false
+          field_type: list_string
+          field_storage_settings:
+            allowed_values_function: canvas_load_allowed_values_for_component_prop
+          field_instance_settings: {  }
+          field_widget: options_select
+          default_value:
+            -
+              value: white
+          expression: ℹ︎list_string␟value
+          derived_schema_metadata: {  }
+        photo:
+          required: false
+          field_type: entity_reference
+          field_storage_settings:
+            target_type: media
+          field_instance_settings:
+            handler: 'default:media'
+            handler_settings:
+              target_bundles:
+                image: image
+                svg_image: svg_image
+          field_widget: media_library_widget
+          default_value: {  }
+          expression: 'ℹ︎entity_reference␟entity␜[␜entity:media:image␝field_media_image␞␟{src↠src_with_alternate_widths,alt↠alt,width↠width,height↠height}][␜entity:media:svg_image␝field_media_svg_image␞␟{src↠src_with_alternate_widths,alt↠alt,width↠width,height↠height}]'
+          derived_schema_metadata: {  }
+        icon:
+          required: false
+          field_type: entity_reference
+          field_storage_settings:
+            target_type: media
+          field_instance_settings:
+            handler: 'default:media'
+            handler_settings:
+              target_bundles:
+                image: image
+                svg_image: svg_image
+          field_widget: media_library_widget
+          default_value: {  }
+          expression: 'ℹ︎entity_reference␟entity␜[␜entity:media:image␝field_media_image␞␟{src↠src_with_alternate_widths,alt↠alt,width↠width,height↠height}][␜entity:media:svg_image␝field_media_svg_image␞␟{src↠src_with_alternate_widths,alt↠alt,width↠width,height↠height}]'
+          derived_schema_metadata: {  }
+        heading:
+          required: true
+          field_type: string
+          field_storage_settings: {  }
+          field_instance_settings: {  }
+          field_widget: string_textfield
+          default_value:
+            -
+              value: "I'm a Maker"
+          expression: ℹ︎string␟value
+          derived_schema_metadata:
+            string_shape: {  }
+        heading_level:
+          required: false
+          field_type: list_string
+          field_storage_settings:
+            allowed_values_function: canvas_load_allowed_values_for_component_prop
+          field_instance_settings: {  }
+          field_widget: options_select
+          default_value:
+            -
+              value: h2
+          expression: ℹ︎list_string␟value
+          derived_schema_metadata: {  }
+        formatted_heading:
+          required: false
+          field_type: text
+          field_storage_settings: {  }
+          field_instance_settings:
+            allowed_formats:
+              - canvas_full_html
+          field_widget: text_textfield
+          default_value: null
+          expression: ℹ︎text␟processed
+          derived_schema_metadata:
+            string_shape:
+              contentMediaType: text/html
+              x-formatting-context: inline
+        formatted_summary:
+          required: false
+          field_type: text_long
+          field_storage_settings: {  }
+          field_instance_settings:
+            allowed_formats:
+              - canvas_full_html
+          field_widget: text_textarea
+          default_value: null
+          expression: ℹ︎text_long␟processed
+          derived_schema_metadata:
+            string_shape:
+              contentMediaType: text/html
+              x-formatting-context: block
+        summary:
+          required: false
+          field_type: string
+          field_storage_settings: {  }
+          field_instance_settings: {  }
+          field_widget: string_textfield
+          default_value:
+            -
+              value: 'Grow your brand and reach new markets.'
+          expression: ℹ︎string␟value
+          derived_schema_metadata:
+            string_shape: {  }
+        link_label:
+          required: false
+          field_type: string
+          field_storage_settings: {  }
+          field_instance_settings: {  }
+          field_widget: string_textfield
+          default_value:
+            -
+              value: 'See resources for makers'
+          expression: ℹ︎string␟value
+          derived_schema_metadata:
+            string_shape: {  }
+        link_url:
+          required: false
+          field_type: link
+          field_storage_settings: {  }
+          field_instance_settings:
+            title: 0
+            link_type: 17
+          field_widget: link_default
+          default_value:
+            -
+              uri: '#makers'
+              options: {  }
+          expression: ℹ︎link␟url
+          derived_schema_metadata:
+            string_shape:
+              format: uri-reference
+    fallback_metadata:
+      slot_definitions: {  }
+  a999d9e1ecf18a5b:
+    settings:
+      prop_field_definitions:
+        background:
+          required: false
+          field_type: list_string
+          field_storage_settings:
+            allowed_values_function: canvas_load_allowed_values_for_component_prop
+          field_instance_settings: {  }
+          field_widget: options_select
+          default_value:
+            -
+              value: white
+          expression: ℹ︎list_string␟value
+          derived_schema_metadata: {  }
+        photo:
+          required: false
+          field_type: entity_reference
+          field_storage_settings:
+            target_type: media
+          field_instance_settings:
+            handler: 'default:media'
+            handler_settings:
+              target_bundles:
+                image: image
+                svg_image: svg_image
+          field_widget: media_library_widget
+          default_value: {  }
+          expression: 'ℹ︎entity_reference␟entity␜[␜entity:media:image␝field_media_image␞␟{src↠src_with_alternate_widths,alt↠alt,width↠width,height↠height}][␜entity:media:svg_image␝field_media_svg_image␞␟{src↠src_with_alternate_widths,alt↠alt,width↠width,height↠height}]'
+          derived_schema_metadata: {  }
+        icon:
+          required: false
+          field_type: entity_reference
+          field_storage_settings:
+            target_type: media
+          field_instance_settings:
+            handler: 'default:media'
+            handler_settings:
+              target_bundles:
+                image: image
+                svg_image: svg_image
+          field_widget: media_library_widget
+          default_value: {  }
+          expression: 'ℹ︎entity_reference␟entity␜[␜entity:media:image␝field_media_image␞␟{src↠src_with_alternate_widths,alt↠alt,width↠width,height↠height}][␜entity:media:svg_image␝field_media_svg_image␞␟{src↠src_with_alternate_widths,alt↠alt,width↠width,height↠height}]'
+          derived_schema_metadata: {  }
+        heading:
+          required: true
+          field_type: string
+          field_storage_settings: {  }
+          field_instance_settings: {  }
+          field_widget: string_textfield
+          default_value:
+            -
+              value: "I'm a Maker"
+          expression: ℹ︎string␟value
+          derived_schema_metadata:
+            string_shape: {  }
+        heading_level:
+          required: false
+          field_type: list_string
+          field_storage_settings:
+            allowed_values_function: canvas_load_allowed_values_for_component_prop
+          field_instance_settings: {  }
+          field_widget: options_select
+          default_value:
+            -
+              value: h2
+          expression: ℹ︎list_string␟value
+          derived_schema_metadata: {  }
+        summary:
+          required: false
+          field_type: string
+          field_storage_settings: {  }
+          field_instance_settings: {  }
+          field_widget: string_textfield
+          default_value:
+            -
+              value: 'Grow your brand and reach new markets.'
+          expression: ℹ︎string␟value
+          derived_schema_metadata:
+            string_shape: {  }
+        link_label:
+          required: false
+          field_type: string
+          field_storage_settings: {  }
+          field_instance_settings: {  }
+          field_widget: string_textfield
+          default_value:
+            -
+              value: 'See resources for makers'
+          expression: ℹ︎string␟value
+          derived_schema_metadata:
+            string_shape: {  }
+        link_url:
+          required: false
+          field_type: link
+          field_storage_settings: {  }
+          field_instance_settings:
+            title: 0
+            link_type: 17
+          field_widget: link_default
+          default_value:
+            -
+              uri: '#makers'
+              options: {  }
+          expression: ℹ︎link␟url
+          derived_schema_metadata:
+            string_shape:
+              format: uri-reference
+    fallback_metadata:
+      slot_definitions: {  }
+label: 'Audience card'
+id: sdc.sfa_theme.audience-card
+provider: sfa_theme
+source: sdc
+source_local_id: 'sfa_theme:audience-card'

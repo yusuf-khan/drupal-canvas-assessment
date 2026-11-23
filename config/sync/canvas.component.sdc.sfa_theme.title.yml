@@ -1,0 +1,124 @@
+uuid: d7d5cae3-a697-4954-b2d0-7a8ff131a380
+langcode: en
+status: true
+dependencies:
+  config:
+    - filter.format.canvas_full_html
+  module:
+    - options
+    - text
+  theme:
+    - sfa_theme
+active_version: feb6f4f0b9cde4f4
+versioned_properties:
+  active:
+    settings:
+      prop_field_definitions:
+        text:
+          required: false
+          field_type: string
+          field_storage_settings: {  }
+          field_instance_settings: {  }
+          field_widget: string_textfield
+          default_value:
+            -
+              value: 'Section title'
+          expression: ℹ︎string␟value
+          derived_schema_metadata:
+            string_shape: {  }
+        second_line:
+          required: false
+          field_type: string
+          field_storage_settings: {  }
+          field_instance_settings: {  }
+          field_widget: string_textfield
+          default_value: null
+          expression: ℹ︎string␟value
+          derived_schema_metadata:
+            string_shape: {  }
+        formatted:
+          required: false
+          field_type: text_long
+          field_storage_settings: {  }
+          field_instance_settings:
+            allowed_formats:
+              - canvas_full_html
+          field_widget: text_textarea
+          default_value: null
+          expression: ℹ︎text_long␟processed
+          derived_schema_metadata:
+            string_shape:
+              contentMediaType: text/html
+              x-formatting-context: block
+        level:
+          required: false
+          field_type: list_string
+          field_storage_settings:
+            allowed_values_function: canvas_load_allowed_values_for_component_prop
+          field_instance_settings: {  }
+          field_widget: options_select
+          default_value:
+            -
+              value: h2
+          expression: ℹ︎list_string␟value
+          derived_schema_metadata: {  }
+    fallback_metadata:
+      slot_definitions: {  }
+  5701a0397b1cd69c:
+    settings:
+      prop_field_definitions:
+        text:
+          required: false
+          field_type: string
+          field_storage_settings: {  }
+          field_instance_settings: {  }
+          field_widget: string_textfield
+          default_value:
+            -
+              value: 'Section title'
+          expression: ℹ︎string␟value
+          derived_schema_metadata:
+            string_shape: {  }
+        second_line:
+          required: false
+          field_type: string
+          field_storage_settings: {  }
+          field_instance_settings: {  }
+          field_widget: string_textfield
+          default_value: null
+          expression: ℹ︎string␟value
+          derived_schema_metadata:
+            string_shape: {  }
+        formatted:
+          required: false
+          field_type: text
+          field_storage_settings: {  }
+          field_instance_settings:
+            allowed_formats:
+              - canvas_full_html
+          field_widget: text_textfield
+          default_value: null
+          expression: ℹ︎text␟processed
+          derived_schema_metadata:
+            string_shape:
+              contentMediaType: text/html
+              x-formatting-context: inline
+        level:
+          required: false
+          field_type: list_string
+          field_storage_settings:
+            allowed_values_function: canvas_load_allowed_values_for_component_prop
+          field_instance_settings: {  }
+          field_widget: options_select
+          default_value:
+            -
+              value: h2
+          expression: ℹ︎list_string␟value
+          derived_schema_metadata: {  }
+    fallback_metadata:
+      slot_definitions: {  }
+label: Title
+id: sdc.sfa_theme.title
+provider: sfa_theme
+source: sdc
+source_local_id: 'sfa_theme:title'

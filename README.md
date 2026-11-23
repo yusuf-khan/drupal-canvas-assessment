@@ -59,6 +59,20 @@ The recipe imports the Canvas page and media, sets **Winter FancyFaire** as the 
 
 If Drush fails while traversing the repository, run the same command from the Drupal docroot using `ddev exec --dir /var/www/html/web /var/www/html/vendor/bin/drush <command>`.
 
+### Configuration synchronization
+
+The Canvas site’s reviewed configuration is in [config/sync](config/sync). The Auth0 assessment keeps its own export in [auth0-assessment/config/sync](auth0-assessment/config/sync).
+
+After running the Canvas installer, add this setting to the ignored `web/sites/default/settings.php` file, within PHP.
+
+```php
+$settings['config_sync_directory'] = dirname($app_root) . '/config/sync';
+```
+
+Run `ddev drush config:status` to review differences. Use `ddev drush config:import` on an installation with the same site UUID as the export. For a new Canvas installation, follow the Starter and demo recipe steps above. Canvas pages and media are content and are provided by the demo recipe.
+
+The export leaves the Auth0 client secret and notification address blank. Supply the Auth0 secret through the ignored runtime file described below and set any site-specific notification address locally. Review future configuration exports before committing them.
+
 ### Update an existing Canvas demo
 
 For an existing installation that already uses the `sfa_theme` components, rebuild caches and run the migration to update its saved layouts and drafts.

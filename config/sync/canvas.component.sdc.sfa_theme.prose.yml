@@ -1,0 +1,49 @@
+uuid: 014338a3-81d9-4948-bc17-111b3f6ba03f
+langcode: en
+status: true
+dependencies:
+  config:
+    - filter.format.canvas_full_html
+  module:
+    - text
+  theme:
+    - sfa_theme
+active_version: 3b9215d85c2cf60d
+versioned_properties:
+  active:
+    settings:
+      prop_field_definitions:
+        text:
+          required: false
+          field_type: string
+          field_storage_settings: {  }
+          field_instance_settings: {  }
+          field_widget: string_textfield
+          default_value: null
+          expression: ℹ︎string␟value
+          derived_schema_metadata:
+            string_shape: {  }
+        formatted:
+          required: false
+          field_type: text_long
+          field_storage_settings: {  }
+          field_instance_settings:
+            allowed_formats:
+              - canvas_full_html
+          field_widget: text_textarea
+          default_value:
+            -
+              value: '<p>Write a description.</p>'
+              format: canvas_full_html
+          expression: ℹ︎text_long␟processed
+          derived_schema_metadata:
+            string_shape:
+              contentMediaType: text/html
+              x-formatting-context: block
+    fallback_metadata:
+      slot_definitions: {  }
+label: Description
+id: sdc.sfa_theme.prose
+provider: sfa_theme
+source: sdc
+source_local_id: 'sfa_theme:prose'
