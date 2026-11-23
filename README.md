@@ -53,11 +53,8 @@ ddev start
 ddev composer install
 ```
 
-Before running `site:install`, edit the root site's ignored
-`web/sites/default/settings.php`. Replace any commented example or existing
-`config_sync_directory` setting with the following line inside the PHP block.
-If `settings.php` is missing, copy `web/sites/default/default.settings.php`
-to `web/sites/default/settings.php` first.
+The tracked `web/sites/default/settings.php` sets the configuration sync path
+before Drupal installs and loads DDEV's generated local settings when available.
 
 ```php
 $settings['config_sync_directory'] = dirname($app_root) . '/config/sync';
@@ -71,8 +68,9 @@ test -f config/sync/core.extension.yml
 ```
 
 The config-sync value should be `/var/www/html/config/sync`. If it still shows
-`sites/default/files/sync`, Drush is using DDEV's fallback. Check that you
-edited the root site's `settings.php` and that your assignment is active PHP.
+`sites/default/files/sync`, Drush is using DDEV's fallback. Check that the
+root site's `web/sites/default/settings.php` contains the active assignment
+shown above.
 
 On a fresh DDEV database, install Drupal from the
 [Canvas configuration export](config/sync), then apply the demo recipe to
@@ -146,20 +144,17 @@ For the bundled Auth0 application, add these URLs in Auth0:
 - **Allowed Callback URLs** `https://drupal-canvas-assessment.ddev.site/openid-connect/auth0`
 - **Allowed Logout URLs** `https://drupal-canvas-assessment.ddev.site/user/login`
 
-Add the rotated client secret to a one-line `.auth0-client-secret` file in
-the Canvas project root. Git ignores this file. In a fresh setup, add the
-following to the end of the ignored `web/sites/default/settings.php` file
-while it is within PHP:
+Add the Auth0 client secret to a one-line `.auth0-client-secret` file in the
+Canvas project root. Create the local runtime settings file from the tracked
+example if the local file is absent.
 
-```php
-$auth0_secret_file = dirname($app_root) . '/.auth0-client-secret';
-if (is_readable($auth0_secret_file)) {
-  $auth0_secret = trim((string) file_get_contents($auth0_secret_file));
-  if ($auth0_secret !== '') {
-    $config['openid_connect.client.auth0']['settings']['client_secret'] = $auth0_secret;
-  }
-}
+```bash
+test -e web/sites/default/settings.secret.php || \
+  cp web/sites/default/settings.secret.example.php web/sites/default/settings.secret.php
 ```
+
+The tracked settings load this optional local file. Git ignores both
+`settings.secret.php` and `.auth0-client-secret`.
 
 Run `ddev drush cr`, then choose **Auth0** at `/user/login`. Configure a
 different application at `/admin/config/people/openid-connect`. See the

@@ -23,6 +23,8 @@ $RECYCLE.BIN/
 
 # Site-specific settings and files.
 /web/sites/*/settings*.php
+!/web/sites/default/settings.php
+!/web/sites/default/settings.secret.example.php
 /web/sites/*/services*.yml
 /web/sites/*/files
 /web/sites/*/private
