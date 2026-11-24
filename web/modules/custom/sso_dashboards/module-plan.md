@@ -1,15 +1,12 @@
 # module-plan.md: Custom Module Implementation Plan
 
-The Auth0 prototype lives in `auth0-assessment/`. Paths to module code,
-configuration, and commands in this plan are relative to that project.
-
 **Status** — the assessment runs on OpenID Connect. The sections below
 plan a separate miniOrange SAML cutover. The public edition passed an
 isolated Drupal 11 installation test, and section 10 records the requirements
 for a full SAML sign-in and logout flow.
 
 The current OIDC implementation and the proposed SAML cutover are separate
-validation milestones. See the [README](README.md#auth0-validation-results) for the
+validation milestones. See the [README](README.md#validation-results) for the
 working setup and recorded results.
 
 ## 1. Goal and scope
@@ -195,7 +192,7 @@ Use the URLs and entity ID displayed on the miniOrange setup screen.
 Require signed assertions and verify issuer, audience, and destination.
 [Auth0 SAML2 Web App add-on](https://auth0.com/docs/authenticate/protocols/saml/saml-sso-integrations/enable-saml2-web-app-addon)
 
-The [SAML Post Login Action](auth0-assessment/auth0/post-login-saml-roles.js) sends the role
+The [SAML Post Login Action](auth0/post-login-saml-roles.js) sends the role
 names as a SAML attribute. Set its client ID to the SAML application's ID.
 The same Action can read administrator-managed `app_metadata.roles` on
 tenants where native role assignments are unavailable.
