@@ -44,32 +44,10 @@ props:
           alt: "Assorted cheeses, fruit, olives and bread"
           width: 1672
           height: 941
-    date_icon:
-      type: string
-      title: Date icon
-      enum: [calendar-days, location-dot, clock, building, none]
-      meta:enum:
-        calendar-days: Calendar
-        location-dot: Location pin
-        clock: Clock
-        building: Building
-        none: No icon
-      examples: [calendar-days]
     event_date:
       type: string
       title: Event date
       examples: ["January 17–19, 2027"]
-    location_icon:
-      type: string
-      title: Location icon
-      enum: [calendar-days, location-dot, clock, building, none]
-      meta:enum:
-        calendar-days: Calendar
-        location-dot: Location pin
-        clock: Clock
-        building: Building
-        none: No icon
-      examples: [location-dot]
     venue:
       type: string
       title: Venue

@@ -1,37 +1,60 @@
 # Specialty Food Canvas components
 
+## Draft for review
+
+The Event hero calendar and location pin are implemented. The authoring changes below are proposed for review before implementation.
+
+Editors supply page content and arrange the cards. The theme owns spacing, widths, alignment, image crops, typography, responsive breakpoints, and icons. The proposed style controls are limited to existing brand presets for Container color and Button link style.
+
 The supplied 1920 × 1067 reference shows a 584px full-bleed hero and a centered 1344px content area shared by the hero and cards. The card row uses 24px gutters, 16:9 photos, an overlapping circular badge, and bottom-aligned links.
 
-## Atomic Design structure
+## What the current forms expose
 
-Component paths below are relative to `web/themes/custom/sfa_theme`.
+- Card group exposes gap from 0 to 80px, top and bottom padding from 0 to 160px, desktop columns, layout direction, and two alignment controls. Container exposes width and the same padding ranges. The proposed forms put these layout rules in CSS.
+- Event hero, Card group, Audience card, and Container each expose background color. Audience card also exposes a badge image picker and heading level. The proposed forms keep a single place to select a section background and derive card badges from an approved audience list.
+- Audience card and the standalone Title and Description components expose overlapping plain and formatted fields. Card group exposes two descriptions. Each proposed form gives editors a single field for each piece of content.
 
-| Level | Source and composition |
+## Proposed Canvas fields
+
+Use one Heading and one Description where applicable. The Event hero keeps its existing CKEditor fields for copy and supports an intentional break in the two-line title. Use a plain heading and one description textarea for Card group and Audience card. Give each standalone text component one field and allow a line break in standalone Title. The theme renders the hero title as H1 and other headings as H2.
+
+| Component | What editors enter | What the theme controls |
 | --- | --- |
-| Organisms | `components/organisms` contains the layout components. Event hero uses Eyebrow, Title, Description, and Event detail. Its button slots accept Button link instances. Audience card uses Title, Description, Card badge, and Button link. Card group arranges card instances in its Cards slot. Container wraps any Canvas components in a Content slot. |
-| Pages | `demo/sfa-homepage/content/canvas_page` stores the exported Winter FancyFaire composition. The recipe imports this page as the front page. Editors can build and publish additional compositions in Canvas. |
+| Event hero | Eyebrow, required heading, description, decorative photo, event date, venue, city, and the existing button slots. Each Button link requires a label and destination to render. | Full-bleed Cream hero with a right-aligned photo that stacks above the copy at 900px and below. The template sets the fixed calendar and pin. |
+| Card group | Optional section heading, description, and section link ID. Editors add, remove, and reorder Audience cards in the Cards slot. | White background and a start-aligned grid with up to four cards across on desktop, two at 1100px and below, and one at 580px and below. Groups with fewer cards use up to the number of cards present. The theme sets the 24px gutters, section padding, equal card heights per row, and bottom-aligned links. |
+| Audience card | Required heading, description, photo with alternative text, and an optional resource link with label and destination. The optional Audience field offers Maker, Buyer, Distributor, and Service Provider. | White card with a 16:9 photo. Each audience maps to its existing branded badge. A card with no audience has no badge. The theme fixes the badge size, position, and card spacing. |
+| Container | Content slot and the existing White, Cream, or Banana background presets. | Boxed width, responsive gutters, and 32px vertical padding. White is the default. |
+| Button link | Label, destination, and a choice of Text, Outline, or Filled. | The theme defines all three styles. The Audience card resource link uses the Text style. |
+| Eyebrow, Title, Description | One text field per component. | Theme typography and a fixed H2 for standalone Title. |
 
-## Organism controls
+Optional details render when they have content. An optional link renders when both its label and destination have values. The section link ID is for links to a specific card group, such as `#resources` in the demo.
 
-Formatted headings and descriptions use CKEditor 5 textareas. The Title atom preserves heading semantics when CKEditor wraps the text in a paragraph. Event hero always uses H1 semantics. The standalone Title and Audience card expose their own heading level settings.
+## Implemented brand icons
 
-Each organism offers White, Cream, and Banana background presets. The hero defaults to Cream. Container, Card group, and Audience card default to White. The hero photo gradient and card badge follow their parent’s background.
+The Event hero template assigns the calendar to Event date and the pin to Venue and City. The shared icon template renders `fa-solid fa-calendar-days` and `fa-solid fa-location-dot` using the theme’s local Font Awesome Free 6.7.2 assets. The decorative glyphs are hidden from assistive technology and appear only when the corresponding text is present. Editors fill in Event date, Venue, and City. [Event hero template](sfa_theme/components/organisms/event-hero/event-hero.twig) · [Icon markup](sfa_theme/components/atoms/icon/icon.twig) · [Theme library](sfa_theme/sfa_theme.libraries.yml)
 
-| Canvas component | Editor controls | Layout and behavior |
-| --- | --- | --- |
-| Event hero | Eyebrow, rich-text H1 heading and description, photo, background color, date and location icons, date, venue, city, Desktop buttons and Mobile buttons slots | Full-width cream section with a right-aligned decorative image and a soft edge. The image stacks above the text at 900px and below. Heading is required. Use a soft line break for a two-line title. Each button owns its label, URL, and style. Mobile buttons appear at 640px and below when that slot has content. The desktop slot supplies the fallback. |
-| Card group | Item alignment first, followed by direction, items across, gap, row alignment, and top and bottom padding. Background, rich-text section heading, description, anchor, and Cards slot follow the layout controls. | Row layouts use up to two items across at 1100px and below and one at 580px and below. Column direction stacks the cards. Start, Center, and End align each card and its contents. Stretch keeps row cards the same height and aligns their content to the start. Row alignment controls the placement of the cards as a group. |
-| Container | Boxed (default), full width, or full width with boxed content, background, top and bottom padding, Content slot | Boxed constrains the container itself. Full width spans the available space. Full width with boxed content applies the width constraint to the inner content. Top and bottom padding each accept 0–160px and default to 32px. |
-| Audience card | Heading and H2/H3 level, optional formatted heading and description, background, photo with alternative text, decorative badge icon, summary, and link label and URL | Reusable article with an optional badge and photo. Use four instances for Maker, Buyer, Distributor and Service Provider. Card group stretches cards to a common height by default. |
+## Decisions for review
 
-The component module shares the supplied palette, typography and radius tokens. The theme supplies a minimal Drupal page shell. Canvas owns the page composition and publication state. The event year in the reference heading differs from the event date shown in the reference. Keep both editable and preserve the supplied copy in the prototype.
+- The earlier draft proposed plain text for all copy. The hero uses CKEditor with heading and source-editing controls. Review the smallest formatting set the hero needs before changing its toolbar or fields. The supplied two-line title and any authored links need to carry over.
+- The earlier draft proposed replacing the two hero button slots with one primary and one secondary link shared across screen sizes. The showcase uses separate mobile buttons. Confirm which labels and destinations to keep before changing the slot design.
 
-## Page compositions
+## Existing pages and drafts
 
-| Page | Canvas layout |
+The theme provides the visual design. Canvas owns composition and publication. Update the demo recipe and migrate existing pages and drafts to the simplified fields. Carry forward copy, intentional line breaks, media, link destinations, section link IDs, card order, and publication state. The event year in the reference heading differs from the event date shown in the reference. Keep both values editable and preserve the supplied copy in the prototype.
+
+Before converting saved layouts, review content entered in duplicate fields. Where both fields contain different copy, retain the version currently rendered and review the other value before removing it. Review any inline links or intentional formatting that the proposed plain-text fields cannot carry. Keep the saved content available until those cases have an approved mapping.
+
+| Page | What to verify |
 | --- | --- |
-| Winter FancyFaire at `/winter-fancyfaire` | Published demo recipe. Event hero with the reference copy and two desktop Button links, followed by a four-card group. |
-| Winter FancyFaire Canvas Showcase at `/winter-fancyfaire-canvas` | Local page authored in Canvas. Event hero with a CKEditor description and separate desktop and mobile buttons. A Container wraps the four-card group. |
-| Audience Resources at `/audience-resources` | Local page authored in Canvas. A Container holds standalone Eyebrow, Title, Description, and Button link components, followed by a two-card group. |
+| Winter FancyFaire at `/winter-fancyfaire` | The published demo recipe renders the two reference links and four audience cards. |
+| Winter FancyFaire Canvas Showcase at `/winter-fancyfaire-canvas` | The locally authored hero and four-card group open in Canvas and on the public page. Both current button slots retain their content. |
+| Audience Resources at `/audience-resources` | The locally authored standalone text and link components and two-card group open in Canvas and on the public page. |
 
-The two local examples demonstrate additional compositions. The demo recipe imports Winter FancyFaire. For existing theme-based installations, [the layout migration](scripts/migrate-canvas-layout-fields.php) converts earlier copy and button fields while preserving page and draft publication state.
+The [existing layout migration](../../../scripts/migrate-canvas-layout-fields.php) documents how previous changes to copy and links handled saved layouts and drafts.
+
+## Acceptance checks
+
+- As a Content editor, edit Event hero, Card group, Audience card, and Container in Canvas. Confirm the forms match the fields above. Check that numeric padding and gap, layout direction, columns, alignment, heading level, and icon selection are absent. Confirm the Container offers the three approved colors and Button link offers its three approved styles.
+- Enter a date and location. Confirm the calendar and pin render next to the matching text in the editor preview and public page. Clear the text and confirm the corresponding detail disappears.
+- Change the photo and reorder the cards. Compare the demo with the desktop reference and check the layout at tablet and mobile widths. Verify that both hero links remain available and that the page fits without horizontal overflow.
+- Verify a fresh demo import and an existing page and draft after migration. Check copy, media, links, card order, and publication state.

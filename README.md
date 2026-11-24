@@ -1,6 +1,6 @@
 # Drupal practical assessments
 
-Both assessments are on branch `main` and can be reviewed on the root DDEV site. OpenAI Codex was the primary coding agent. See the [AI development log](agent-logs.md) for the implementation and review milestones.
+Both assessments are on branch `main` and can be reviewed on the root DDEV site. OpenAI Codex was the primary coding agent. See the [AI development log](web/themes/custom/agent-logs.md) for the implementation and review milestones.
 
 | Assessment | Project directory | DDEV URL | Reviewer guide |
 | --- | --- | --- | --- |
@@ -71,7 +71,7 @@ for the Post Login Action and test accounts.
 
 ### Component design
 
-The [Specialty Food theme](web/themes/custom/sfa_theme/components) defines the reusable Single Directory Components. Canvas slots let editors compose the hero buttons and audience cards, and Canvas Full HTML and Media Library supply the text and image controls. See the [component specifications](component-specs.md) for props, defaults, and responsive behavior.
+The [Specialty Food theme](web/themes/custom/sfa_theme/components) defines the reusable Single Directory Components. Canvas slots let editors compose the hero buttons and audience cards, and Canvas Full HTML and Media Library supply the text and image controls. See the [component specifications](web/themes/custom/component-specs.md) for props, defaults, and responsive behavior.
 
 ### Canvas validation results
 
@@ -83,7 +83,7 @@ The [Specialty Food theme](web/themes/custom/sfa_theme/components) defines the r
 
 [Published desktop page](screenshots/published-desktop.png) · [Canvas editor](screenshots/canvas-editor.png)
 
-The reference pairs a 2028 title with a January 2027 date. Both values stay editable. Button and resource destinations use demo anchors. Network access is required for Adobe Fonts and Font Awesome Free 6.7.2.
+The reference pairs a 2028 title with a January 2027 date. Both values stay editable. Button and resource destinations use demo anchors. The theme serves Font Awesome Free 6.7.2 locally. Adobe Fonts requires network access.
 
 ## Auth0 SSO assessment
 

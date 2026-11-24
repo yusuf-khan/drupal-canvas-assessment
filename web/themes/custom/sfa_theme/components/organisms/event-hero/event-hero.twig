@@ -11,8 +11,8 @@
       {% include 'sfa_theme:prose' with {formatted: formatted_summary|default(''), attributes: create_attribute({class: ['sfa-event-hero__summary']})} only %}
       {% if event_date or venue or city %}
         <div class="sfa-event-hero__details">
-          {% include 'sfa_theme:event-detail' with {glyph: date_icon|default('calendar-days'), text: event_date|default('')} only %}
-          {% include 'sfa_theme:event-detail' with {glyph: location_icon|default('location-dot'), text: venue|default(''), second_line: city|default('')} only %}
+          {% include 'sfa_theme:event-detail' with {glyph: 'calendar-days', text: event_date|default('')} only %}
+          {% include 'sfa_theme:event-detail' with {glyph: 'location-dot', text: venue|default(''), second_line: city|default('')} only %}
         </div>
       {% endif %}
       {% set desktop_buttons %}{% block desktop_actions %}{% endblock %}{% endset %}
