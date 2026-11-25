@@ -70,28 +70,14 @@ default:
         event_date: 'January 17–19, 2027'
         venue: 'Moscone Center'
         city: 'San Francisco, CA'
-    -
-      parent_uuid: 233e13ab-daa2-4a70-ac8a-257e5d127b6c
-      slot: desktop_actions
-      uuid: 187abc59-2d87-443a-8d3d-187f9b65ecd1
-      component_id: sdc.sfa_theme.action-link
-      inputs:
-        label: 'Register to Attend'
-        url:
+        outline_label: 'Register to Attend'
+        outline_url:
           uri: '#registration'
           options: {  }
-        variant: outline
-    -
-      parent_uuid: 233e13ab-daa2-4a70-ac8a-257e5d127b6c
-      slot: desktop_actions
-      uuid: cceb4a28-b1f3-40eb-8191-a1c12bce2af9
-      component_id: sdc.sfa_theme.action-link
-      inputs:
-        label: 'Explore the Event'
-        url:
+        filled_label: 'Explore the Event'
+        filled_url:
           uri: '#resources'
           options: {  }
-        variant: filled
     -
       uuid: 12814b41-6199-4b34-a5b1-1cb31886dca1
       component_id: sdc.sfa_theme.audience-grid

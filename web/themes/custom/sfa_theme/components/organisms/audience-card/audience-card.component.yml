@@ -41,24 +41,10 @@ props:
       type: string
       title: Heading
       examples: ["I'm a Maker"]
-    heading_level:
-      type: string
-      title: Heading level
-      enum: [h2, h3]
-      examples: [h2]
-    formatted_heading:
-      type: string
-      title: Formatted heading
-      contentMediaType: text/html
-      x-formatting-context: block
-    formatted_summary:
-      type: string
-      title: Formatted description
-      contentMediaType: text/html
-      x-formatting-context: block
     summary:
       type: string
       title: Summary
+      pattern: '(.|\r?\n)*'
       examples: ["Grow your brand and reach new markets."]
     link_label:
       type: string

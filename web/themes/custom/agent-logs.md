@@ -24,13 +24,15 @@ The first implementation commit (`9f37709`) includes the spec, log, and componen
 
 On November 24, 2026, the user asked to address the reviewer’s feedback. Codex repaired the documentation links and drafted a small Button link keyboard focus change.
 
-The user then shared the reviewer’s feedback on the authoring interface. Editors should enter content and choose from a small set of brand-approved options. The theme should own spacing, layout, and the date and location icons. Codex revised the [component spec](component-specs.md#draft-for-review) to address the component fields, fixed Font Awesome icons, and migration of existing pages and drafts.
+The user then shared the reviewer’s feedback on the authoring interface. Editors should enter content and choose from a small set of brand-approved options. The theme should own spacing, layout, and the date and location icons. Codex revised the [component spec](component-specs.md#canvas-authoring-spec) to address the component fields, fixed Font Awesome icons, and migration of existing pages and drafts.
 
 The user confirmed the fixed icons and directed Codex to implement that part of the spec on Event hero. Codex removed the two icon selectors from Canvas and fixed the Font Awesome calendar and location pin in Twig. The generated Canvas form retained Event date, Venue, and City. An older hero with saved icon selections rendered the fixed icons and updated to the new version with its authored content intact. The published front page returned HTTP 200 with both icons, and a preview with empty date and location text omitted them.
 
 The user asked to integrate Font Awesome. Codex moved the existing Font Awesome Free 6.7.2 styles and Solid font files into the theme and included the upstream license. Chromium verified the calendar and pin glyphs on the published page with external hosts blocked.
 
 The user asked Codex to reanalyze the component spec against the reviewer’s feedback. Codex compared the current SDC schemas with the exported active Canvas fields, documented the controls that still expose layout decisions, and revised the draft for human review. Changes to the hero’s rich text and mobile button slots require a separate decision because the existing layouts use them.
+
+On November 25, 2026, the user specified the exact fields to remove and instructed Codex to replace the Event hero slots with Outline and Filled links. Codex updated the component spec, moved Card group spacing and alignment to CSS, and simplified the Audience card fields. After a DDEV snapshot and a rolled-back test, the migration updated two saved component trees and five autosaves. It preserved both demo links, existing section copy, and draft content. A second run made no changes. The demo recipe imported as published, and Chromium verified both styled links and the four-, two-, and one-column layouts at 1920px, 768px, and 390px.
 
 ## Auth0 SSO
 

@@ -13,93 +13,167 @@ use Drupal\canvas\AutoSave\AutoSaveManager;
 use Drupal\Component\Utility\Html;
 
 $entity_types = \Drupal::entityTypeManager();
-$versions = [];
-foreach (['event-hero', 'audience-grid', 'container', 'action-link'] as $name) {
+$versions = $fields = [];
+foreach (['event-hero', 'audience-grid', 'audience-card', 'container', 'title', 'prose'] as $name) {
   $id = "sdc.sfa_theme.$name";
   $component = $entity_types->getStorage('component')->load($id);
   if (!$component?->status()) {
     throw new RuntimeException("Canvas component $id is unavailable. Rebuild caches before running this migration.");
   }
   $versions[$id] = $component->getActiveVersion();
+  $fields[$id] = $component->getSettings()['prop_field_definitions'];
+}
+if (!isset($fields['sdc.sfa_theme.event-hero']['outline_label'])
+  || isset($fields['sdc.sfa_theme.audience-grid']['gap'])
+  || isset($fields['sdc.sfa_theme.audience-card']['formatted_heading'])) {
+  throw new RuntimeException('Rebuild caches to discover the simplified Canvas fields before migrating.');
 }
 
-$to_html = static fn (string $text): string => '<p>' . nl2br(Html::escape($text), FALSE) . '</p>';
-$format = 'canvas_full_html';
-$button_uuids = [];
-$migrate = static function (array $items) use ($versions, $to_html, $format, &$button_uuids): array {
-  $desktop_slots = [];
+$read_inputs = static fn (array $item): array => is_array($item['inputs'] ?? []) ? ($item['inputs'] ?? []) : json_decode($item['inputs'] ?: '{}', TRUE, flags: JSON_THROW_ON_ERROR);
+$to_html = static fn (string $text): array => [
+  'value' => '<p>' . nl2br(Html::escape($text), FALSE) . '</p>',
+  'format' => 'canvas_full_html',
+];
+$to_plain = static function (mixed $field, string $uuid): ?string {
+  if ($field === NULL || $field === '') {
+    return NULL;
+  }
+  $html = is_array($field) ? ($field['value'] ?? NULL) : NULL;
+  if (!is_string($html) || !preg_match('~\A(?:[^<]|</?(?:p|strong|b|em|i|u|s)\s*>|<br\s*/?>)*\z~i', $html)) {
+    throw new RuntimeException("Review formatted copy on Audience card $uuid before migrating to plain text.");
+  }
+  $html = preg_replace(['~</p>\s*<p>~i', '~<br\s*/?>~i'], ["\n\n", "\n"], $html);
+  return trim(Html::decodeEntities(strip_tags($html)));
+};
+
+$section_component_ids = [];
+$migrate = static function (array $items) use ($versions, $fields, $read_inputs, $to_html, $to_plain, &$section_component_ids): array {
+  $slot_links = $remove = [];
   foreach ($items as $item) {
-    if (($item['slot'] ?? '') === 'desktop_actions') {
-      $desktop_slots[$item['parent_uuid']] = TRUE;
+    if (in_array($item['slot'] ?? NULL, ['desktop_actions', 'mobile_actions'], TRUE)) {
+      $slot_links[$item['parent_uuid']][$item['slot']][] = $item;
     }
   }
+
   $updated = [];
   foreach ($items as $item) {
     $id = $item['component_id'];
-    if (!isset($versions[$id]) || $id === 'sdc.sfa_theme.action-link') {
+    $uuid = $item['uuid'];
+    if (!isset($versions[$id]) || in_array($id, ['sdc.sfa_theme.title', 'sdc.sfa_theme.prose'], TRUE) || $item['component_version'] === $versions[$id]) {
       $updated[] = $item;
       continue;
     }
-    $input = json_decode($item['inputs'] ?: '{}', TRUE, flags: JSON_THROW_ON_ERROR);
-    $before = $input;
-    $buttons = [];
+    $input = $before = $read_inputs($item);
+
     if ($id === 'sdc.sfa_theme.event-hero') {
-      $second = $input['heading_second_line'] ?? '';
-      $heading = $input['formatted_heading']['value'] ?? '';
-      if ($heading === '' && !empty($input['heading'])) {
+      if (!empty($input['heading']) && empty($input['formatted_heading']['value'])) {
+        $input['formatted_heading'] = $to_html($input['heading']);
+      }
+      if (!empty($input['heading_second_line'])) {
+        $suffix = '<br>' . Html::escape($input['heading_second_line']);
+        $heading = $input['formatted_heading']['value'] ?? '';
+        $heading = preg_replace_callback('~</p>\s*$~', static fn (array $match): string => $suffix . $match[0], $heading, 1, $replaced);
         $input['formatted_heading'] = [
-          'value' => $to_html($input['heading'] . ($second !== '' ? "\n$second" : '')),
-          'format' => $format,
+          'value' => $replaced ? $heading : $heading . $suffix,
+          'format' => $input['formatted_heading']['format'] ?? 'canvas_full_html',
         ];
       }
-      elseif ($heading !== '' && $second !== '') {
-        $suffix = '<br>' . Html::escape($second);
-        $input['formatted_heading']['value'] = preg_match('/<\/p>\s*$/i', $heading)
-          ? preg_replace_callback('/<\/p>\s*$/i', static fn (array $match): string => $suffix . $match[0], $heading)
-          : $heading . $suffix;
+      if (!empty($input['summary']) && empty($input['formatted_summary']['value'])) {
+        $input['formatted_summary'] = $to_html($input['summary']);
       }
-      if (empty($input['formatted_summary']['value']) && !empty($input['summary'])) {
-        $input['formatted_summary'] = ['value' => $to_html($input['summary']), 'format' => $format];
-      }
-      $uuid = $item['uuid'];
-      foreach (['secondary' => 'outline', 'primary' => 'filled'] as $prefix => $variant) {
-        $label = $input[$prefix . '_label'] ?? '';
-        $url = $input[$prefix . '_url'] ?? [];
-        if (is_string($url)) {
-          $url = ['uri' => $url, 'options' => []];
+
+      $links_by_slot = [];
+      foreach ($slot_links[$uuid] ?? [] as $slot => $children) {
+        if (count($children) > 2) {
+          throw new RuntimeException("Review the $slot links on Event hero $uuid. There is space for two links.");
         }
-        if (!isset($desktop_slots[$uuid]) && $label !== '' && !empty($url['uri'])) {
-          $child_uuid = $button_uuids[$uuid][$variant] ??= \Drupal::service('uuid')->generate();
-          $buttons[] = [
-            'uuid' => $child_uuid,
-            'parent_uuid' => $uuid,
-            'slot' => 'desktop_actions',
-            'component_id' => 'sdc.sfa_theme.action-link',
-            'component_version' => $versions['sdc.sfa_theme.action-link'],
-            'inputs' => json_encode(['label' => $label, 'url' => $url, 'variant' => $variant], JSON_THROW_ON_ERROR),
-          ];
+        $buttons = [];
+        foreach ($children as $child) {
+          $link = $read_inputs($child);
+          if ($child['component_id'] !== 'sdc.sfa_theme.action-link'
+            || !is_string($link['label'] ?? NULL)
+            || trim($link['label']) === ''
+            || empty($link['url']['uri'])) {
+            throw new RuntimeException("Review the $slot links on Event hero $uuid. Each style can hold one complete label and URL.");
+          }
+          $buttons[] = $link;
+          $remove[$child['uuid']] = TRUE;
         }
-        unset($input[$prefix . '_label'], $input[$prefix . '_url']);
+        $styles = ['outline', 'filled'];
+        $first = $buttons[0]['variant'] ?? 'text';
+        if (count($buttons) === 1) {
+          $styles = [$first === 'outline' ? 'outline' : 'filled'];
+        }
+        else {
+          $second = $buttons[1]['variant'] ?? 'text';
+          if (($first === 'filled' && $second !== 'filled') || ($second === 'outline' && $first !== 'outline')) {
+            $styles = ['filled', 'outline'];
+          }
+        }
+        foreach ($buttons as $index => $button) {
+          $style = $styles[$index];
+          $links_by_slot[$slot][$style . '_label'] = $button['label'];
+          $links_by_slot[$slot][$style . '_url'] = $button['url'];
+        }
       }
-      unset($input['heading'], $input['heading_second_line'], $input['heading_level'], $input['summary']);
+
+      $desktop = $links_by_slot['desktop_actions'] ?? [];
+      $mobile = $links_by_slot['mobile_actions'] ?? [];
+      if ($desktop && $mobile && $desktop != $mobile) {
+        throw new RuntimeException("Review the different desktop and mobile links on Event hero $uuid before combining them.");
+      }
+      foreach (['secondary' => 'outline', 'primary' => 'filled'] as $legacy => $style) {
+        foreach (['_label', '_url'] as $suffix) {
+          if (isset($input[$legacy . $suffix]) && !isset($input[$style . $suffix])) {
+            $value = $input[$legacy . $suffix];
+            $input[$style . $suffix] = $suffix === '_url' && is_string($value) ? ['uri' => $value, 'options' => []] : $value;
+          }
+        }
+      }
+      $input = ($desktop ?: $mobile) + $input;
     }
     elseif ($id === 'sdc.sfa_theme.audience-grid') {
-      if (empty($input['formatted_heading']['value']) && !empty($input['heading'])) {
-        $input['formatted_heading'] = ['value' => $to_html($input['heading']), 'format' => $format];
+      // Preserve the group's authored introduction as standalone content.
+      foreach ([
+        'sdc.sfa_theme.title' => ['text' => $input['heading'] ?? NULL, 'formatted' => $input['formatted_heading'] ?? NULL],
+        'sdc.sfa_theme.prose' => ['text' => $input['summary'] ?? NULL, 'formatted' => $input['formatted_summary'] ?? NULL],
+      ] as $component => $copy) {
+        $copy = array_filter($copy, static fn (mixed $value): bool => $value !== NULL && $value !== '');
+        if ($copy) {
+          $child = $item;
+          $child['uuid'] = $section_component_ids[$uuid][$component] ??= \Drupal::service('uuid')->generate();
+          $child['component_id'] = $component;
+          $child['component_version'] = $versions[$component];
+          $child['inputs'] = json_encode($copy, JSON_THROW_ON_ERROR);
+          $updated[] = $child;
+        }
       }
-      unset($input['heading']);
     }
-    elseif ($item['component_version'] !== $versions[$id] && !isset($input['width'])) {
+    elseif ($id === 'sdc.sfa_theme.audience-card') {
+      $heading = $to_plain($input['formatted_heading'] ?? NULL, $uuid);
+      if ($heading !== NULL && $heading !== '') {
+        if (preg_match('/[\r\n]/', $heading)) {
+          throw new RuntimeException("Review the multiple heading lines on Audience card $uuid before migrating.");
+        }
+        $input['heading'] = $heading;
+      }
+      $summary = $to_plain($input['formatted_summary'] ?? NULL, $uuid);
+      if ($summary !== NULL && $summary !== '') {
+        $input['summary'] = $summary;
+      }
+    }
+    elseif (!isset($input['width'])) {
       $input['width'] = 'full-boxed';
     }
+
+    $input = array_intersect_key($input, $fields[$id]);
     if ($before !== $input) {
-      $item['inputs'] = json_encode($input, JSON_THROW_ON_ERROR);
+      $item['inputs'] = is_array($item['inputs'] ?? NULL) ? $input : json_encode((object) $input, JSON_THROW_ON_ERROR);
     }
     $item['component_version'] = $versions[$id];
     $updated[] = $item;
-    array_push($updated, ...$buttons);
   }
-  return $updated;
+  return array_values(array_filter($updated, static fn (array $item): bool => !isset($remove[$item['uuid']])));
 };
 
 $pages = $entity_types->getStorage('canvas_page');
@@ -176,6 +250,9 @@ try {
   foreach ($drafts as $key => ['record' => $draft, 'had_conflict' => $had_conflict]) {
     $items = $migrate($draft['data']['components']);
     if ($items !== $draft['data']['components']) {
+      if ($draft_store->get($key) !== $draft) {
+        throw new RuntimeException("Canvas draft $key changed during migration. Retry after editing is complete.");
+      }
       $draft['data']['components'] = $items;
       $draft_store->set($key, $draft);
       $updated_drafts++;

@@ -2,7 +2,7 @@ $schema: https://git.drupalcode.org/project/drupal/-/raw/HEAD/core/assets/schema
 name: Event hero
 status: stable
 group: Specialty Food
-description: Promote an event with full-width photography and separate desktop and mobile button slots.
+description: Promote an event with full-width photography and up to two links.
 libraryOverrides:
   dependencies:
     - sfa_theme/design
@@ -56,10 +56,17 @@ props:
       type: string
       title: City
       examples: ["San Francisco, CA"]
-slots:
-  desktop_actions:
-    title: Desktop buttons
-    description: Add as many Button link components as needed. Also appears on mobile when Mobile buttons is empty.
-  mobile_actions:
-    title: Mobile buttons
-    description: Add Button link components to replace the desktop buttons on mobile.
+    outline_label:
+      type: string
+      title: Outline link label
+    outline_url:
+      type: string
+      title: Outline link URL
+      format: uri-reference
+    filled_label:
+      type: string
+      title: Filled link label
+    filled_url:
+      type: string
+      title: Filled link URL
+      format: uri-reference

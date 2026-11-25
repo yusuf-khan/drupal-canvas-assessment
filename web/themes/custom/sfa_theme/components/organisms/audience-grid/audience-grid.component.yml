@@ -9,17 +9,6 @@ libraryOverrides:
 props:
   type: object
   properties:
-    alignment:
-      type: string
-      title: Item alignment
-      description: Align individual cards and their contents. Stretch keeps cards the same height in a row and aligns contents to the start.
-      enum: [stretch, start, center, end]
-      examples: [stretch]
-    direction:
-      type: string
-      title: Direction
-      enum: [row, column]
-      examples: [row]
     columns:
       type: string
       title: Items across on desktop
@@ -29,27 +18,6 @@ props:
         three: Three
         four: Four
       examples: [four]
-    gap:
-      type: integer
-      title: Space between items in pixels
-      minimum: 0
-      maximum: 80
-      examples: [24]
-    row_alignment:
-      type: string
-      title: Row alignment
-      enum: [start, center, end]
-      examples: [start]
-    padding_top:
-      type: integer
-      title: Top padding in pixels
-      minimum: 0
-      maximum: 160
-    padding_bottom:
-      type: integer
-      title: Bottom padding in pixels
-      minimum: 0
-      maximum: 160
     background:
       type: string
       title: Background color
@@ -59,19 +27,6 @@ props:
         cream: Cream
         banana: Banana
       examples: [white]
-    formatted_heading:
-      type: string
-      title: Section heading (rich text)
-      contentMediaType: text/html
-      x-formatting-context: block
-    formatted_summary:
-      type: string
-      title: Formatted description
-      contentMediaType: text/html
-      x-formatting-context: block
-    summary:
-      type: string
-      title: Optional section description
     anchor:
       type: string
       title: Section anchor without #

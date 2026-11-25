@@ -33,7 +33,7 @@ The recipe imports the published Winter FancyFaire page and media. Open `/winter
 
 1. Run `ddev drush user:login` and open the generated local sign-in link.
 2. Go to **Content → Pages → Winter FancyFaire → Edit**.
-3. In **Layers**, expand **Event hero → Desktop buttons** or **Card group → Cards** and select a child component to inspect its settings.
+3. In **Layers**, select **Event hero** to see the Outline and Filled link fields. Expand **Card group → Cards** to inspect or reorder its child cards.
 
 #### Set up a test editor
 
@@ -42,7 +42,7 @@ As the local administrator, create a new active user under **People → Add user
 #### Compose the design in Canvas
 
 1. Open **Content → Pages → Add Page** and set the title and an unused alias in **Page data**.
-2. In **Library → Components → Specialty Food**, add **Event hero** and **Card group**. Add **Button link** instances to the hero’s **Desktop buttons** slot. Use **Mobile buttons** when the mobile labels or destinations differ.
+2. In **Library → Components → Specialty Food**, add **Event hero** and **Card group**. Enter a label and URL for each hero link you want to show. Both links work across viewport sizes.
 3. Add four **Audience card** instances to the **Cards** slot. Configure the Maker, Buyer, Distributor, and Service Provider cards with photos and icons from the Media Library.
 4. In **Review changes**, select the new page and publish. Open its URL in a signed-out window.
 
@@ -71,7 +71,9 @@ for the Post Login Action and test accounts.
 
 ### Component design
 
-The [Specialty Food theme](web/themes/custom/sfa_theme/components) defines the reusable Single Directory Components. Canvas slots let editors compose the hero buttons and audience cards, and Canvas Full HTML and Media Library supply the text and image controls. See the [component specifications](web/themes/custom/component-specs.md) for props, defaults, and responsive behavior.
+The [Specialty Food theme](web/themes/custom/sfa_theme/components) defines the reusable Single Directory Components. Canvas slots let editors compose audience cards. The theme controls Card group spacing and responsive layout, and the hero uses separate label and URL fields for its Outline and Filled links. See the [component specifications](web/themes/custom/component-specs.md) for the editor fields and defaults.
+
+For an existing local site, take a DDEV database snapshot, run `ddev drush cache:rebuild`, then `ddev drush php:script /var/www/html/scripts/migrate-canvas-layout-fields.php` before opening existing pages in Canvas. The migration preserves compatible links and moves authored Card group introductions into standalone components. It rolls back and reports any links or formatted card copy that need review.
 
 ### Canvas validation results
 

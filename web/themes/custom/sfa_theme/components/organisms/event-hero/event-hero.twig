@@ -15,16 +15,27 @@
           {% include 'sfa_theme:event-detail' with {glyph: 'location-dot', text: venue|default(''), second_line: city|default('')} only %}
         </div>
       {% endif %}
-      {% set desktop_buttons %}{% block desktop_actions %}{% endblock %}{% endset %}
-      {% set mobile_buttons %}{% block mobile_actions %}{% endblock %}{% endset %}
-      {% set has_desktop_buttons = desktop_buttons|striptags|trim is not empty %}
-      {% set has_mobile_buttons = mobile_buttons|striptags|trim is not empty %}
-      <div class="sfa-event-hero__actions{% if has_mobile_buttons %} sfa-event-hero__actions--desktop{% endif %}{% if not has_desktop_buttons %} sfa-event-hero__actions--empty{% endif %}">
-        {{ desktop_buttons }}
-      </div>
-      <div class="sfa-event-hero__actions sfa-event-hero__actions--mobile{% if not has_mobile_buttons %} sfa-event-hero__actions--empty{% endif %}">
-        {{ mobile_buttons }}
-      </div>
+      {% set outline_label = outline_label|default(secondary_label|default('')) %}
+      {% set outline_url = outline_url|default(secondary_url|default('')) %}
+      {% set filled_label = filled_label|default(primary_label|default('')) %}
+      {% set filled_url = filled_url|default(primary_url|default('')) %}
+      {% if (outline_label and outline_url) or (filled_label and filled_url) %}
+        <div class="sfa-event-hero__actions">
+          {% include 'sfa_theme:action-link' with {label: outline_label, url: outline_url, variant: 'outline'} only %}
+          {% include 'sfa_theme:action-link' with {label: filled_label, url: filled_url, variant: 'filled'} only %}
+        </div>
+      {% else %}
+        {# Render button slots for saved heroes on an earlier Canvas version. #}
+        {% set desktop_buttons %}{% block desktop_actions %}{% endblock %}{% endset %}
+        {% set mobile_buttons %}{% block mobile_actions %}{% endblock %}{% endset %}
+        {% set has_mobile_buttons = mobile_buttons|striptags|trim is not empty %}
+        {% if desktop_buttons|striptags|trim is not empty %}
+          <div class="sfa-event-hero__actions{% if has_mobile_buttons %} sfa-event-hero__actions--desktop{% endif %}">{{ desktop_buttons }}</div>
+        {% endif %}
+        {% if has_mobile_buttons %}
+          <div class="sfa-event-hero__actions sfa-event-hero__actions--mobile">{{ mobile_buttons }}</div>
+        {% endif %}
+      {% endif %}
     </div>
   </div>
 </section>
